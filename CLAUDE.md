@@ -1,4 +1,4 @@
-# 프로젝트: Sunguk's App Universe
+# 프로젝트: 닌자거북의홈 (HOMEninja)
 
 ## 기술 스택
 - Next.js 15 (App Router, SSG)

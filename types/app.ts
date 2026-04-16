@@ -13,7 +13,6 @@ export type PlanetStyle = {
   position: { x: string; y: string };
   parallaxSpeed: number;
   shadowColor: string;
-  stripes?: boolean; // 정적 줄무늬 (SVG filter)
   ring?: RingStyle; // 고리
 };
 

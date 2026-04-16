@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useRef } from "react";
 import type { PlanetStyle } from "@/types/app";
 
 /* ── 효과 목록 (독립 제거 가능) ──────────────────────
- * 1. 정적 줄무늬  → stripes={true} 제거하면 OFF
- * 2. 고리(ring)   → ring 객체 제거하면 OFF
+ * 1. 고리(ring) → ring 객체 제거하면 OFF
  * ─────────────────────────────────────────────── */
 
 export default function Planet({
@@ -14,13 +13,11 @@ export default function Planet({
   position,
   parallaxSpeed,
   shadowColor,
-  stripes,
   ring,
 }: PlanetStyle) {
   const ref = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
   const isVisibleRef = useRef(false);
-  const reactId = useId();
 
   useEffect(() => {
     const el = ref.current;
@@ -63,9 +60,6 @@ export default function Planet({
 
   const gradient = `radial-gradient(ellipse at 30% 30%, ${colors.join(", ")})`;
   const sizeVal = `clamp(200px, ${size}vh, ${size}vh)`;
-  const safeId = reactId.replace(/:/g, "");
-  const filterName = `planet-stripes-${safeId}`;
-  const seed = size * 7;
 
   return (
     <div
@@ -78,30 +72,6 @@ export default function Planet({
         transform: "translateY(0)",
       }}
     >
-      {/* ── SVG filter 정의 (정적 줄무늬) ── */}
-      {stripes && (
-        <svg width="0" height="0" className="absolute">
-          <defs>
-            <filter id={filterName}>
-              <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.02 0.15"
-                numOctaves={4}
-                seed={seed}
-                result="noise"
-              />
-              <feDisplacementMap
-                in="SourceGraphic"
-                in2="noise"
-                scale={25}
-                xChannelSelector="R"
-                yChannelSelector="G"
-              />
-            </filter>
-          </defs>
-        </svg>
-      )}
-
       {/* ── 고리 뒤쪽 절반 (행성 뒤) ── */}
       {ring && (
         <div
@@ -125,7 +95,6 @@ export default function Planet({
           height: sizeVal,
           background: gradient,
           boxShadow: `inset -20px -20px 60px rgba(0,0,0,0.6), 0 0 80px 20px ${shadowColor}`,
-          filter: stripes ? `url(#${filterName})` : undefined,
         }}
       />
 

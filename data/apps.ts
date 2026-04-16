@@ -33,7 +33,7 @@ export const apps: AppData[] = [
       position: { x: "60%", y: "20%" },
       parallaxSpeed: 0.3,
       shadowColor: "oklch(0.55 0.18 40 / 0.2)",
-      stripes: false,
+
       ring: {
         color: "oklch(0.6 0.1 45)",
         opacity: 0.35,
@@ -68,7 +68,7 @@ export const apps: AppData[] = [
       position: { x: "15%", y: "25%" },
       parallaxSpeed: 0.25,
       shadowColor: "oklch(0.50 0.15 210 / 0.2)",
-      stripes: false,
+
     },
   },
   {
@@ -94,7 +94,7 @@ export const apps: AppData[] = [
       position: { x: "65%", y: "15%" },
       parallaxSpeed: 0.28,
       shadowColor: "oklch(0.50 0.16 130 / 0.2)",
-      stripes: false,
+
     },
   },
 ];

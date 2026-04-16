@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Noto_Sans_KR } from "next/font/google";
+import Link from "next/link";
 import Starfield from "@/components/Starfield";
 import ShootingStar from "@/components/ShootingStar";
 import "./globals.css";
@@ -50,8 +51,32 @@ export default function RootLayout({
         style={{ color: "oklch(0.85 0.005 260)" }}
       >
         <Starfield />
-        {/* 효과 #4: 유성 — 제거: 이 줄 + import + globals.css의 .shooting-star 삭제 */}
         <ShootingStar />
+        <header
+          className="fixed top-0 left-0 right-0 z-50 flex justify-end items-center gap-4 px-4 py-2 text-[10px]"
+          style={{ color: "oklch(0.25 0.005 260)" }}
+        >
+          <a
+            href="mailto:sun.park20@gmail.com"
+            className="transition-colors duration-200 hover:text-white/40"
+          >
+            문의사항
+          </a>
+          <a
+            href="https://x.com/ppjp334"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors duration-200 hover:text-white/40"
+          >
+            X로 연락하기
+          </a>
+          <Link
+            href="/privacy"
+            className="transition-colors duration-200 hover:text-white/40"
+          >
+            개인정보처리방침
+          </Link>
+        </header>
         <main className="relative z-10">{children}</main>
       </body>
     </html>

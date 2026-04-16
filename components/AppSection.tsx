@@ -8,6 +8,7 @@ const nebulaColors = [
   "oklch(0.5 0.1 45)",   // 따뜻한 톤 (행성 1 매칭)
   "oklch(0.5 0.08 210)", // 차가운 톤 (행성 2 매칭)
   "oklch(0.5 0.1 130)",  // 초록 톤 (행성 3 매칭)
+  "oklch(0.5 0.1 350)",  // 붉은 톤 (행성 4 매칭)
 ];
 
 export default function AppSection({

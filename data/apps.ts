@@ -97,4 +97,28 @@ export const apps: AppData[] = [
 
     },
   },
+  {
+    id: "spamcall070",
+    name: "SpamCall070",
+    description: "070 스팸 전화 차단",
+    meta: {
+      minOS: "iOS 16.0+",
+    },
+    screenshots: [],
+    downloads: [
+      { platform: "ios", url: null, label: "App Store" },
+    ],
+    planet: {
+      colors: [
+        "oklch(0.70 0.14 0)",
+        "oklch(0.48 0.16 350)",
+        "oklch(0.28 0.10 340)",
+        "oklch(0.12 0.05 335)",
+      ],
+      size: 42,
+      position: { x: "20%", y: "30%" },
+      parallaxSpeed: 0.22,
+      shadowColor: "oklch(0.48 0.16 350 / 0.2)",
+    },
+  },
 ];

@@ -3,6 +3,10 @@ node_modules/
 out/
 next-env.d.ts
 tsconfig.tsbuildinfo
+.DS_Store
+
+# 개인 참고 자료
+sunguk/
 
 # phase execution outputs
 phases/**/phase*-output.json

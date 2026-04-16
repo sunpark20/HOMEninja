@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: oklch(0.05 0.01 260);
+  min-height: 100vh;
+}
+
+@keyframes gentle-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.animate-gentle-bounce {
+  animation: gentle-bounce 2.5s ease-in-out infinite;
+}
+
+/* ── 효과 #4: 유성 ─────────────────────────────
+ * 제거: ShootingStar 컴포넌트 삭제 + 이 블록 삭제
+ * ──────────────────────────────────────────── */
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: oklch(0.95 0.005 260);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.shooting-star::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(to left, oklch(0.95 0.005 260 / 0.6), transparent);
+  transform-origin: left center;
+  transform: rotate(215deg);
+}
+
+.shooting-star-1 {
+  top: 15%;
+  left: 70%;
+  animation: shoot 8s ease-out 3s infinite;
+}
+
+.shooting-star-2 {
+  top: 40%;
+  left: 85%;
+  animation: shoot 11s ease-out 7s infinite;
+}
+
+@keyframes shoot {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(-35deg);
+  }
+  2% {
+    opacity: 1;
+  }
+  6% {
+    opacity: 0;
+    transform: translate(-120px, 80px) rotate(-35deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-120px, 80px) rotate(-35deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-gentle-bounce {
+    animation: none;
+  }
+  .shooting-star {
+    animation: none !important;
+    display: none;
+  }
+}

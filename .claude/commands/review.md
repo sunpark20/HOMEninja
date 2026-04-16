@@ -1,9 +1,9 @@
 이 프로젝트의 변경 사항을 리뷰하라.
 
 먼저 다음 문서들을 읽어라:
-- `/CLAUDE.md`
-- `/docs/ARCHITECTURE.md`
-- `/docs/ADR.md`
+- `CLAUDE.md`
+- `docs/ARCHITECTURE.md`
+- `docs/ADR.md`
 
 그런 다음 변경된 파일들을 확인하고, 아래 체크리스트로 검증하라:
 

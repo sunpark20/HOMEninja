@@ -19,12 +19,12 @@ const body = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: "Sunguk Park — 앱 포트폴리오",
+  title: "닌자거북의홈",
   description:
     "기억의궁전, 제주택배비지원 등 유용한 앱을 만듭니다.",
-  metadataBase: new URL("https://sunguk.vercel.app"),
+  metadataBase: new URL("https://homeninja.vercel.app"),
   openGraph: {
-    title: "Sunguk Park — 앱 포트폴리오",
+    title: "닌자거북의홈",
     description:
       "기억의궁전, 제주택배비지원 등 유용한 앱을 만듭니다.",
     type: "website",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sunguk Park — 앱 포트폴리오",
+    title: "닌자거북의홈",
     description:
       "기억의궁전, 제주택배비지원 등 유용한 앱을 만듭니다.",
   },

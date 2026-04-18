@@ -152,8 +152,9 @@ export const galaxies: Galaxy[] = [
     accent: "oklch(0.68 0.08 80)",
     bg: {
       gradients: [
-        { color: "oklch(0.30 0.05 60 / 0.06)", x: "40%", y: "20%", size: 70 },
-        { color: "oklch(0.25 0.04 40 / 0.05)", x: "70%", y: "70%", size: 60 },
+        { color: "oklch(0.20 0.06 55 / 0.25)", x: "50%", y: "50%", size: 140 },
+        { color: "oklch(0.28 0.07 50 / 0.14)", x: "30%", y: "30%", size: 80 },
+        { color: "oklch(0.22 0.05 40 / 0.12)", x: "75%", y: "65%", size: 70 },
       ],
       starDensity: 0.7,
       dustHaze: true,

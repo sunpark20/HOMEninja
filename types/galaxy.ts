@@ -11,6 +11,7 @@ export type GalaxyBackground = {
   gradients: GradientConfig[];
   starDensity: number;
   gasBands?: boolean;
+  dustHaze?: boolean;
   dust?: boolean;
 };
 

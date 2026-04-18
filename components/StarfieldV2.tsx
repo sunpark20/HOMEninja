@@ -16,6 +16,7 @@ type Props = {
   density?: number;
   tint?: number | null;
   gasBands?: boolean;
+  dustHaze?: boolean;
   galaxyId: string;
 };
 
@@ -23,6 +24,7 @@ export default function StarfieldV2({
   density = 1.0,
   tint = null,
   gasBands = false,
+  dustHaze = false,
   galaxyId,
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -96,6 +98,24 @@ export default function StarfieldV2({
         ctx!.restore();
       }
 
+      if (dustHaze) {
+        ctx!.save();
+        const d1 = ctx!.createLinearGradient(0, h, w, 0);
+        d1.addColorStop(0, "rgba(0,0,0,0)");
+        d1.addColorStop(0.3, "rgba(140,90,40,0.04)");
+        d1.addColorStop(0.6, "rgba(160,110,50,0.055)");
+        d1.addColorStop(1, "rgba(0,0,0,0)");
+        ctx!.fillStyle = d1;
+        ctx!.fillRect(0, 0, w, h);
+        const d2 = ctx!.createLinearGradient(0, h * 0.6, w, h * 0.2);
+        d2.addColorStop(0, "rgba(0,0,0,0)");
+        d2.addColorStop(0.5, "rgba(120,80,30,0.035)");
+        d2.addColorStop(1, "rgba(0,0,0,0)");
+        ctx!.fillStyle = d2;
+        ctx!.fillRect(0, 0, w, h);
+        ctx!.restore();
+      }
+
       for (const s of starsRef.current) {
         const o = red ? s.o : s.o + Math.sin(t * s.s + s.p) * 0.3;
         const clamped = Math.max(0, Math.min(1, o));
@@ -134,7 +154,7 @@ export default function StarfieldV2({
       mql.removeEventListener("change", onMotion);
       clearTimeout(rt);
     };
-  }, [density, tint, gasBands, galaxyId]);
+  }, [density, tint, gasBands, dustHaze, galaxyId]);
 
   return (
     <canvas

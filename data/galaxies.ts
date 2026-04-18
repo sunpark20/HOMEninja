@@ -156,6 +156,7 @@ export const galaxies: Galaxy[] = [
         { color: "oklch(0.25 0.04 40 / 0.05)", x: "70%", y: "70%", size: 60 },
       ],
       starDensity: 0.7,
+      dustHaze: true,
       dust: true,
     },
     objects: [

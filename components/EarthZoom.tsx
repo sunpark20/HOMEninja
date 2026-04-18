@@ -160,9 +160,9 @@ function HousePanel({ onClose }: { onClose: () => void }) {
         right: 24,
         bottom: 24,
         zIndex: 10,
-        width: "min(480px, calc(100% - 48px))",
-        padding: "28px 28px 24px",
-        borderRadius: 14,
+        width: "min(420px, calc(100% - 48px))",
+        padding: "32px 32px 28px",
+        borderRadius: 16,
         background: "oklch(0.07 0.01 260 / 0.96)",
         border: "1px solid oklch(1 0 0 / 0.1)",
         fontFamily: "var(--font-body)",
@@ -172,82 +172,59 @@ function HousePanel({ onClose }: { onClose: () => void }) {
         opacity: 0,
       }}
     >
-      <div
-        style={{
-          fontFamily: "var(--font-display)",
-          fontSize: 11,
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          color: "oklch(0.55 0.12 60)",
-          marginBottom: 8,
-        }}
-      >
-        우리집
-      </div>
       <h3
         style={{
           margin: 0,
           fontFamily: "var(--font-display)",
-          fontSize: 22,
+          fontSize: 20,
           fontWeight: 700,
           letterSpacing: "-0.02em",
           color: "oklch(0.96 0.005 260)",
+          textAlign: "center",
         }}
       >
         닌자거북이 작업실
       </h3>
       <p
         style={{
-          marginTop: 8,
-          fontSize: 14,
-          lineHeight: 1.6,
-          color: "oklch(0.72 0.01 260)",
+          marginTop: 6,
+          fontSize: 13,
+          lineHeight: 1.5,
+          color: "oklch(0.6 0.01 260)",
+          textAlign: "center",
         }}
       >
-        여기서 기억의궁전, 제주택배비지원 같은 앱을 만들고 있어요.
+        여기서 기억의궁전, 제주택배비지원 같은 앱을 만들고 있어요
       </p>
 
       <div
         style={{
-          marginTop: 18,
-          padding: 16,
-          borderRadius: 12,
+          marginTop: 20,
+          padding: 20,
+          borderRadius: 14,
           background: "oklch(0.98 0.002 260)",
           display: "flex",
-          gap: 16,
+          flexDirection: "column",
           alignItems: "center",
+          gap: 14,
         }}
       >
         <Image
           src="/toss-qr.png"
           alt="토스 후원 QR 코드"
-          width={140}
-          height={140}
-          style={{
-            flex: "0 0 140px",
-            borderRadius: 6,
-          }}
+          width={240}
+          height={240}
+          style={{ borderRadius: 8 }}
         />
         <div
           style={{
-            fontSize: 14,
-            color: "oklch(0.35 0.02 260)",
-            lineHeight: 1.6,
+            fontSize: 13,
+            color: "oklch(0.45 0.01 260)",
+            textAlign: "center",
+            lineHeight: 1.5,
           }}
         >
-          <div
-            style={{
-              fontWeight: 600,
-              fontSize: 16,
-              color: "oklch(0.2 0.02 260)",
-              marginBottom: 4,
-            }}
-          >
-            토스로 후원하기
-          </div>
-          모바일 카메라로 스캔하면
-          <br />
-          바로 후원 페이지로 이동해요
+          토스로 후원하기 — 카메라로 스캔하세요
         </div>
       </div>
 

@@ -9,6 +9,7 @@ import GalaxyNav from "./GalaxyNav";
 import AsteroidModal from "./AsteroidModal";
 import HeroV2 from "./HeroV2";
 import EarthZoom from "./EarthZoom";
+import LensFlare from "./LensFlare";
 import { Galaxy } from "./galaxy";
 
 const TRANSITION_MS = 700;
@@ -65,7 +66,12 @@ export default function GalaxyExplorer({
   );
 
   const galaxy = galaxies[displayed];
-  const starTint = galaxy.kind === "nebula" ? 280 : null;
+  const starTint =
+    galaxy.kind === "nebula"
+      ? 280
+      : galaxy.kind === "asteroids"
+        ? 50
+        : null;
 
   return (
     <>
@@ -73,9 +79,11 @@ export default function GalaxyExplorer({
         density={galaxy.bg.starDensity}
         tint={starTint}
         gasBands={!!galaxy.bg.gasBands}
+        dustHaze={!!galaxy.bg.dustHaze}
         galaxyId={galaxy.id}
       />
       <DustLayer active={!!galaxy.bg.dust} />
+      <LensFlare active={galaxy.kind === "planets"} />
       <div aria-hidden="true">
         <div className="comet comet-1" />
         <div className="comet comet-2" />

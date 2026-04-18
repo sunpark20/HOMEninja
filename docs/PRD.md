@@ -1,4 +1,4 @@
-# PRD: Sunguk's App Universe
+# PRD: 닌자거북의홈 (HOMEninja)
 
 ## 목표
 인디 앱 개발자의 모든 앱을 한 페이지에서 소개하고 다운로드할 수 있는 포트폴리오 사이트.

@@ -160,8 +160,8 @@ function HousePanel({ onClose }: { onClose: () => void }) {
         right: 24,
         bottom: 24,
         zIndex: 10,
-        width: "min(380px, calc(100% - 48px))",
-        padding: "24px 24px 20px",
+        width: "min(480px, calc(100% - 48px))",
+        padding: "28px 28px 24px",
         borderRadius: 14,
         background: "oklch(0.07 0.01 260 / 0.96)",
         border: "1px solid oklch(1 0 0 / 0.1)",
@@ -221,24 +221,24 @@ function HousePanel({ onClose }: { onClose: () => void }) {
         <Image
           src="/toss-qr.png"
           alt="토스 후원 QR 코드"
-          width={100}
-          height={100}
+          width={140}
+          height={140}
           style={{
-            flex: "0 0 100px",
+            flex: "0 0 140px",
             borderRadius: 6,
           }}
         />
         <div
           style={{
-            fontSize: 13,
+            fontSize: 14,
             color: "oklch(0.35 0.02 260)",
-            lineHeight: 1.5,
+            lineHeight: 1.6,
           }}
         >
           <div
             style={{
               fontWeight: 600,
-              fontSize: 14,
+              fontSize: 16,
               color: "oklch(0.2 0.02 260)",
               marginBottom: 4,
             }}

@@ -50,7 +50,7 @@ export default function RootLayout({
       >
         <header
           className="fixed top-0 left-0 right-0 z-50 flex justify-end items-center gap-4 px-4 py-2 text-[10px]"
-          style={{ color: "oklch(0.25 0.005 260)" }}
+          style={{ color: "oklch(0.45 0.01 260)" }}
         >
           <a
             href="mailto:sun.park20@gmail.com"

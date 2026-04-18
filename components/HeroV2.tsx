@@ -11,6 +11,11 @@ export default function HeroV2({
       className="relative flex flex-col items-center justify-center"
       style={{ minHeight: "72vh", padding: "80px 24px 40px" }}
     >
+      {onEarthClick && (
+        <div className="mb-4">
+          <Earth onClick={onEarthClick} size={48} />
+        </div>
+      )}
       <div className="flex items-center gap-3">
         <Image
           src="/logo-icon.svg"
@@ -28,7 +33,6 @@ export default function HeroV2({
         >
           NinjaTurtle
         </h1>
-        {onEarthClick && <Earth onClick={onEarthClick} size={40} />}
       </div>
       <p
         className="mt-3.5 text-center max-w-[420px]"

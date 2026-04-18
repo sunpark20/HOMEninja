@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function LensFlare({ active }: { active: boolean }) {
   const [visible, setVisible] = useState(false);
   const [angle, setAngle] = useState(25);
+  const intervalRef = useRef<ReturnType<typeof setInterval>>(undefined);
 
   useEffect(() => {
     if (!active) {
@@ -16,22 +17,19 @@ export default function LensFlare({ active }: { active: boolean }) {
     if (mql.matches) return;
 
     function flash() {
-      setAngle(15 + Math.random() * 30);
+      setAngle(15 + Math.random() * 25);
       setVisible(true);
-      setTimeout(() => setVisible(false), 1200);
+      setTimeout(() => setVisible(false), 1800);
     }
 
-    const first = 3000 + Math.random() * 4000;
     const t1 = setTimeout(() => {
       flash();
-      const interval = setInterval(flash, 8000 + Math.random() * 12000);
-      cleanup = () => clearInterval(interval);
-    }, first);
+      intervalRef.current = setInterval(flash, 10000 + Math.random() * 8000);
+    }, 1500);
 
-    let cleanup = () => {};
     return () => {
       clearTimeout(t1);
-      cleanup();
+      clearInterval(intervalRef.current);
       setVisible(false);
     };
   }, [active]);
@@ -42,45 +40,61 @@ export default function LensFlare({ active }: { active: boolean }) {
     <div
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: 3, animation: "flare-in 1200ms ease-out forwards" }}
+      style={{ zIndex: 3, animation: "flare-in 1800ms ease-out forwards" }}
     >
+      {/* 광원 포인트 */}
       <div
         style={{
           position: "absolute",
-          top: "-10%",
-          right: "-5%",
-          width: "110%",
-          height: "6px",
+          top: "8%",
+          right: "12%",
+          width: 40,
+          height: 40,
+          borderRadius: "50%",
           background:
-            "linear-gradient(90deg, transparent 0%, oklch(0.95 0.02 60 / 0.15) 20%, oklch(0.98 0.01 60 / 0.5) 50%, oklch(0.95 0.02 60 / 0.15) 80%, transparent 100%)",
-          transform: `rotate(${angle}deg)`,
-          transformOrigin: "top right",
+            "radial-gradient(circle, oklch(0.99 0.02 70 / 0.9), oklch(0.95 0.04 60 / 0.3) 40%, transparent 70%)",
         }}
       />
+      {/* 메인 빛줄기 — 넓은 */}
       <div
         style={{
           position: "absolute",
-          top: "-10%",
-          right: "-5%",
-          width: "110%",
-          height: "2px",
+          top: "8%",
+          right: "12%",
+          width: "120vw",
+          height: 20,
           background:
-            "linear-gradient(90deg, transparent 0%, oklch(0.98 0.005 60 / 0.3) 30%, oklch(1 0 0 / 0.7) 50%, oklch(0.98 0.005 60 / 0.3) 70%, transparent 100%)",
+            "linear-gradient(90deg, transparent 0%, oklch(0.95 0.03 60 / 0.08) 10%, oklch(0.98 0.02 65 / 0.25) 40%, oklch(0.99 0.01 60 / 0.4) 50%, oklch(0.98 0.02 65 / 0.25) 60%, oklch(0.95 0.03 60 / 0.08) 90%, transparent 100%)",
           transform: `rotate(${angle}deg)`,
-          transformOrigin: "top right",
+          transformOrigin: "0 50%",
         }}
       />
+      {/* 코어 빛줄기 — 밝은 중심선 */}
       <div
         style={{
           position: "absolute",
-          top: "-10%",
-          right: "-5%",
-          width: "80%",
-          height: "1px",
+          top: "8%",
+          right: "12%",
+          width: "120vw",
+          height: 4,
           background:
-            "linear-gradient(90deg, transparent, oklch(0.9 0.03 60 / 0.2) 40%, oklch(0.95 0.01 60 / 0.4) 50%, transparent 80%)",
-          transform: `rotate(${angle + 90}deg)`,
-          transformOrigin: "top right",
+            "linear-gradient(90deg, transparent 0%, oklch(0.99 0.01 60 / 0.2) 20%, oklch(1 0 0 / 0.6) 45%, oklch(1 0 0 / 0.8) 50%, oklch(1 0 0 / 0.6) 55%, oklch(0.99 0.01 60 / 0.2) 80%, transparent 100%)",
+          transform: `rotate(${angle}deg)`,
+          transformOrigin: "0 50%",
+        }}
+      />
+      {/* 수직 교차 빛줄기 */}
+      <div
+        style={{
+          position: "absolute",
+          top: "8%",
+          right: "12%",
+          width: "60vw",
+          height: 10,
+          background:
+            "linear-gradient(90deg, transparent 0%, oklch(0.95 0.03 60 / 0.06) 20%, oklch(0.98 0.02 60 / 0.2) 45%, oklch(0.99 0.01 60 / 0.3) 50%, oklch(0.98 0.02 60 / 0.2) 55%, transparent 80%)",
+          transform: `rotate(${angle + 85}deg)`,
+          transformOrigin: "0 50%",
         }}
       />
     </div>

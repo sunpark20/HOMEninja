@@ -36,8 +36,17 @@
 ### 행성별 액센트
 | 행성 | 색조 | 용도 |
 |------|------|------|
-| 행성 1 (기억의궁전) | 따뜻한 주황/호박 (hue ~60-80) | 행성 gradient, 다운로드 버튼 hover |
-| 행성 2 (제주택배비지원) | 차가운 청록 (hue ~200-220) | 행성 gradient, 다운로드 버튼 hover |
+| 기억의궁전 | 따뜻한 주황/호박 (hue ~60-80) | 행성 gradient, 다운로드 버튼 hover |
+| 제주택배비지원 | 차가운 청록 (hue ~200-220) | 행성 gradient, 다운로드 버튼 hover |
+| CallNinja | 녹색/에메랄드 (hue ~155) | 행성 gradient |
+| SpamCall070 | 붉은 톤 (hue ~25) | 행성 gradient |
+
+### 은하별 배경 톤
+| 은하 | 배경 특성 |
+|------|-----------|
+| 태양계 | 기본 우주 (남색), 렌즈플레어 |
+| 운석 지대 | amber/brown dustHaze, 따뜻한 star tint (hue 50) |
+| 빛나는 성운 | 보라 gasBands, 보라 star tint (hue 280) |
 
 #### 행성 1 gradient 값 (따뜻한 가스 행성)
 | 역할 | OKLCH 값 |
@@ -58,23 +67,26 @@
 | 외부 glow | oklch(0.55 0.12 205 / 0.15) |
 
 ## 컴포넌트
-### 앱 카드
-```
-배경 없음 (우주 배경 위에 직접 배치)
-텍스트 + 스크린샷 + 다운로드 버튼의 조합
-행성 그래픽이 배경 역할
-```
+### 은하 섹션
+- PlanetSection: 행성 + ObjectContentCard + DownloadButtons (72vh)
+- AsteroidSection: 운석 + ObjectContentCard (62vh, 클릭 시 모달)
+- NebulaSection: 성운 오브 + ObjectContentCard (68vh)
+- 모든 섹션은 SectionShell로 감싸 negative margin overlap 처리
+
+### 후원 카드 (HousePanel)
+- 420px 너비, 우하단 고정
+- 토스 QR 240px 세로 중앙 레이아웃
+- 어두운 배경 (oklch 0.07), 흰색 QR 영역
 
 ### 다운로드 버튼
-```
-Primary: 플랫폼 배지 스타일 (App Store / Google Play 공식 배지)
-Secondary: 텍스트 링크 ("웹에서 바로 사용 →")
-```
+- 플랫폼 배지 스타일 (App Store / Google Play 공식 배지)
+- 텍스트 링크 ("웹에서 바로 사용 →")
+- 플랫폼 감지로 관련 버튼 강조
 
 ## 레이아웃
-- 전체 너비: max-w-4xl (본문 콘텐츠), 행성은 뷰포트 전체
-- 정렬: 좌측 정렬 기본. 히어로만 중앙 정렬
-- 각 앱 섹션: min-h-screen (100vh), 행성 배경 + 콘텐츠
+- 은하 전환: 하이퍼스페이스 이펙트 (700ms)
+- 히어로: 중앙 정렬, 72vh
+- 섹션 overlap: 인접 섹션이 -20vh씩 겹침 (z-index 순차 증가)
 - 간격: 섹션 간 넉넉한 여백 (우주의 빈 공간 느낌)
 
 ## 타이포그래피
@@ -89,10 +101,15 @@ Secondary: 텍스트 링크 ("웹에서 바로 사용 →")
 - 본문: 가독성 우선의 서체
 
 ## 애니메이션
-- 별 반짝임: opacity 0.3↔1, duration 2-4s, ease-in-out (CSS keyframes)
-- 행성 패럴랙스: 스크롤 속도의 0.3배로 이동 (requestAnimationFrame)
-- 앱 카드 등장: opacity 0→1, translateY 30px→0, duration 0.6s, ease-out (Intersection Observer)
-- 페이지 전체 전환 없음 (싱글 페이지)
+- 별 반짝임: sin(time) 기반 opacity 변화 (Canvas, rAF)
+- 유성: 랜덤 궤적, Web Animations API, 6~24초 간격 스폰
+- 렌즈플레어: 랜덤 광원/줄기, 8~22초 간격, 1.2~2.4초 지속 (태양계만)
+- 은하 전환: Hyperspace 이펙트 700ms, opacity fade
+- 지구 halo: 4s ease-in-out infinite alternate (CSS)
+- 후원 카드: panel-rise 420ms cubic-bezier(.2,.8,.2,1)
+- 운석 drift: CSS keyframe 개별 궤도
+- 성운 float: CSS keyframe 부유
+- prefers-reduced-motion: 모든 애니메이션 비활성화
 
 ## 반응형
 | 뷰포트 | 조정 |

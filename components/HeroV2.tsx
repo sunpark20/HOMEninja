@@ -1,6 +1,11 @@
 import Image from "next/image";
+import Earth from "./Earth";
 
-export default function HeroV2() {
+export default function HeroV2({
+  onEarthClick,
+}: {
+  onEarthClick?: () => void;
+}) {
   return (
     <section
       className="relative flex flex-col items-center justify-center"
@@ -23,6 +28,7 @@ export default function HeroV2() {
         >
           NinjaTurtle
         </h1>
+        {onEarthClick && <Earth onClick={onEarthClick} size={40} />}
       </div>
       <p
         className="mt-3.5 text-center max-w-[420px]"

@@ -8,6 +8,7 @@ import Hyperspace from "./Hyperspace";
 import GalaxyNav from "./GalaxyNav";
 import AsteroidModal from "./AsteroidModal";
 import HeroV2 from "./HeroV2";
+import EarthZoom from "./EarthZoom";
 import { Galaxy } from "./galaxy";
 
 const TRANSITION_MS = 700;
@@ -22,6 +23,7 @@ export default function GalaxyExplorer({
   const [direction, setDirection] = useState(1);
   const [transitioning, setTransitioning] = useState(false);
   const [asteroid, setAsteroid] = useState<AsteroidObject | null>(null);
+  const [earthOpen, setEarthOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -87,7 +89,9 @@ export default function GalaxyExplorer({
           transition: `opacity ${TRANSITION_MS * 0.5}ms ease`,
         }}
       >
-        {displayed === 0 && <HeroV2 />}
+        {displayed === 0 && (
+          <HeroV2 onEarthClick={() => setEarthOpen(true)} />
+        )}
         <Galaxy
           galaxy={galaxy}
           overlap={20}
@@ -107,6 +111,7 @@ export default function GalaxyExplorer({
         obj={asteroid}
         onClose={() => setAsteroid(null)}
       />
+      <EarthZoom open={earthOpen} onClose={() => setEarthOpen(false)} />
     </>
   );
 }

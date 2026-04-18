@@ -9,81 +9,97 @@ body {
   min-height: 100vh;
 }
 
-@keyframes gentle-bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(6px);
-  }
+/* ── v2: Asteroid drift ──────────────────────── */
+@keyframes asteroid-drift-0 {
+  from { transform: translate(0, 0) rotate(var(--r, 0deg)); }
+  to   { transform: translate(12px, -18px) rotate(calc(var(--r, 0deg) + 6deg)); }
+}
+@keyframes asteroid-drift-1 {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-14px, 10px); }
+}
+@keyframes asteroid-drift-2 {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(8px, 14px); }
 }
 
-.animate-gentle-bounce {
-  animation: gentle-bounce 2.5s ease-in-out infinite;
+/* ── v2: Nebula orb float ────────────────────── */
+@keyframes orb-float {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(6px, -10px) scale(1.04); }
 }
 
-/* ── 효과 #4: 유성 ─────────────────────────────
- * 제거: ShootingStar 컴포넌트 삭제 + 이 블록 삭제
- * ──────────────────────────────────────────── */
-.shooting-star {
-  position: absolute;
+/* ── v2: Hyperspace transition ───────────────── */
+@keyframes hyperspace-flash {
+  0%   { background-color: oklch(0 0 0 / 0); }
+  40%  { background-color: oklch(0.05 0.01 260 / 0.4); }
+  100% { background-color: oklch(0 0 0 / 0); }
+}
+@keyframes hyperstreak-r {
+  0%   { opacity: 0; transform: translate(-20vw, 0) scaleX(0.2); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(120vw, 0) scaleX(4); }
+}
+@keyframes hyperstreak-l {
+  0%   { opacity: 0; transform: translate(20vw, 0) scaleX(0.2); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-120vw, 0) scaleX(4); }
+}
+
+/* ── v2: Fade in ─────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── v2: Comets ──────────────────────────────── */
+.comet {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 2px;
   height: 2px;
-  background: oklch(0.95 0.005 260);
   border-radius: 50%;
+  background: oklch(0.95 0.02 240);
+  box-shadow: 0 0 4px oklch(0.95 0.02 240 / 0.8);
   opacity: 0;
+  pointer-events: none;
+  z-index: 2;
 }
-
-.shooting-star::after {
+.comet::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 40px;
+  width: 80px;
   height: 1px;
-  background: linear-gradient(to left, oklch(0.95 0.005 260 / 0.6), transparent);
+  background: linear-gradient(to left, oklch(0.95 0.02 240 / 0.7), transparent);
   transform-origin: left center;
-  transform: rotate(215deg);
 }
-
-.shooting-star-1 {
-  top: 15%;
-  left: 70%;
-  animation: shoot 8s ease-out 3s infinite;
+.comet-1 {
+  animation: comet-path-1 18s linear 5s infinite;
 }
-
-.shooting-star-2 {
-  top: 40%;
-  left: 85%;
-  animation: shoot 11s ease-out 7s infinite;
+.comet-2 {
+  animation: comet-path-2 26s linear 12s infinite;
 }
-
-@keyframes shoot {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0) rotate(-35deg);
-  }
-  2% {
-    opacity: 1;
-  }
-  6% {
-    opacity: 0;
-    transform: translate(-120px, 80px) rotate(-35deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-120px, 80px) rotate(-35deg);
-  }
+@keyframes comet-path-1 {
+  0%        { opacity: 0; transform: translate(110vw, 10vh) rotate(200deg); }
+  2%        { opacity: 0.9; }
+  10%       { opacity: 0.9; }
+  14%, 100% { opacity: 0; transform: translate(-20vw, 45vh) rotate(200deg); }
+}
+@keyframes comet-path-2 {
+  0%        { opacity: 0; transform: translate(-10vw, 60vh) rotate(340deg); }
+  3%        { opacity: 0.7; }
+  9%        { opacity: 0.7; }
+  13%, 100% { opacity: 0; transform: translate(110vw, 15vh) rotate(340deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .animate-gentle-bounce {
-    animation: none;
-  }
-  .shooting-star {
+  .comet {
     animation: none !important;
     display: none;
   }

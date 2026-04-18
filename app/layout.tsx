@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Noto_Sans_KR } from "next/font/google";
 import Link from "next/link";
-import Starfield from "@/components/Starfield";
-import ShootingStar from "@/components/ShootingStar";
 import "./globals.css";
 
 const display = Outfit({
@@ -50,8 +48,6 @@ export default function RootLayout({
         className="font-[family-name:var(--font-body)]"
         style={{ color: "oklch(0.85 0.005 260)" }}
       >
-        <Starfield />
-        <ShootingStar />
         <header
           className="fixed top-0 left-0 right-0 z-50 flex justify-end items-center gap-4 px-4 py-2 text-[10px]"
           style={{ color: "oklch(0.25 0.005 260)" }}

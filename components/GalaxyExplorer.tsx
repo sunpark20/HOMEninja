@@ -10,6 +10,7 @@ import AsteroidModal from "./AsteroidModal";
 import HeroV2 from "./HeroV2";
 import EarthZoom from "./EarthZoom";
 import LensFlare from "./LensFlare";
+import Comets from "./Comets";
 import { Galaxy } from "./galaxy";
 
 const TRANSITION_MS = 700;
@@ -84,10 +85,7 @@ export default function GalaxyExplorer({
       />
       <DustLayer active={!!galaxy.bg.dust} />
       <LensFlare active={galaxy.kind === "planets"} />
-      <div aria-hidden="true">
-        <div className="comet comet-1" />
-        <div className="comet comet-2" />
-      </div>
+      <Comets />
 
       <div
         className="relative"

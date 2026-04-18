@@ -52,56 +52,6 @@ body {
   to   { opacity: 1; }
 }
 
-/* ── v2: Comets ──────────────────────────────── */
-.comet {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: oklch(0.95 0.02 240);
-  box-shadow: 0 0 4px oklch(0.95 0.02 240 / 0.8);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-.comet::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 80px;
-  height: 1px;
-  background: linear-gradient(to left, oklch(0.95 0.02 240 / 0.7), transparent);
-  transform-origin: left center;
-}
-.comet-1 {
-  animation: comet-path-1 18s linear 5s infinite;
-}
-.comet-2 {
-  animation: comet-path-2 26s linear 12s infinite;
-}
-@keyframes comet-path-1 {
-  0%        { opacity: 0; transform: translate(110vw, 10vh) rotate(200deg); }
-  2%        { opacity: 0.9; }
-  10%       { opacity: 0.9; }
-  14%, 100% { opacity: 0; transform: translate(-20vw, 45vh) rotate(200deg); }
-}
-@keyframes comet-path-2 {
-  0%        { opacity: 0; transform: translate(-10vw, 60vh) rotate(340deg); }
-  3%        { opacity: 0.7; }
-  9%        { opacity: 0.7; }
-  13%, 100% { opacity: 0; transform: translate(110vw, 15vh) rotate(340deg); }
-}
-
-/* ── Lens flare ─────────────────────────────── */
-@keyframes flare-in {
-  0%   { opacity: 0; }
-  10%  { opacity: 1; }
-  60%  { opacity: 0.7; }
-  100% { opacity: 0; }
-}
 
 /* ── Earth halo pulse ───────────────────────── */
 @keyframes earth-halo {
@@ -117,9 +67,5 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .comet {
-    animation: none !important;
-    display: none;
   }
 }

@@ -2,25 +2,128 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "CallNinja 개인정보처리방침",
-  description: "CallNinja 앱 개인정보처리방침",
+  title: "CallNinja Privacy Policy",
+  description: "CallNinja app privacy policy",
 };
 
 export default function CallNinjaPrivacy() {
   return (
     <div className="min-h-screen flex items-start justify-center px-6 py-24">
-      <article className="max-w-2xl w-full space-y-8">
+      <article className="max-w-2xl w-full space-y-12">
         <h1
           className="text-3xl font-semibold tracking-tight font-[family-name:var(--font-display)]"
           style={{ color: "oklch(0.95 0.005 260)" }}
         >
-          CallNinja 개인정보처리방침
+          CallNinja Privacy Policy
         </h1>
 
+        {/* English */}
         <div
           className="space-y-6 text-sm leading-relaxed"
           style={{ color: "oklch(0.7 0.01 260)" }}
         >
+          <div
+            className="text-xs font-medium uppercase tracking-widest"
+            style={{ color: "oklch(0.5 0.01 260)" }}
+          >
+            English
+          </div>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "oklch(0.85 0.005 260)" }}
+            >
+              1. Data Collection
+            </h2>
+            <p>
+              CallNinja does not collect any personal information. The app
+              operates entirely on-device with no network communication, and
+              does not access your call content, contacts, or call history.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "oklch(0.85 0.005 260)" }}
+            >
+              2. Blocking Data
+            </h2>
+            <p>
+              Phone number patterns entered by the user are stored only in iOS
+              App Group storage on your device and are never transmitted to any
+              external server. All data is removed when the app is deleted.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "oklch(0.85 0.005 260)" }}
+            >
+              3. Contacts Access
+            </h2>
+            <p>
+              CallNinja does not access your contacts. iOS CallKit automatically
+              protects numbers saved in your contacts — those numbers are never
+              blocked.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "oklch(0.85 0.005 260)" }}
+            >
+              4. Third Parties
+            </h2>
+            <p>
+              No data is collected, so no data is shared with third parties.
+              The app contains no advertising SDKs, analytics tools, or external
+              services.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "oklch(0.85 0.005 260)" }}
+            >
+              5. Contact
+            </h2>
+            <p>
+              For privacy-related inquiries, contact{" "}
+              <a
+                href="mailto:coastguard2681@gmail.com"
+                className="underline underline-offset-2 hover:text-white/80 transition-colors"
+              >
+                coastguard2681@gmail.com
+              </a>
+              .
+            </p>
+          </section>
+
+          <p className="text-xs" style={{ color: "oklch(0.5 0.01 260)" }}>
+            Effective date: April 19, 2026
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div style={{ borderTop: "1px solid oklch(0.25 0.01 260)" }} />
+
+        {/* Korean */}
+        <div
+          className="space-y-6 text-sm leading-relaxed"
+          style={{ color: "oklch(0.7 0.01 260)" }}
+        >
+          <div
+            className="text-xs font-medium uppercase tracking-widest"
+            style={{ color: "oklch(0.5 0.01 260)" }}
+          >
+            한국어
+          </div>
+
           <section>
             <h2
               className="text-lg font-medium mb-2"

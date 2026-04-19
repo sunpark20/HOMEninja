@@ -22,10 +22,8 @@
     ]
   },
   "jeju-delivery": {
-    "name": "제주택배",
-    "description": "테스트 설명",
-    "entries": [
-      "항목1"
-    ]
+    "name": null,
+    "description": null,
+    "entries": []
   }
 }

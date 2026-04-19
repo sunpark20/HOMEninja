@@ -31,7 +31,7 @@ export default function AdminEditModal({ obj, onClose, onSaved }: Props) {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [entries, setEntries] = useState<string[]>([]);
+  const [tmtText, setTmtText] = useState("");
   const [saving, setSaving] = useState(false);
   const [saveMsg, setSaveMsg] = useState<{
     text: string;
@@ -49,7 +49,7 @@ export default function AdminEditModal({ obj, onClose, onSaved }: Props) {
     setLoading(false);
     setName("");
     setDescription("");
-    setEntries([]);
+    setTmtText("");
     setSaving(false);
     setSaveMsg(null);
   }, []);
@@ -132,8 +132,10 @@ export default function AdminEditModal({ obj, onClose, onSaved }: Props) {
     const data = await fetchContent();
     setName(data?.name ?? obj!.name);
     setDescription(data?.description ?? obj!.description);
-    setEntries(
-      data?.entries && data.entries.length > 0 ? [...data.entries] : [""],
+    setTmtText(
+      data?.entries && data.entries.length > 0
+        ? data.entries.join("\n\n")
+        : "",
     );
     setPhase("edit");
   }
@@ -142,7 +144,10 @@ export default function AdminEditModal({ obj, onClose, onSaved }: Props) {
     setSaving(true);
     setSaveMsg(null);
     const pw = sessionStorage.getItem("tmt_pw") || password;
-    const filtered = entries.filter((e) => e.trim() !== "");
+    const filtered = tmtText
+      .split(/\n\s*\n/)
+      .map((s) => s.trim())
+      .filter(Boolean);
     const sendName =
       name.trim() === defaultName.current ? null : name.trim() || null;
     const sendDesc =
@@ -311,43 +316,16 @@ export default function AdminEditModal({ obj, onClose, onSaved }: Props) {
                 className="block text-xs mb-1"
                 style={{ color: C.label }}
               >
-                TMT
+                TMT (빈 줄로 항목 구분)
               </label>
-              <div className="flex flex-col gap-2">
-                {entries.map((text, i) => (
-                  <div key={i} className="flex gap-2 items-start">
-                    <textarea
-                      value={text}
-                      onChange={(e) => {
-                        const next = [...entries];
-                        next[i] = e.target.value;
-                        setEntries(next);
-                      }}
-                      rows={2}
-                      className="flex-1 text-[13px] leading-relaxed px-3 py-2 resize-y outline-none"
-                      style={inputStyle}
-                    />
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setEntries(entries.filter((_, j) => j !== i))
-                      }
-                      className="text-xs px-1.5 py-1 shrink-0 cursor-pointer"
-                      style={{ color: C.err }}
-                    >
-                      삭제
-                    </button>
-                  </div>
-                ))}
-                <button
-                  type="button"
-                  onClick={() => setEntries([...entries, ""])}
-                  className="text-xs px-2 py-1 self-start cursor-pointer"
-                  style={{ color: C.dim }}
-                >
-                  + 추가
-                </button>
-              </div>
+              <textarea
+                value={tmtText}
+                onChange={(e) => setTmtText(e.target.value)}
+                rows={8}
+                className="w-full text-[13px] leading-relaxed px-3 py-2 resize-y outline-none"
+                style={inputStyle}
+                placeholder={"첫 번째 항목\n\n두 번째 항목\n\n세 번째 항목"}
+              />
             </div>
 
             {/* 액션 */}

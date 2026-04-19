@@ -54,7 +54,7 @@ export default function TmtSection({ entries }: Props) {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="inline-flex items-center gap-1.5 text-xs tracking-wide transition-colors duration-200"
+        className="inline-flex items-center gap-1.5 px-2 py-1.5 text-xs tracking-wide transition-colors duration-200 rounded cursor-pointer"
         style={{
           color: open ? "oklch(0.65 0.01 260)" : "oklch(0.45 0.01 260)",
         }}

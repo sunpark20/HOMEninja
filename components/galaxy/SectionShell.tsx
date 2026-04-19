@@ -1,4 +1,5 @@
 type Props = {
+  id?: string;
   index: number;
   overlap: number;
   sectionHeight?: number;
@@ -6,6 +7,7 @@ type Props = {
 };
 
 export default function SectionShell({
+  id,
   index,
   overlap,
   sectionHeight = 75,
@@ -14,6 +16,7 @@ export default function SectionShell({
   const isFirst = index === 0;
   return (
     <section
+      id={id}
       className="relative flex items-center"
       style={{
         minHeight: `${sectionHeight}vh`,

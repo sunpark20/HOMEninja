@@ -28,6 +28,22 @@ export default function GalaxyExplorer({
   const [earthOpen, setEarthOpen] = useState(false);
 
   useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const galaxyIdx = galaxies.findIndex((g) =>
+        g.objects.some((o) => o.id === hash),
+      );
+      if (galaxyIdx >= 0 && galaxyIdx !== 0) {
+        setCurrent(galaxyIdx);
+        setDisplayed(galaxyIdx);
+      }
+      requestAnimationFrame(() => {
+        const el = document.getElementById(hash);
+        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+      return;
+    }
+
     try {
       const saved = Number(localStorage.getItem("ninjaturtle.galaxy") || 0);
       if (saved > 0 && saved < galaxies.length) {
@@ -37,7 +53,7 @@ export default function GalaxyExplorer({
     } catch {
       /* noop */
     }
-  }, [galaxies.length]);
+  }, [galaxies]);
 
   const goTo = useCallback(
     (next: number) => {

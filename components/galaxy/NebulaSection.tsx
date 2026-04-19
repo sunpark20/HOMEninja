@@ -18,7 +18,7 @@ export default function NebulaSection({ obj, index, overlap }: Props) {
   };
 
   return (
-    <SectionShell index={index} overlap={overlap} sectionHeight={68}>
+    <SectionShell id={obj.id} index={index} overlap={overlap} sectionHeight={68}>
       <NebulaOrb obj={positioned} />
       <CardSide isEven={isEven}>
         <ObjectContentCard

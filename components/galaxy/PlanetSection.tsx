@@ -1,6 +1,8 @@
 import type { PlanetObject } from "@/types/galaxy";
 import Planet from "@/components/Planet";
 import DownloadButtons from "@/components/DownloadButtons";
+import TmtSection from "@/components/TmtSection";
+import { tmt } from "@/data/tmt";
 import SectionShell from "./SectionShell";
 import CardSide from "./CardSide";
 import ObjectContentCard from "./ObjectContentCard";
@@ -19,7 +21,7 @@ export default function PlanetSection({ obj, index, overlap }: Props) {
   };
 
   return (
-    <SectionShell index={index} overlap={overlap} sectionHeight={72}>
+    <SectionShell id={obj.id} index={index} overlap={overlap} sectionHeight={72}>
       <Planet {...planet} />
       <CardSide isEven={isEven}>
         <ObjectContentCard
@@ -31,6 +33,7 @@ export default function PlanetSection({ obj, index, overlap }: Props) {
           {obj.downloads.length > 0 && (
             <DownloadButtons downloads={obj.downloads} />
           )}
+          {tmt[obj.id] && <TmtSection entries={tmt[obj.id]} />}
         </ObjectContentCard>
       </CardSide>
     </SectionShell>

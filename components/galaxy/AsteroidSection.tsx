@@ -21,7 +21,7 @@ export default function AsteroidSection({ obj, index, overlap, onOpen }: Props) 
   };
 
   return (
-    <SectionShell index={index} overlap={overlap} sectionHeight={62}>
+    <SectionShell id={obj.id} index={index} overlap={overlap} sectionHeight={62}>
       <Asteroid obj={positioned} onOpen={onOpen} />
       <CardSide isEven={isEven}>
         <ObjectContentCard

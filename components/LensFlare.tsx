@@ -19,6 +19,8 @@ interface FlareEvent {
   pointSize: number;
 }
 
+const MAX_FLARES = 3;
+
 function randomFlare(id: number): FlareEvent {
   const streakCount = 2 + Math.floor(Math.random() * 4);
   const baseAngle = Math.random() * 360;
@@ -52,6 +54,8 @@ function FlareInstance({
   onDone: () => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const onDoneRef = useRef(onDone);
+  onDoneRef.current = onDone;
 
   useEffect(() => {
     const el = ref.current;
@@ -65,9 +69,9 @@ function FlareInstance({
       ],
       { duration: flare.duration, easing: "ease-out", fill: "forwards" },
     );
-    anim.onfinish = onDone;
+    anim.onfinish = () => onDoneRef.current();
     return () => anim.cancel();
-  }, [flare, onDone]);
+  }, [flare]);
 
   return (
     <div
@@ -131,8 +135,11 @@ export default function LensFlare({ active }: { active: boolean }) {
     if (mql.matches) return;
 
     function spawn() {
-      const f = randomFlare(counterRef.current++);
-      setFlares((prev) => [...prev, f]);
+      if (document.hidden) return;
+      setFlares((prev) => {
+        if (prev.length >= MAX_FLARES) return prev;
+        return [...prev, randomFlare(counterRef.current++)];
+      });
     }
 
     function scheduleNext() {
@@ -148,10 +155,21 @@ export default function LensFlare({ active }: { active: boolean }) {
       scheduleNext();
     }, 2000 + Math.random() * 3000);
 
+    function onVisibility() {
+      if (document.hidden) {
+        clearTimeout(timerRef.current);
+        setFlares([]);
+      } else {
+        scheduleNext();
+      }
+    }
+    document.addEventListener("visibilitychange", onVisibility);
+
     return () => {
       clearTimeout(initial);
       clearTimeout(timerRef.current);
       setFlares([]);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [active]);
 

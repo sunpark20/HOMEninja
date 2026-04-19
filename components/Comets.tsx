@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 interface CometData {
   id: number;
@@ -13,6 +13,8 @@ interface CometData {
   tailLength: number;
   delay: number;
 }
+
+const MAX_COMETS = 5;
 
 function randomComet(id: number): CometData {
   const fromRight = Math.random() > 0.5;
@@ -39,6 +41,8 @@ function randomComet(id: number): CometData {
 
 function CometElement({ comet, onDone }: { comet: CometData; onDone: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
+  const onDoneRef = useRef(onDone);
+  onDoneRef.current = onDone;
 
   useEffect(() => {
     const el = ref.current;
@@ -66,9 +70,9 @@ function CometElement({ comet, onDone }: { comet: CometData; onDone: () => void 
       { duration: comet.duration * 1000, easing: "linear", fill: "forwards" },
     );
 
-    anim.onfinish = onDone;
+    anim.onfinish = () => onDoneRef.current();
     return () => anim.cancel();
-  }, [comet, onDone]);
+  }, [comet]);
 
   return (
     <div
@@ -108,22 +112,31 @@ export default function Comets() {
   const counterRef = useRef(0);
   const reducedRef = useRef(false);
 
+  const handleDone = useCallback((id: number) => {
+    setComets((prev) => prev.filter((c) => c.id !== id));
+  }, []);
+
   useEffect(() => {
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
     reducedRef.current = mql.matches;
-    const handler = (e: MediaQueryListEvent) => {
+    const motionHandler = (e: MediaQueryListEvent) => {
       reducedRef.current = e.matches;
     };
-    mql.addEventListener("change", handler);
+    mql.addEventListener("change", motionHandler);
+
+    let timerRef: ReturnType<typeof setTimeout>;
 
     function spawn() {
-      if (reducedRef.current) return;
+      if (reducedRef.current || document.hidden) return;
       const count = 1 + Math.floor(Math.random() * 2);
       const newComets: CometData[] = [];
       for (let i = 0; i < count; i++) {
         newComets.push(randomComet(counterRef.current++));
       }
-      setComets((prev) => [...prev, ...newComets]);
+      setComets((prev) => {
+        if (prev.length >= MAX_COMETS) return prev;
+        return [...prev, ...newComets].slice(0, MAX_COMETS);
+      });
     }
 
     function scheduleNext() {
@@ -139,18 +152,23 @@ export default function Comets() {
       timerRef = scheduleNext();
     }, 3000 + Math.random() * 5000);
 
-    let timerRef: ReturnType<typeof setTimeout>;
+    function onVisibility() {
+      if (document.hidden) {
+        clearTimeout(timerRef);
+        setComets([]);
+      } else {
+        timerRef = scheduleNext();
+      }
+    }
+    document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
       clearTimeout(initialDelay);
       clearTimeout(timerRef);
-      mql.removeEventListener("change", handler);
+      mql.removeEventListener("change", motionHandler);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
-
-  const handleDone = (id: number) => {
-    setComets((prev) => prev.filter((c) => c.id !== id));
-  };
 
   return (
     <div aria-hidden="true">

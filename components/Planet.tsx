@@ -66,22 +66,13 @@ export default function Planet({
     <div
       ref={ref}
       aria-hidden={!onClick}
-      className={`absolute will-change-transform ${onClick ? "cursor-pointer" : "pointer-events-none"}`}
+      className="absolute pointer-events-none will-change-transform"
       style={{
         left: position.x,
         top: position.y,
         transform: "translateY(0)",
+        zIndex: onClick ? 20 : undefined,
       }}
-      onClick={onClick}
-      role={onClick ? "button" : undefined}
-      tabIndex={onClick ? 0 : undefined}
-      onKeyDown={
-        onClick
-          ? (e) => {
-              if (e.key === "Enter" || e.key === " ") onClick();
-            }
-          : undefined
-      }
     >
       {/* ── 고리 뒤쪽 절반 (행성 뒤) ── */}
       {ring && (
@@ -101,11 +92,23 @@ export default function Planet({
       {/* ── 행성 본체 ── */}
       <div
         className="rounded-full overflow-hidden"
+        onClick={onClick}
+        role={onClick ? "button" : undefined}
+        tabIndex={onClick ? 0 : undefined}
+        onKeyDown={
+          onClick
+            ? (e) => {
+                if (e.key === "Enter" || e.key === " ") onClick();
+              }
+            : undefined
+        }
         style={{
           width: sizeVal,
           height: sizeVal,
           background: gradient,
           boxShadow: `inset -20px -20px 60px rgba(0,0,0,0.6), 0 0 80px 20px ${shadowColor}`,
+          cursor: onClick ? "pointer" : undefined,
+          pointerEvents: onClick ? "auto" : undefined,
         }}
       />
 

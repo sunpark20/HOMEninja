@@ -33,7 +33,9 @@ export default function PlanetSection({ obj, index, overlap }: Props) {
           {obj.downloads.length > 0 && (
             <DownloadButtons downloads={obj.downloads} />
           )}
-          {tmt[obj.id] && <TmtSection entries={tmt[obj.id]} />}
+          {!obj.comingSoon && (
+            <TmtSection appId={obj.id} entries={tmt[obj.id] ?? []} />
+          )}
         </ObjectContentCard>
       </CardSide>
     </SectionShell>

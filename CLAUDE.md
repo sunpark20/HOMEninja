@@ -7,7 +7,7 @@
 - Vercel 배포 (무료)
 
 ## 아키텍처 규칙
-- CRITICAL: 순수 정적 사이트. API 라우트 사용하지 않는다. 앱 데이터는 `data/apps.ts`에 하드코딩.
+- CRITICAL: 기본 정적 사이트 + 관리용 API Route 최소한으로 사용. 앱 데이터는 `data/`에 JSON/TS로 관리, TMT는 `/api/tmt`를 통해 GitHub API로 실시간 수정 가능.
 - CRITICAL: 외부 라이브러리 최소화. 우주 배경(별, 행성)은 CSS + Canvas로만 구현. Three.js 등 3D 라이브러리 금지.
 - CRITICAL: Impeccable 스킬(`.claude/skills/impeccable/`)의 디자인 가이드라인을 따른다. 특히 절대 금지 항목(gradient-text, border-left 스트라이프) 위반 금지.
 - Server Components 기본. Canvas/스크롤 이벤트가 필요한 곳만 Client Component ("use client").

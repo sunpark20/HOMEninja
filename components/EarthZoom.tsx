@@ -3,6 +3,9 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
+const TOSS_DONATE_URL =
+  "supertoss://send?amount=1000&bank=국민은행&accountNo=92682879142";
+
 const ZOOM_STAGES = [
   { id: "earth", label: "지구", caption: "파란 별, 우리 집이 있는 곳" },
   { id: "asia", label: "아시아", caption: "동쪽으로, 동쪽으로" },
@@ -153,6 +156,48 @@ function WorldMap() {
 }
 
 function HousePanel({ onClose }: { onClose: () => void }) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
+
+  const qrContainerStyle = {
+    marginTop: 20,
+    padding: 20,
+    borderRadius: 14,
+    background: "oklch(0.98 0.002 260)",
+    display: "flex",
+    flexDirection: "column" as const,
+    alignItems: "center",
+    gap: 14,
+    textDecoration: "none",
+    color: "inherit",
+  };
+
+  const qrContent = (
+    <>
+      <Image
+        src="/toss-qr.png"
+        alt="토스 후원 QR 코드"
+        width={240}
+        height={240}
+        style={{ borderRadius: 8 }}
+      />
+      <div
+        style={{
+          fontSize: 13,
+          color: "oklch(0.45 0.01 260)",
+          textAlign: "center",
+          lineHeight: 1.5,
+        }}
+      >
+        {isMobile
+          ? "토스로 후원하기 — 터치하여 토스 앱 열기"
+          : "토스로 후원하기 — 카메라로 스캔하세요"}
+      </div>
+    </>
+  );
+
   return (
     <div
       style={{
@@ -197,36 +242,17 @@ function HousePanel({ onClose }: { onClose: () => void }) {
         여기서 기억의궁전, 제주택배비지원 같은 앱을 만들고 있어요
       </p>
 
-      <div
-        style={{
-          marginTop: 20,
-          padding: 20,
-          borderRadius: 14,
-          background: "oklch(0.98 0.002 260)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 14,
-        }}
-      >
-        <Image
-          src="/toss-qr.png"
-          alt="토스 후원 QR 코드"
-          width={240}
-          height={240}
-          style={{ borderRadius: 8 }}
-        />
-        <div
-          style={{
-            fontSize: 13,
-            color: "oklch(0.45 0.01 260)",
-            textAlign: "center",
-            lineHeight: 1.5,
-          }}
+      {isMobile ? (
+        <a
+          href={TOSS_DONATE_URL}
+          aria-label="토스로 후원 페이지 열기"
+          style={qrContainerStyle}
         >
-          토스로 후원하기 — 카메라로 스캔하세요
-        </div>
-      </div>
+          {qrContent}
+        </a>
+      ) : (
+        <div style={qrContainerStyle}>{qrContent}</div>
+      )}
 
       <button
         onClick={onClose}

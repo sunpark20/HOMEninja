@@ -60,7 +60,7 @@ export default function Planet({
   }, [parallaxSpeed]);
 
   const gradient = `radial-gradient(ellipse at 30% 30%, ${colors.join(", ")})`;
-  const sizeVal = `clamp(200px, ${size}vh, ${size}vh)`;
+  const sizeVal = `clamp(140px, ${size}vw, ${size}vh)`;
 
   return (
     <div
@@ -71,7 +71,6 @@ export default function Planet({
         left: position.x,
         top: position.y,
         transform: "translateY(0)",
-        zIndex: onClick ? 20 : undefined,
       }}
     >
       {/* ── 고리 뒤쪽 절반 (행성 뒤) ── */}

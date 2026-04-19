@@ -19,6 +19,8 @@ function renderWithBreaks(text: string) {
 
 const TEXT = "oklch(0.58 0.01 260)";
 const DIM = "oklch(0.38 0.01 260)";
+const ERR = "oklch(0.55 0.12 25)";
+const OK = "oklch(0.6 0.08 160)";
 
 export default function TmtSection({ appId, entries: initialEntries }: Props) {
   const [open, setOpen] = useState(false);
@@ -33,7 +35,11 @@ export default function TmtSection({ appId, entries: initialEntries }: Props) {
   const [authError, setAuthError] = useState(false);
   const [editEntries, setEditEntries] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
-  const [saveMsg, setSaveMsg] = useState("");
+  const [saveMsg, setSaveMsg] = useState<{
+    text: string;
+    ok: boolean;
+  } | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const measure = useCallback(() => {
     if (contentRef.current) {
@@ -42,8 +48,18 @@ export default function TmtSection({ appId, entries: initialEntries }: Props) {
   }, []);
 
   useEffect(() => {
-    if (open && !adminMode) requestAnimationFrame(measure);
+    if (!open || adminMode) return;
+    const id = requestAnimationFrame(measure);
+    return () => cancelAnimationFrame(id);
   }, [open, adminMode, measure, entries, showPwInput, authError, saveMsg]);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el || !open || adminMode) return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [open, adminMode, measure]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -98,31 +114,41 @@ export default function TmtSection({ appId, entries: initialEntries }: Props) {
   /* ── handlers ── */
 
   async function handleEditClick() {
-    const stored = sessionStorage.getItem("tmt_pw");
-    if (stored) {
-      const ok = await tryAuth(stored);
-      if (ok) {
-        await enterEditMode(stored);
-        return;
+    setLoading(true);
+    try {
+      const stored = sessionStorage.getItem("tmt_pw");
+      if (stored) {
+        const ok = await tryAuth(stored);
+        if (ok) {
+          await enterEditMode(stored);
+          return;
+        }
+        sessionStorage.removeItem("tmt_pw");
       }
-      sessionStorage.removeItem("tmt_pw");
+      setShowPwInput(true);
+    } finally {
+      setLoading(false);
     }
-    setShowPwInput(true);
   }
 
   async function handleAuth() {
     setAuthError(false);
-    const ok = await tryAuth(password);
-    if (!ok) {
-      setAuthError(true);
-      return;
+    setLoading(true);
+    try {
+      const ok = await tryAuth(password);
+      if (!ok) {
+        setAuthError(true);
+        return;
+      }
+      await enterEditMode(password);
+    } finally {
+      setLoading(false);
     }
-    await enterEditMode(password);
   }
 
   async function handleSave() {
     setSaving(true);
-    setSaveMsg("");
+    setSaveMsg(null);
     const pw = sessionStorage.getItem("tmt_pw") || password;
     const filtered = editEntries.filter((e) => e.trim() !== "");
     try {
@@ -134,13 +160,16 @@ export default function TmtSection({ appId, entries: initialEntries }: Props) {
       if (res.ok) {
         setEntries(filtered);
         setAdminMode(false);
-        setSaveMsg("저장 완료");
-        setTimeout(() => setSaveMsg(""), 3000);
+        setSaveMsg({ text: "저장 완료", ok: true });
+        setTimeout(() => setSaveMsg(null), 3000);
       } else {
-        setSaveMsg("저장 실패");
+        const data = (await res.json().catch(() => ({}))) as {
+          error?: string;
+        };
+        setSaveMsg({ text: data.error ?? "저장 실패", ok: false });
       }
     } catch {
-      setSaveMsg("저장 실패");
+      setSaveMsg({ text: "네트워크 오류", ok: false });
     }
     setSaving(false);
   }
@@ -196,7 +225,7 @@ export default function TmtSection({ appId, entries: initialEntries }: Props) {
                       setEditEntries(editEntries.filter((_, j) => j !== i))
                     }
                     className="text-xs px-1.5 py-1 shrink-0 cursor-pointer"
-                    style={{ color: "oklch(0.55 0.12 25)" }}
+                    style={{ color: ERR }}
                   >
                     삭제
                   </button>
@@ -217,7 +246,7 @@ export default function TmtSection({ appId, entries: initialEntries }: Props) {
                   disabled={saving}
                   className="text-xs px-3 py-1 cursor-pointer"
                   style={{
-                    color: "oklch(0.65 0.08 160)",
+                    color: OK,
                     opacity: saving ? 0.5 : 1,
                   }}
                 >
@@ -234,6 +263,14 @@ export default function TmtSection({ appId, entries: initialEntries }: Props) {
                 >
                   취소
                 </button>
+                {saveMsg && (
+                  <span
+                    className="text-xs self-center"
+                    style={{ color: saveMsg.ok ? OK : ERR }}
+                  >
+                    {saveMsg.text}
+                  </span>
+                )}
               </div>
             </>
           ) : (
@@ -270,16 +307,14 @@ export default function TmtSection({ appId, entries: initialEntries }: Props) {
                   <button
                     type="button"
                     onClick={handleAuth}
+                    disabled={loading}
                     className="text-xs px-2 py-1 cursor-pointer"
-                    style={{ color: DIM }}
+                    style={{ color: DIM, opacity: loading ? 0.5 : 1 }}
                   >
-                    확인
+                    {loading ? "..." : "확인"}
                   </button>
                   {authError && (
-                    <span
-                      className="text-xs"
-                      style={{ color: "oklch(0.55 0.12 25)" }}
-                    >
+                    <span className="text-xs" style={{ color: ERR }}>
                       틀림
                     </span>
                   )}
@@ -288,18 +323,19 @@ export default function TmtSection({ appId, entries: initialEntries }: Props) {
                 <button
                   type="button"
                   onClick={handleEditClick}
+                  disabled={loading}
                   className="text-[11px] cursor-pointer"
-                  style={{ color: DIM }}
+                  style={{ color: DIM, opacity: loading ? 0.5 : 1 }}
                 >
-                  수정
+                  {loading ? "..." : "수정"}
                 </button>
               )}
               {saveMsg && (
                 <span
                   className="text-xs"
-                  style={{ color: "oklch(0.6 0.08 160)" }}
+                  style={{ color: saveMsg.ok ? OK : ERR }}
                 >
-                  {saveMsg}
+                  {saveMsg.text}
                 </span>
               )}
             </div>

@@ -6,7 +6,7 @@ const REPO = "HOMEninja";
 const FILE_PATH = "data/tmt.json";
 const BRANCH = "main";
 
-function headers() {
+function githubHeaders() {
   return {
     Authorization: `Bearer ${process.env.GITHUB_PAT}`,
     Accept: "application/vnd.github.v3+json",
@@ -17,9 +17,13 @@ function headers() {
 async function getFile() {
   const res = await fetch(
     `${GITHUB_API}/repos/${OWNER}/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`,
-    { headers: headers(), cache: "no-store" },
+    { headers: githubHeaders(), cache: "no-store" },
   );
-  if (!res.ok) return null;
+  if (!res.ok) {
+    const err = await res.text().catch(() => "");
+    console.error("[TMT] GitHub GET failed:", res.status, err);
+    return null;
+  }
   const data = (await res.json()) as { content: string; sha: string };
   const decoded = Buffer.from(data.content, "base64").toString("utf-8");
   return {
@@ -28,14 +32,13 @@ async function getFile() {
   };
 }
 
-// GET — 읽기
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const appId = searchParams.get("app");
 
   const file = await getFile();
   if (!file) {
-    return NextResponse.json({ error: "fetch failed" }, { status: 500 });
+    return NextResponse.json({ error: "GitHub 연결 실패" }, { status: 500 });
   }
 
   if (appId) {
@@ -44,7 +47,6 @@ export async function GET(request: Request) {
   return NextResponse.json(file.content);
 }
 
-// POST — 비밀번호 확인
 export async function POST(request: Request) {
   const { password } = (await request.json()) as { password: string };
   if (!password || password !== process.env.ADMIN_PASSWORD) {
@@ -53,7 +55,6 @@ export async function POST(request: Request) {
   return NextResponse.json({ ok: true });
 }
 
-// PUT — 수정
 export async function PUT(request: Request) {
   const body = (await request.json()) as {
     password: string;
@@ -62,15 +63,15 @@ export async function PUT(request: Request) {
   };
 
   if (!body.password || body.password !== process.env.ADMIN_PASSWORD) {
-    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: "비밀번호 틀림" }, { status: 401 });
   }
   if (!body.appId || !Array.isArray(body.entries)) {
-    return NextResponse.json({ error: "bad request" }, { status: 400 });
+    return NextResponse.json({ error: "잘못된 요청" }, { status: 400 });
   }
 
   const file = await getFile();
   if (!file) {
-    return NextResponse.json({ error: "fetch failed" }, { status: 500 });
+    return NextResponse.json({ error: "GitHub 연결 실패" }, { status: 500 });
   }
 
   if (body.entries.length === 0) {
@@ -86,7 +87,7 @@ export async function PUT(request: Request) {
     `${GITHUB_API}/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`,
     {
       method: "PUT",
-      headers: headers(),
+      headers: githubHeaders(),
       body: JSON.stringify({
         message: `chore: update TMT for ${body.appId}`,
         content: encoded,
@@ -97,7 +98,15 @@ export async function PUT(request: Request) {
   );
 
   if (!res.ok) {
-    return NextResponse.json({ error: "save failed" }, { status: 500 });
+    const err = (await res.json().catch(() => ({}))) as {
+      message?: string;
+    };
+    console.error("[TMT] GitHub PUT failed:", res.status, err);
+    const msg =
+      err.message === "Resource not accessible by personal access token"
+        ? "GitHub 토큰에 쓰기 권한 없음"
+        : `저장 실패 (${res.status})`;
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true });

@@ -6,6 +6,7 @@ import type {
   AsteroidObject,
   NebulaObject,
 } from "@/types/galaxy";
+import type { AppContent } from "@/data/tmt";
 import GalaxyBackground from "./GalaxyBackground";
 import GalaxyIntro from "./GalaxyIntro";
 import PlanetSection from "./PlanetSection";
@@ -16,9 +17,17 @@ type Props = {
   galaxy: GalaxyType;
   overlap: number;
   onOpenAsteroid: (obj: AsteroidObject) => void;
+  onOpenPlanet?: (obj: PlanetObject) => void;
+  contentOverrides?: Record<string, AppContent>;
 };
 
-export default function Galaxy({ galaxy, overlap, onOpenAsteroid }: Props) {
+export default function Galaxy({
+  galaxy,
+  overlap,
+  onOpenAsteroid,
+  onOpenPlanet,
+  contentOverrides,
+}: Props) {
   return (
     <div className="relative">
       <GalaxyBackground bg={galaxy.bg} />
@@ -31,6 +40,8 @@ export default function Galaxy({ galaxy, overlap, onOpenAsteroid }: Props) {
               obj={obj as PlanetObject}
               index={i}
               overlap={overlap}
+              onPlanetClick={onOpenPlanet}
+              contentOverrides={contentOverrides}
             />
           );
         }

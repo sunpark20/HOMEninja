@@ -14,7 +14,8 @@ export default function Planet({
   parallaxSpeed,
   shadowColor,
   ring,
-}: PlanetStyle) {
+  onClick,
+}: PlanetStyle & { onClick?: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
   const isVisibleRef = useRef(false);
@@ -64,13 +65,23 @@ export default function Planet({
   return (
     <div
       ref={ref}
-      aria-hidden="true"
-      className="absolute pointer-events-none will-change-transform"
+      aria-hidden={!onClick}
+      className={`absolute will-change-transform ${onClick ? "cursor-pointer" : "pointer-events-none"}`}
       style={{
         left: position.x,
         top: position.y,
         transform: "translateY(0)",
       }}
+      onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") onClick();
+            }
+          : undefined
+      }
     >
       {/* ── 고리 뒤쪽 절반 (행성 뒤) ── */}
       {ring && (

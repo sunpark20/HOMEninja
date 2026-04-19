@@ -1,12 +1,18 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import type { Galaxy as GalaxyType, AsteroidObject } from "@/types/galaxy";
+import type {
+  Galaxy as GalaxyType,
+  AsteroidObject,
+  PlanetObject,
+} from "@/types/galaxy";
+import type { AppContent } from "@/data/tmt";
 import StarfieldV2 from "./StarfieldV2";
 import DustLayer from "./DustLayer";
 import Hyperspace from "./Hyperspace";
 import GalaxyNav from "./GalaxyNav";
 import AsteroidModal from "./AsteroidModal";
+import AdminEditModal from "./AdminEditModal";
 import HeroV2 from "./HeroV2";
 import EarthZoom from "./EarthZoom";
 import LensFlare from "./LensFlare";
@@ -25,7 +31,18 @@ export default function GalaxyExplorer({
   const [direction, setDirection] = useState(1);
   const [transitioning, setTransitioning] = useState(false);
   const [asteroid, setAsteroid] = useState<AsteroidObject | null>(null);
+  const [editPlanet, setEditPlanet] = useState<PlanetObject | null>(null);
+  const [contentOverrides, setContentOverrides] = useState<
+    Record<string, AppContent>
+  >({});
   const [earthOpen, setEarthOpen] = useState(false);
+
+  const handleSaved = useCallback(
+    (appId: string, data: AppContent) => {
+      setContentOverrides((prev) => ({ ...prev, [appId]: data }));
+    },
+    [],
+  );
 
   useEffect(() => {
     const hash = window.location.hash.slice(1);
@@ -118,6 +135,8 @@ export default function GalaxyExplorer({
           galaxy={galaxy}
           overlap={20}
           onOpenAsteroid={setAsteroid}
+          onOpenPlanet={setEditPlanet}
+          contentOverrides={contentOverrides}
         />
         <div style={{ padding: "60px 0 120px" }} />
       </div>
@@ -132,6 +151,11 @@ export default function GalaxyExplorer({
       <AsteroidModal
         obj={asteroid}
         onClose={() => setAsteroid(null)}
+      />
+      <AdminEditModal
+        obj={editPlanet}
+        onClose={() => setEditPlanet(null)}
+        onSaved={handleSaved}
       />
       <EarthZoom open={earthOpen} onClose={() => setEarthOpen(false)} />
     </>

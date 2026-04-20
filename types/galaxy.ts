@@ -23,6 +23,7 @@ export type PlanetObject = {
   downloads: DownloadLink[];
   planet: PlanetStyle;
   comingSoon?: boolean;
+  macOnly?: boolean;
 };
 
 export type AsteroidObject = {

@@ -50,6 +50,7 @@ export default function PlanetSection({
           description={displayDesc}
           meta={obj.meta}
           comingSoon={obj.comingSoon}
+          macOnly={obj.macOnly}
         >
           {obj.downloads.length > 0 && (
             <DownloadButtons downloads={obj.downloads} />

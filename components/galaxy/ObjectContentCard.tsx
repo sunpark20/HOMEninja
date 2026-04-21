@@ -6,8 +6,22 @@ type Props = {
   meta?: AppMeta;
   comingSoon?: boolean;
   macOnly?: boolean;
+  hasBgraw?: boolean;
   children?: React.ReactNode;
 };
+
+function OptimusMark() {
+  return (
+    <div className="mt-6 flex items-center gap-1.5" style={{ color: "oklch(0.30 0.01 260)" }}>
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
+        <path d="M12 2L4 6v5c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4zm0 3l2 1v2h-4V6l2-1zm-3 5h6v2h-1v3h-1v-3h-2v3h-1v-3H9v-2zm3 9c-2.76-.8-5-4.16-5-7.6V8.4l5-2.5 5 2.5v3c0 3.44-2.24 6.8-5 7.6z" />
+      </svg>
+      <span className="text-[10px] tracking-[0.06em] font-[family-name:var(--font-body)]">
+        for AI
+      </span>
+    </div>
+  );
+}
 
 export default function ObjectContentCard({
   title,
@@ -15,6 +29,7 @@ export default function ObjectContentCard({
   meta,
   comingSoon,
   macOnly,
+  hasBgraw,
   children,
 }: Props) {
   return (
@@ -71,6 +86,7 @@ export default function ObjectContentCard({
         </div>
       )}
       {children}
+      {hasBgraw && <OptimusMark />}
     </div>
   );
 }

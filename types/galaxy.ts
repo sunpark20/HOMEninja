@@ -24,6 +24,7 @@ export type PlanetObject = {
   planet: PlanetStyle;
   comingSoon?: boolean;
   macOnly?: boolean;
+  bgrawUrl?: string;
 };
 
 export type AsteroidObject = {

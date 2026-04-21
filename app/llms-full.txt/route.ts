@@ -2,11 +2,6 @@ import { galaxies } from "@/data/galaxies";
 import tmtData from "@/data/tmt.json";
 import type { PlanetObject } from "@/types/galaxy";
 
-const BGRAW_URLS: Record<string, string> = {
-  spamcall070:
-    "https://raw.githubusercontent.com/sunpark20/spamcall/main/bgraw.md",
-};
-
 export const revalidate = 3600;
 
 function isPlanet(obj: unknown): obj is PlanetObject {
@@ -48,8 +43,8 @@ export async function GET() {
     }
     sections.push("");
 
-    const bgraw = BGRAW_URLS[app.id];
-    if (bgraw) {
+    if (app.bgrawUrl) {
+      const bgraw = app.bgrawUrl;
       const content = await fetchBgraw(bgraw);
       if (content) {
         sections.push(content);

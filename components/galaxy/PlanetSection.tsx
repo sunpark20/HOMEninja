@@ -51,6 +51,7 @@ export default function PlanetSection({
           meta={obj.meta}
           comingSoon={obj.comingSoon}
           macOnly={obj.macOnly}
+          hasBgraw={!!obj.bgrawUrl}
         >
           {obj.downloads.length > 0 && (
             <DownloadButtons downloads={obj.downloads} />

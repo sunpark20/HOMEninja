@@ -107,6 +107,7 @@ export const galaxies: Galaxy[] = [
         name: "070 스팸 전화 차단",
         description: "최초 1회 설정, 벨소리도 안울리는",
         meta: { minOS: "iOS 16.0+" },
+        bgrawUrl: "https://raw.githubusercontent.com/sunpark20/spamcall/main/bgraw.md",
         downloads: [{ platform: "ios", url: "https://apps.apple.com/kr/app/070-%EC%8A%A4%ED%8C%B8-%EC%A0%84%ED%99%94-%EC%B0%A8%EB%8B%A8/id6762326707", label: "App Store" }],
         planet: {
           colors: [

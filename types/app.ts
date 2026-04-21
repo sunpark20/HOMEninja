@@ -28,6 +28,12 @@ export type AppMeta = {
   version?: string;
 };
 
+export type MoonLink = {
+  targetId: string;
+  colors: string[];
+  kind: "planet" | "asteroid";
+};
+
 export type AppData = {
   id: string;
   name: string;

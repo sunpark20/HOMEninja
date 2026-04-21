@@ -1,11 +1,87 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type { PlanetStyle } from "@/types/app";
+import type { PlanetStyle, MoonLink } from "@/types/app";
 
-/* ── 효과 목록 (독립 제거 가능) ──────────────────────
- * 1. 고리(ring) → ring 객체 제거하면 OFF
- * ─────────────────────────────────────────────── */
+function seededRand(seed: number, n: number) {
+  const x = Math.sin(seed * 9999 + n) * 10000;
+  return x - Math.floor(x);
+}
+
+const MOON_SCALE = 0.25;
+
+function MoonSatellite({ moon, parentSize }: { moon: MoonLink; parentSize: number }) {
+  const moonSize = `clamp(42px, ${parentSize * MOON_SCALE}vw, ${parentSize * MOON_SCALE}vh)`;
+  const handleClick = () => {
+    window.dispatchEvent(
+      new CustomEvent("navigate-to-app", { detail: moon.targetId })
+    );
+  };
+
+  const shared = {
+    position: "absolute" as const,
+    right: "-20%",
+    top: "15%",
+    cursor: "pointer",
+    pointerEvents: "auto" as const,
+    animation: "moon-float 4s ease-in-out infinite alternate",
+  };
+
+  if (moon.kind === "asteroid") {
+    const seed = moon.targetId.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+    const points: [number, number][] = [];
+    const N = 12;
+    for (let i = 0; i < N; i++) {
+      const a = (i / N) * Math.PI * 2;
+      const r = 35 + seededRand(seed, i) * 15;
+      points.push([50 + Math.cos(a) * r, 50 + Math.sin(a) * r]);
+    }
+    const path = "M " + points.map((p) => p.join(",")).join(" L ") + " Z";
+    const gradId = `moon-ast-${moon.targetId}`;
+
+    return (
+      <div
+        onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleClick(); }}
+        style={{ ...shared, width: moonSize, height: moonSize }}
+      >
+        <svg viewBox="0 0 100 100" style={{ width: "100%", height: "100%", overflow: "visible" }}>
+          <defs>
+            <radialGradient id={gradId} cx="0.35" cy="0.35" r="0.9">
+              <stop offset="0%" stopColor="oklch(0.55 0.04 60)" />
+              <stop offset="50%" stopColor="oklch(0.38 0.04 55)" />
+              <stop offset="100%" stopColor="oklch(0.18 0.03 50)" />
+            </radialGradient>
+          </defs>
+          <path d={path} fill={`url(#${gradId})`} stroke="oklch(0.15 0.02 50)" strokeWidth="0.3" strokeOpacity="0.4" />
+          {[0, 1, 2, 3].map((i) => (
+            <circle key={i} cx={30 + seededRand(seed, i + 10) * 40} cy={30 + seededRand(seed, i + 20) * 40} r={1.5 + seededRand(seed, i + 30) * 3} fill="oklch(0.15 0.02 50 / 0.5)" />
+          ))}
+        </svg>
+      </div>
+    );
+  }
+
+  const gradient = `radial-gradient(ellipse at 30% 30%, ${moon.colors.join(", ")})`;
+  return (
+    <div
+      className="absolute rounded-full"
+      onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleClick(); }}
+      style={{
+        ...shared,
+        width: moonSize,
+        height: moonSize,
+        background: gradient,
+        boxShadow: `inset -8px -8px 20px rgba(0,0,0,0.5), 0 0 24px 6px ${moon.colors[1]} / 0.3)`,
+      }}
+    />
+  );
+}
 
 export default function Planet({
   colors,
@@ -15,7 +91,8 @@ export default function Planet({
   shadowColor,
   ring,
   onClick,
-}: PlanetStyle & { onClick?: () => void }) {
+  moons,
+}: PlanetStyle & { onClick?: () => void; moons?: MoonLink[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
   const isVisibleRef = useRef(false);
@@ -125,6 +202,11 @@ export default function Planet({
           }}
         />
       )}
+
+      {/* ── 위성 (관련 앱 링크) ── */}
+      {moons?.map((moon) => (
+        <MoonSatellite key={moon.targetId} moon={moon} parentSize={size} />
+      ))}
     </div>
   );
 }

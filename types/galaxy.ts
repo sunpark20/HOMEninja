@@ -1,4 +1,4 @@
-import type { PlanetStyle, DownloadLink, AppMeta } from "./app";
+import type { PlanetStyle, DownloadLink, AppMeta, MoonLink } from "./app";
 
 export type GradientConfig = {
   color: string;
@@ -25,12 +25,18 @@ export type PlanetObject = {
   comingSoon?: boolean;
   macOnly?: boolean;
   bgrawUrl?: string;
+  moons?: MoonLink[];
 };
 
 export type AsteroidObject = {
   id: string;
   name: string;
   hint: string;
+  description?: string;
+  meta?: AppMeta;
+  downloads?: DownloadLink[];
+  bgrawUrl?: string;
+  moons?: MoonLink[];
   size: number;
   position: { x: string; y: string };
   rotate: number;

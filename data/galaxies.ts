@@ -108,6 +108,16 @@ export const galaxies: Galaxy[] = [
         description: "최초 1회 설정, 벨소리도 안울리는",
         meta: { minOS: "iOS 16.0+" },
         bgrawUrl: "https://raw.githubusercontent.com/sunpark20/spamcall/main/bgraw.md",
+        moons: [{
+          targetId: "callninja",
+          kind: "asteroid",
+          colors: [
+            "oklch(0.55 0.04 60)",
+            "oklch(0.38 0.04 55)",
+            "oklch(0.28 0.03 50)",
+            "oklch(0.18 0.03 50)",
+          ],
+        }],
         downloads: [{ platform: "ios", url: "https://apps.apple.com/kr/app/070-%EC%8A%A4%ED%8C%B8-%EC%A0%84%ED%99%94-%EC%B0%A8%EB%8B%A8/id6762326707", label: "App Store" }],
         planet: {
           colors: [
@@ -168,9 +178,29 @@ export const galaxies: Galaxy[] = [
     },
     objects: [
       {
-        id: "a1",
-        name: "작명 대기",
-        hint: "이름부터 정해야 하는데",
+        id: "callninja",
+        name: "콜닌자",
+        hint: "번호 범위를 직접 지정해서 차단",
+        description: "번호 범위를 직접 지정해서 차단",
+        meta: { minOS: "iOS 16.0+" },
+        bgrawUrl: "https://raw.githubusercontent.com/sunpark20/callninja/main/bgraw.md",
+        moons: [{
+          targetId: "spamcall070",
+          kind: "planet",
+          colors: [
+            "oklch(0.70 0.14 0)",
+            "oklch(0.48 0.16 350)",
+            "oklch(0.28 0.10 340)",
+            "oklch(0.12 0.05 335)",
+          ],
+        }],
+        downloads: [
+          {
+            platform: "ios",
+            url: "https://apps.apple.com/kr/app/%EC%BD%9C%EB%8B%8C%EC%9E%90-%EC%8A%A4%ED%8C%B8-%EC%A0%84%ED%99%94-%ED%8C%A8%ED%84%B4-%EC%B0%A8%EB%8B%A8/id6762523084",
+            label: "App Store",
+          },
+        ],
         size: 28,
         position: { x: "55%", y: "25%" },
         rotate: 12,

@@ -10,7 +10,7 @@ export default function CardSide({ isEven, children }: Props) {
       style={{ justifyContent: isEven ? "flex-start" : "flex-end" }}
     >
       <div
-        className="max-w-[480px]"
+        className="max-w-[480px] pointer-events-auto"
         style={{ margin: isEven ? "0 0 0 4%" : "0 4% 0 0" }}
       >
         {children}

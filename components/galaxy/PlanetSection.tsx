@@ -38,6 +38,7 @@ export default function PlanetSection({
     <SectionShell id={obj.id} index={index} overlap={overlap} sectionHeight={72}>
       <Planet
         {...planet}
+        moons={obj.moons}
         onClick={
           !obj.comingSoon && onPlanetClick
             ? () => onPlanetClick(obj)

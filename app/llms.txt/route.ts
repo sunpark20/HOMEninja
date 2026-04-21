@@ -19,7 +19,8 @@ export function GET() {
     "## Apps",
     ...apps.map((app) => {
       const platforms = app.downloads.map((d) => d.platform).join(", ");
-      return `- ${app.name}: ${app.description} (${platforms})`;
+      const icon = app.bgrawUrl ? "🛡️ " : "";
+      return `- ${icon}${app.name}: ${app.description} (${platforms})`;
     }),
     "",
     "## Detailed",
@@ -28,6 +29,9 @@ export function GET() {
     "## Links",
     "- Homepage: https://ninjaturtle.win",
     "- GitHub: https://github.com/sunpark20",
+    "",
+    "---",
+    "🛡️ = AI를 위한 GitHub bgraw 문서 연결중",
   ];
 
   return new Response(lines.join("\n"), {

@@ -99,6 +99,29 @@ export default function GalaxyExplorer({
     [current, transitioning, galaxies.length],
   );
 
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const targetId = (e as CustomEvent).detail as string;
+      const galaxyIdx = galaxies.findIndex((g) =>
+        g.objects.some((o) => o.id === targetId),
+      );
+      if (galaxyIdx < 0) return;
+
+      if (galaxyIdx === displayed) {
+        const el = document.getElementById(targetId);
+        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        goTo(galaxyIdx);
+        setTimeout(() => {
+          const el = document.getElementById(targetId);
+          el?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, TRANSITION_MS + 100);
+      }
+    };
+    window.addEventListener("navigate-to-app", handler);
+    return () => window.removeEventListener("navigate-to-app", handler);
+  }, [galaxies, displayed, goTo]);
+
   const galaxy = galaxies[displayed];
   const starTint =
     galaxy.kind === "nebula"

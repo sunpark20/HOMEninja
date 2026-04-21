@@ -46,6 +46,12 @@ body {
   100% { opacity: 0; transform: translate(-120vw, 0) scaleX(4); }
 }
 
+/* ── Moon float ─────────────────────────────── */
+@keyframes moon-float {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-4px); }
+}
+
 /* ── v2: Fade in ─────────────────────────────── */
 @keyframes fade-in {
   from { opacity: 0; }

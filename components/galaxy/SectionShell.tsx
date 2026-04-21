@@ -17,7 +17,7 @@ export default function SectionShell({
   return (
     <section
       id={id}
-      className="relative flex items-center"
+      className="relative flex items-center pointer-events-none"
       style={{
         minHeight: `${sectionHeight}vh`,
         marginTop: isFirst ? 0 : `-${overlap}vh`,

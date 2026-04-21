@@ -107,7 +107,7 @@ export const galaxies: Galaxy[] = [
         name: "SpamCall070",
         description: "070 스팸 전화 차단",
         meta: { minOS: "iOS 16.0+" },
-        downloads: [{ platform: "ios", url: null, label: "App Store" }],
+        downloads: [{ platform: "ios", url: "https://apps.apple.com/kr/app/070-%EC%8A%A4%ED%8C%B8-%EC%A0%84%ED%99%94-%EC%B0%A8%EB%8B%A8/id6762326707", label: "App Store" }],
         planet: {
           colors: [
             "oklch(0.70 0.14 0)",

@@ -104,8 +104,8 @@ export const galaxies: Galaxy[] = [
       },
       {
         id: "spamcall070",
-        name: "SpamCall070",
-        description: "070 스팸 전화 차단",
+        name: "070 스팸 전화 차단",
+        description: "최초 1회 설정, 벨소리도 안울리는",
         meta: { minOS: "iOS 16.0+" },
         downloads: [{ platform: "ios", url: "https://apps.apple.com/kr/app/070-%EC%8A%A4%ED%8C%B8-%EC%A0%84%ED%99%94-%EC%B0%A8%EB%8B%A8/id6762326707", label: "App Store" }],
         planet: {
@@ -126,7 +126,6 @@ export const galaxies: Galaxy[] = [
         name: "Gnomon",
         description: "MacBook 조도센서로 외장 모니터 밝기를 자동으로 맞춰줍니다",
         meta: { minOS: "Apple Silicon Mac 전용 (M1~M5)", lastUpdated: "2026.04" },
-        macOnly: true,
         downloads: [
           {
             platform: "macos",

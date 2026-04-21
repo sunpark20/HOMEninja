@@ -72,6 +72,12 @@ export default function RootLayout({
           >
             개인정보처리방침
           </Link>
+          <Link
+            href="/llms.txt"
+            className="transition-colors duration-200 hover:text-white/40"
+          >
+            llms.txt
+          </Link>
         </header>
         <main className="relative z-10">{children}</main>
       </body>

@@ -70,13 +70,49 @@ export default function Privacy() {
             <p>
               개인정보 관련 문의는{" "}
               <a
-                href="mailto:contact@example.com"
+                href="mailto:coastguard2681@gmail.com"
                 className="underline underline-offset-2 hover:text-white/80 transition-colors"
               >
-                contact@example.com
+                coastguard2681@gmail.com
               </a>
               으로 연락해 주세요.
             </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "oklch(0.85 0.005 260)" }}
+            >
+              5. 앱별 추가사항
+            </h2>
+
+            <div className="space-y-4">
+              <div>
+                <h3
+                  className="text-base font-medium mb-1"
+                  style={{ color: "oklch(0.8 0.005 260)" }}
+                >
+                  장보고 (SnapCart)
+                </h3>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>
+                    카메라 접근 권한을 사용하여 영수증을 촬영합니다.
+                  </li>
+                  <li>
+                    촬영된 이미지는 가격 분석을 위해 외부 AI 서비스(OpenAI
+                    API)로 전송됩니다.
+                  </li>
+                  <li>
+                    분석 결과는 기기 내에 저장되며, 서버에 별도로 보관하지
+                    않습니다.
+                  </li>
+                  <li>
+                    음성 입력 기능 사용 시 마이크 접근 권한을 사용합니다.
+                  </li>
+                </ul>
+              </div>
+            </div>
           </section>
         </div>
 

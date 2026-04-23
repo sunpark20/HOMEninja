@@ -137,6 +137,7 @@ export const galaxies: Galaxy[] = [
         name: "Gnomon",
         description: "MacBook 조도센서로 외장 모니터 밝기를 자동으로 맞춰줍니다",
         meta: { minOS: "Apple Silicon Mac 전용 (M1~M5)", lastUpdated: "2026.04" },
+        bgrawUrl: "https://raw.githubusercontent.com/sunpark20/gnomon/main/bgraw.md",
         downloads: [
           {
             platform: "macos",

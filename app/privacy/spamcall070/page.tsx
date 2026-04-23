@@ -12,19 +12,19 @@ export default function SpamCall070Privacy() {
       <article className="max-w-2xl w-full space-y-8">
         <h1
           className="text-3xl font-semibold tracking-tight font-[family-name:var(--font-display)]"
-          style={{ color: "oklch(0.95 0.005 260)" }}
+          style={{ color: "var(--c-title)" }}
         >
           SpamCall070 개인정보처리방침
         </h1>
 
         <div
           className="space-y-6 text-sm leading-relaxed"
-          style={{ color: "oklch(0.7 0.01 260)" }}
+          style={{ color: "var(--c-body)" }}
         >
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               1. 개인정보 수집 항목
             </h2>
@@ -38,7 +38,7 @@ export default function SpamCall070Privacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               2. 에러 리포트
             </h2>
@@ -63,7 +63,7 @@ export default function SpamCall070Privacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               3. 데이터 저장
             </h2>
@@ -77,7 +77,7 @@ export default function SpamCall070Privacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               4. 문의
             </h2>
@@ -93,7 +93,7 @@ export default function SpamCall070Privacy() {
             </p>
           </section>
 
-          <p className="text-xs" style={{ color: "oklch(0.5 0.01 260)" }}>
+          <p className="text-xs" style={{ color: "var(--c-meta)" }}>
             시행일: 2026년 4월 16일
           </p>
         </div>
@@ -102,7 +102,7 @@ export default function SpamCall070Privacy() {
           <Link
             href="/"
             className="text-sm transition-colors duration-200 hover:text-white/70"
-            style={{ color: "oklch(0.45 0.01 260)" }}
+            style={{ color: "var(--c-dim)" }}
           >
             &larr; 홈으로 돌아가기
           </Link>

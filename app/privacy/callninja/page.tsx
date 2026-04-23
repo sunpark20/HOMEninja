@@ -12,7 +12,7 @@ export default function CallNinjaPrivacy() {
       <article className="max-w-2xl w-full space-y-12">
         <h1
           className="text-3xl font-semibold tracking-tight font-[family-name:var(--font-display)]"
-          style={{ color: "oklch(0.95 0.005 260)" }}
+          style={{ color: "var(--c-title)" }}
         >
           CallNinja Privacy Policy
         </h1>
@@ -20,11 +20,11 @@ export default function CallNinjaPrivacy() {
         {/* English */}
         <div
           className="space-y-6 text-sm leading-relaxed"
-          style={{ color: "oklch(0.7 0.01 260)" }}
+          style={{ color: "var(--c-body)" }}
         >
           <div
             className="text-xs font-medium uppercase tracking-widest"
-            style={{ color: "oklch(0.5 0.01 260)" }}
+            style={{ color: "var(--c-meta)" }}
           >
             English
           </div>
@@ -32,7 +32,7 @@ export default function CallNinjaPrivacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               1. Data Collection
             </h2>
@@ -46,7 +46,7 @@ export default function CallNinjaPrivacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               2. Blocking Data
             </h2>
@@ -60,7 +60,7 @@ export default function CallNinjaPrivacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               3. Contacts Access
             </h2>
@@ -74,7 +74,7 @@ export default function CallNinjaPrivacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               4. Third Parties
             </h2>
@@ -88,7 +88,7 @@ export default function CallNinjaPrivacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               5. Contact
             </h2>
@@ -104,22 +104,22 @@ export default function CallNinjaPrivacy() {
             </p>
           </section>
 
-          <p className="text-xs" style={{ color: "oklch(0.5 0.01 260)" }}>
+          <p className="text-xs" style={{ color: "var(--c-meta)" }}>
             Effective date: April 19, 2026
           </p>
         </div>
 
         {/* Divider */}
-        <div style={{ borderTop: "1px solid oklch(0.25 0.01 260)" }} />
+        <div style={{ borderTop: "1px solid var(--c-divider)" }} />
 
         {/* Korean */}
         <div
           className="space-y-6 text-sm leading-relaxed"
-          style={{ color: "oklch(0.7 0.01 260)" }}
+          style={{ color: "var(--c-body)" }}
         >
           <div
             className="text-xs font-medium uppercase tracking-widest"
-            style={{ color: "oklch(0.5 0.01 260)" }}
+            style={{ color: "var(--c-meta)" }}
           >
             한국어
           </div>
@@ -127,7 +127,7 @@ export default function CallNinjaPrivacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               1. 개인정보 수집 항목
             </h2>
@@ -141,7 +141,7 @@ export default function CallNinjaPrivacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               2. 차단 번호 데이터
             </h2>
@@ -155,7 +155,7 @@ export default function CallNinjaPrivacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               3. 연락처 접근
             </h2>
@@ -168,7 +168,7 @@ export default function CallNinjaPrivacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               4. 제3자 제공
             </h2>
@@ -181,7 +181,7 @@ export default function CallNinjaPrivacy() {
           <section>
             <h2
               className="text-lg font-medium mb-2"
-              style={{ color: "oklch(0.85 0.005 260)" }}
+              style={{ color: "var(--c-heading)" }}
             >
               5. 문의
             </h2>
@@ -197,7 +197,7 @@ export default function CallNinjaPrivacy() {
             </p>
           </section>
 
-          <p className="text-xs" style={{ color: "oklch(0.5 0.01 260)" }}>
+          <p className="text-xs" style={{ color: "var(--c-meta)" }}>
             시행일: 2026년 4월 19일
           </p>
         </div>
@@ -206,7 +206,7 @@ export default function CallNinjaPrivacy() {
           <Link
             href="/"
             className="text-sm transition-colors duration-200 hover:text-white/70"
-            style={{ color: "oklch(0.45 0.01 260)" }}
+            style={{ color: "var(--c-dim)" }}
           >
             &larr; 홈으로 돌아가기
           </Link>

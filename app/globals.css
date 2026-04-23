@@ -1,11 +1,24 @@
 @import "tailwindcss";
 
+:root {
+  --c-title: oklch(0.95 0.005 260);
+  --c-heading: oklch(0.85 0.005 260);
+  --c-subheading: oklch(0.8 0.005 260);
+  --c-body: oklch(0.7 0.01 260);
+  --c-secondary: oklch(0.6 0.01 260);
+  --c-meta: oklch(0.5 0.01 260);
+  --c-dim: oklch(0.45 0.01 260);
+  --c-bg: oklch(0.05 0.01 260);
+  --c-border: oklch(0.3 0.01 260);
+  --c-divider: oklch(0.25 0.01 260);
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background: oklch(0.05 0.01 260);
+  background: var(--c-bg);
   min-height: 100vh;
 }
 

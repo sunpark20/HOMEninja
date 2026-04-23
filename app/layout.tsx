@@ -46,11 +46,11 @@ export default function RootLayout({
     <html lang="ko" className={`${display.variable} ${body.variable}`}>
       <body
         className="font-[family-name:var(--font-body)]"
-        style={{ color: "oklch(0.85 0.005 260)" }}
+        style={{ color: "var(--c-heading)" }}
       >
         <header
           className="fixed top-0 left-0 right-0 z-50 flex justify-end items-center gap-4 px-4 py-2 text-[10px]"
-          style={{ color: "oklch(0.45 0.01 260)" }}
+          style={{ color: "var(--c-dim)" }}
         >
           <a
             href="mailto:sun.park20@gmail.com"

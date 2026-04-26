@@ -2,25 +2,130 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "SpamCall070 개인정보처리방침",
-  description: "SpamCall070 앱 개인정보처리방침",
+  title: "SpamCall070 Privacy Policy",
+  description: "SpamCall070 app privacy policy",
 };
 
 export default function SpamCall070Privacy() {
   return (
     <div className="min-h-screen flex items-start justify-center px-6 py-24">
-      <article className="max-w-2xl w-full space-y-8">
+      <article className="max-w-2xl w-full space-y-12">
         <h1
           className="text-3xl font-semibold tracking-tight font-[family-name:var(--font-display)]"
           style={{ color: "var(--c-title)" }}
         >
-          SpamCall070 개인정보처리방침
+          SpamCall070 Privacy Policy
+          <span
+            className="block text-xl font-normal mt-1"
+            style={{ color: "var(--c-dim)" }}
+          >
+            개인정보처리방침
+          </span>
         </h1>
 
+        {/* English */}
         <div
           className="space-y-6 text-sm leading-relaxed"
           style={{ color: "var(--c-body)" }}
         >
+          <div
+            className="text-xs font-medium uppercase tracking-widest"
+            style={{ color: "var(--c-meta)" }}
+          >
+            English
+          </div>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--c-heading)" }}
+            >
+              1. Information We Collect
+            </h2>
+            <p>
+              SpamCall070 does not collect any personal information. The app
+              operates entirely on-device with no network communication, and
+              does not access your call content, contacts, or call history.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--c-heading)" }}
+            >
+              2. Error Reports
+            </h2>
+            <p>
+              If an error occurs, users may tap the &quot;Report Error&quot; button to
+              send an error report manually. The report contains only:
+            </p>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li>Device model and iOS version</li>
+              <li>App version</li>
+              <li>Device storage information</li>
+              <li>Error code and message</li>
+            </ul>
+            <p className="mt-2">
+              Reports are sent only when the user taps the button — never
+              collected automatically. The information is used solely to fix
+              bugs and is never shared with third parties.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--c-heading)" }}
+            >
+              3. Data Storage
+            </h2>
+            <p>
+              All blocked number data is stored within iOS system storage and
+              is deleted when the app is uninstalled. The app uses no external
+              servers or cloud storage.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--c-heading)" }}
+            >
+              4. Contact
+            </h2>
+            <p>
+              For privacy-related inquiries, contact{" "}
+              <a
+                href="mailto:coastguard2681@gmail.com"
+                className="underline underline-offset-2 hover:text-white/80 transition-colors"
+              >
+                coastguard2681@gmail.com
+              </a>
+              .
+            </p>
+          </section>
+
+          <p className="text-xs" style={{ color: "var(--c-meta)" }}>
+            Effective date: April 16, 2026
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div style={{ borderTop: "1px solid var(--c-divider)" }} />
+
+        {/* Korean */}
+        <div
+          className="space-y-6 text-sm leading-relaxed"
+          style={{ color: "var(--c-body)" }}
+        >
+          <div
+            className="text-xs font-medium uppercase tracking-widest"
+            style={{ color: "var(--c-meta)" }}
+          >
+            한국어
+          </div>
+
           <section>
             <h2
               className="text-lg font-medium mb-2"

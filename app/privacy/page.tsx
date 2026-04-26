@@ -3,24 +3,148 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "개인정보처리방침 — 닌자거북의홈",
-  description: "개인정보처리방침",
+  description: "개인정보처리방침 / Privacy Policy",
 };
 
 export default function Privacy() {
   return (
     <div className="min-h-screen flex items-start justify-center px-6 py-24">
-      <article className="max-w-2xl w-full space-y-8">
+      <article className="max-w-2xl w-full space-y-12">
         <h1
           className="text-3xl font-semibold tracking-tight font-[family-name:var(--font-display)]"
           style={{ color: "var(--c-title)" }}
         >
           개인정보처리방침
+          <span
+            className="block text-xl font-normal mt-1"
+            style={{ color: "var(--c-dim)" }}
+          >
+            Privacy Policy
+          </span>
         </h1>
 
+        {/* English */}
         <div
           className="space-y-6 text-sm leading-relaxed"
           style={{ color: "var(--c-body)" }}
         >
+          <div
+            className="text-xs font-medium uppercase tracking-widest"
+            style={{ color: "var(--c-meta)" }}
+          >
+            English
+          </div>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--c-heading)" }}
+            >
+              1. Information We Collect
+            </h2>
+            <p>
+              This service collects only the minimum personal information
+              necessary. Items collected and their purposes vary by app
+              function and are described per-app in Section 5 below.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--c-heading)" }}
+            >
+              2. Purpose of Use
+            </h2>
+            <p>
+              Collected information is used solely for service provision and
+              improvement, and is immediately deleted once that purpose is
+              fulfilled.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--c-heading)" }}
+            >
+              3. Retention and Deletion
+            </h2>
+            <p>
+              Personal information is deleted immediately upon fulfillment of
+              the collection purpose. Where retention is required by law, the
+              data is stored securely for that period only.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--c-heading)" }}
+            >
+              4. Contact
+            </h2>
+            <p>
+              For privacy-related inquiries, contact{" "}
+              <a
+                href="mailto:coastguard2681@gmail.com"
+                className="underline underline-offset-2 hover:text-white/80 transition-colors"
+              >
+                coastguard2681@gmail.com
+              </a>
+              .
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--c-heading)" }}
+            >
+              5. App-Specific Details
+            </h2>
+
+            <div>
+              <h3
+                className="text-base font-medium mb-1"
+                style={{ color: "var(--c-subheading)" }}
+              >
+                SnapCart (장보고)
+              </h3>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Camera access is used to photograph receipts.</li>
+                <li>
+                  Captured images are sent to an external AI service (OpenAI
+                  API) for price analysis.
+                </li>
+                <li>
+                  Analysis results are stored on-device only; nothing is
+                  retained on our servers.
+                </li>
+                <li>
+                  Microphone access is used when the voice input feature is
+                  enabled.
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+        {/* Divider */}
+        <div style={{ borderTop: "1px solid var(--c-divider)" }} />
+
+        {/* Korean */}
+        <div
+          className="space-y-6 text-sm leading-relaxed"
+          style={{ color: "var(--c-body)" }}
+        >
+          <div
+            className="text-xs font-medium uppercase tracking-widest"
+            style={{ color: "var(--c-meta)" }}
+          >
+            한국어
+          </div>
+
           <section>
             <h2
               className="text-lg font-medium mb-2"
@@ -95,9 +219,7 @@ export default function Privacy() {
                 장보고 (SnapCart)
               </h3>
               <ul className="list-disc list-inside space-y-1">
-                <li>
-                  카메라 접근 권한을 사용하여 영수증을 촬영합니다.
-                </li>
+                <li>카메라 접근 권한을 사용하여 영수증을 촬영합니다.</li>
                 <li>
                   촬영된 이미지는 가격 분석을 위해 외부 AI 서비스(OpenAI
                   API)로 전송됩니다.

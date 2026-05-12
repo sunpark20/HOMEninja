@@ -164,27 +164,29 @@ MVP 속도 최우선. 외부 의존성 최소화. CSS + Canvas로 해결 가능�
 
 ---
 
-### ADR-008: SSG (Static Site Generation) 선택
-**결정**: next build로 완전 정적 HTML을 생성하여 배포
+### ADR-008: 정적 공개 페이지 + 최소 관리 API
+**결정**: 공개 페이지는 정적으로 프리렌더링하고, TMT 편집만 `/api/tmt` Serverless Function으로 처리한다.
 **이유**:
-- 모든 데이터가 빌드 타임에 확정 (API 호출 없음)
-- CDN에서 직접 서빙 → TTFB 최소
-- 서버 비용 0 (Vercel 무료 플랜의 정적 사이트)
-- 서버 장애 위험 0 (서버가 없으므로)
+- 일반 방문자가 보는 홈/개인정보처리방침/llms 라우트는 정적 생성되어 CDN에서 빠르게 서빙된다.
+- TMT 문구는 운영 중 자주 바뀔 수 있어, 재배포 없이 GitHub contents API로 `data/tmt.json`을 갱신한다.
+- 동적 서버 범위를 `/api/tmt` 하나로 제한해 비용과 장애 표면을 작게 유지한다.
+- 완전 정적 export는 API Route와 양립하지 않으므로 현재 요구사항과 맞지 않는다.
 
 **대안 검토**:
 | 대안 | 장점 | 탈락 이유 |
 |------|------|-----------|
-| SSR (서버 사이드 렌더링) | 요청 시 최신 데이터 | 데이터가 정적이므로 SSR 불필요. Serverless 함수 호출 비용 발생 |
-| ISR (Incremental Static Regeneration) | 주기적 갱신 | 갱신할 동적 데이터 없음 |
-| CSR (클라이언트 렌더링) | 서버 부하 0 | 초기 빈 화면 (SEO 불리, LCP 저하) |
+| `output: "export"` 완전 정적 export | 서버 없음, 단순 배포 | `/api/tmt` 관리자 편집 기능을 사용할 수 없음 |
+| 전체 SSR | 요청 시 항상 최신 데이터 | 공개 페이지까지 함수 호출이 필요해 성능/비용 면에서 과잉 |
+| Headless CMS | 비개발자 편집 UI 제공 | 앱 수와 편집 범위에 비해 인프라가 과함 |
+| CSR (클라이언트 렌더링) | 서버 부하 0 | 초기 빈 화면으로 SEO와 LCP가 나빠짐 |
 
 **구현 상세**:
-- `next.config.ts`에 `output: "export"` 설정 → `out/` 디렉토리에 완전 정적 파일 생성
-- `output: "export"` 사용 시 `next/image`의 런타임 이미지 최적화가 비활성화됨 → `images: { unoptimized: true }` 설정 필수
-- 스크린샷은 사전에 WebP로 최적화하여 `public/screenshots/`에 배치
+- `next build`는 공개 라우트를 정적 prerender로 만들고 `/api/tmt`는 동적 함수로 남긴다.
+- `next.config.ts`는 `outputFileTracingRoot`를 프로젝트 루트로 고정해 상위 디렉터리 lockfile 때문에 workspace root가 잘못 추론되는 빌드 경고를 방지한다.
+- `images: { unoptimized: true }`는 유지한다. 현재 이미지 수가 적고, 정적 자산 중심이라 런타임 이미지 최적화 의존이 필요 없다.
+- 운영 환경 변수는 `GITHUB_PAT`, `ADMIN_PASSWORD` 두 개다.
 
-**트레이드오프**: 데이터 변경 시 재빌드+재배포 필요. 하지만 git push 한 번이면 Vercel이 자동 처리 (1분 내). `next/image` 자동 최적화를 포기하지만, 이미지가 소수이므로 수동 최적화로 충분.
+**트레이드오프**: `/api/tmt`는 Serverless Function과 GitHub API에 의존한다. 공개 페이지는 이 API 장애와 무관하게 계속 서빙되지만, 관리자 저장은 환경 변수나 GitHub 권한이 잘못되면 실패한다.
 
 ---
 

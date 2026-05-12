@@ -10,6 +10,10 @@ function seededRand(seed: number, n: number) {
 
 const MOON_SCALE = 0.25;
 
+function withAlpha(color: string, alpha: number) {
+  return color.replace(/\)$/, ` / ${alpha})`);
+}
+
 function MoonSatellite({ moon, parentSize }: { moon: MoonLink; parentSize: number }) {
   const moonSize = `clamp(42px, ${parentSize * MOON_SCALE}vw, ${parentSize * MOON_SCALE}vh)`;
   const handleClick = () => {
@@ -77,7 +81,7 @@ function MoonSatellite({ moon, parentSize }: { moon: MoonLink; parentSize: numbe
         width: moonSize,
         height: moonSize,
         background: gradient,
-        boxShadow: `inset -8px -8px 20px rgba(0,0,0,0.5), 0 0 24px 6px ${moon.colors[1]} / 0.3)`,
+        boxShadow: `inset -8px -8px 20px rgba(0,0,0,0.5), 0 0 24px 6px ${withAlpha(moon.colors[1], 0.3)}`,
       }}
     />
   );

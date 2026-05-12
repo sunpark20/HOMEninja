@@ -13,7 +13,8 @@ homepage/
 │   │   ├── callninja/page.tsx  # CallNinja 개인정보처리방침
 │   │   └── spamcall070/page.tsx # SpamCall070 개인정보처리방침
 │   ├── sitemap.ts              # sitemap.xml 자동 생성
-│   └── robots.ts               # robots.txt 자동 생성
+│   ├── robots.ts               # robots.txt 자동 생성
+│   └── api/tmt/route.ts        # 관리자용 TMT 편집 API (GitHub contents API)
 ├── components/
 │   ├── GalaxyExplorer.tsx      # 최상위 클라이언트 컴포넌트 (은하 전환 오케스트레이터)
 │   ├── HeroV2.tsx              # 히어로 섹션 (타이틀 + Earth 버튼)
@@ -94,6 +95,7 @@ page.tsx (Server)
     ├── Hyperspace (전환 이펙트)
     ├── GalaxyNav (은하 네비게이션)
     ├── AsteroidModal (운석 상세)
+    ├── AdminEditModal (행성 콘텐츠/TMT 관리자 편집)
     └── EarthZoom (후원 줌인 오버레이)
         └── HousePanel (토스 QR 카드)
 ```
@@ -107,6 +109,7 @@ page.tsx (Server)
 | current / displayed | 현재/표시 중 은하 인덱스 | localStorage |
 | transitioning / direction | 전환 애니메이션 제어 | 없음 |
 | asteroid | 열린 운석 모달 데이터 | 없음 |
+| editPlanet / contentOverrides | 관리자 편집 모달, 저장 후 즉시 반영할 콘텐츠 오버라이드 | sessionStorage(비밀번호), 메모리 |
 | earthOpen | EarthZoom 오버레이 상태 | 없음 |
 
 ## 데이터 흐름
@@ -121,14 +124,15 @@ page.tsx (Server)
   ├── StarfieldV2: Canvas 리사이즈 + 별 재생성 + tint/gasBands/dustHaze 전환
   ├── Comets: 랜덤 타이머 → Web Animations API로 유성 스폰
   ├── LensFlare: 랜덤 타이머 → 광원 + 줄기 스폰 (태양계만)
-  └── localStorage: 마지막 은하 인덱스 저장/복원
+  ├── localStorage: 마지막 은하 인덱스 저장/복원
+  └── AdminEditModal: /api/tmt 인증/저장 → GitHub data/tmt.json 갱신 → contentOverrides로 즉시 반영
 ```
 
 ## 배포
 
 ```
 GitHub (sunpark20/HOMEninja) → Vercel 자동 빌드
-main push → next build (SSG) → 정적 HTML → CDN 서빙
+main push → next build → 정적 페이지는 CDN 서빙, /api/tmt는 Serverless Function
 도메인: homeninja.vercel.app
-환경 변수: 없음
+환경 변수: GITHUB_PAT, ADMIN_PASSWORD
 ```

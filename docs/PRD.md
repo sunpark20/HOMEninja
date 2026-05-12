@@ -94,10 +94,17 @@
 - `/privacy/callninja` — CallNinja 전용
 - `/privacy/spamcall070` — SpamCall070 전용
 
+### F-009: 관리자 TMT 편집
+- 행성 클릭 → 관리자 비밀번호 인증 모달
+- 앱 이름, 설명, TMT 항목을 수정
+- `/api/tmt`가 GitHub contents API로 `data/tmt.json`을 갱신
+- 저장 직후 현재 화면에는 로컬 오버라이드로 즉시 반영
+
 ## 비기능 요구사항
 
 ### 성능
-- SSG 정적 사이트 (서버 없음)
+- 공개 페이지는 정적 프리렌더링/CDN 서빙
+- 관리자 TMT 편집만 Vercel Serverless Function 사용
 - Canvas 애니메이션 60fps
 - prefers-reduced-motion 지원 (모든 애니메이션 비활성화)
 
@@ -114,6 +121,6 @@
 
 ## MVP 제외 사항
 - 댓글/게시판/피드백, 사용자 인증, 블로그, 다국어
-- CMS / 관리자 페이지, 검색, 카테고리/필터
+- 범용 CMS, 검색, 카테고리/필터
 - PWA / 오프라인 지원, RSS 피드
 - 다크/라이트 모드 토글 (다크 고정)

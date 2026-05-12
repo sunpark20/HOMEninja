@@ -58,14 +58,6 @@ export default function RootLayout({
           >
             문의사항
           </a>
-          <a
-            href="https://x.com/ppjp334"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors duration-200 hover:text-white/40"
-          >
-            X로 연락하기
-          </a>
           <Link
             href="/privacy"
             className="transition-colors duration-200 hover:text-white/40"

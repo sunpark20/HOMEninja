@@ -128,6 +128,31 @@ page.tsx (Server)
   └── AdminEditModal: /api/tmt 인증/저장 → GitHub data/tmt.json 갱신 → contentOverrides로 즉시 반영
 ```
 
+## 앱 폐지 처리 패턴
+
+서비스가 종료된 앱은 삭제하지 않고 "블랙홀에 들어가는중." 상태로 남긴다. 방문자는 앱 이력을 볼 수 있지만 다운로드/실행 버튼은 누를 수 없어야 한다.
+
+`data/galaxies.ts`의 해당 `PlanetObject`에 다음 값을 설정한다.
+
+```ts
+retired: true,
+retiredLabel: "블랙홀에 들어가는중.",
+retiredImage: "/black-hole.svg",
+downloads: [
+  {
+    platform: "web",
+    url: null,
+    label: "블랙홀에 들어가는중.",
+  },
+],
+```
+
+렌더링 책임은 공통 컴포넌트에 둔다.
+
+- `ObjectContentCard`: `retired`일 때 블랙홀 이미지, 상태 배지, 앱 이름 삭선을 표시한다.
+- `DownloadButtons`: 다운로드 `url`이 `null`이면 `<a>` 대신 클릭 불가능한 `<span>`을 렌더링하고 `label`을 그대로 보여준다.
+- `public/black-hole.svg`: 폐지 상태 공통 이미지. 새 폐지 앱도 이 자산을 재사용한다.
+
 ## 배포
 
 ```

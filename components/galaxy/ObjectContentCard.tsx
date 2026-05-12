@@ -5,6 +5,9 @@ type Props = {
   description: string;
   meta?: AppMeta;
   comingSoon?: boolean;
+  retired?: boolean;
+  retiredLabel?: string;
+  retiredImage?: string;
   macOnly?: boolean;
   hasBgraw?: boolean;
   children?: React.ReactNode;
@@ -28,6 +31,9 @@ export default function ObjectContentCard({
   description,
   meta,
   comingSoon,
+  retired,
+  retiredLabel,
+  retiredImage,
   macOnly,
   hasBgraw,
   children,
@@ -61,18 +67,47 @@ export default function ObjectContentCard({
           Coming soon
         </div>
       )}
+      {retired && (
+        <div className="mb-4 flex items-center gap-3">
+          {retiredImage && (
+            <div
+              aria-hidden="true"
+              className="h-14 w-14 shrink-0 rounded-full"
+              style={{
+                backgroundImage: `url(${retiredImage})`,
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "125%",
+              }}
+            />
+          )}
+          <div
+            className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] tracking-[0.08em] font-[family-name:var(--font-body)]"
+            style={{
+              background: "oklch(0.12 0.05 220 / 0.7)",
+              border: "1px solid oklch(0.55 0.14 210 / 0.38)",
+              color: "oklch(0.78 0.12 210)",
+            }}
+          >
+            {retiredLabel ?? "운영 종료"}
+          </div>
+        </div>
+      )}
       <h2
         className="m-0 font-[family-name:var(--font-display)] font-semibold tracking-tight"
         style={{
-          color: "oklch(0.95 0.005 260)",
+          color: retired ? "oklch(0.62 0.01 260)" : "oklch(0.95 0.005 260)",
           fontSize: "clamp(1.6rem, 3.6vw, 2.1rem)",
+          textDecoration: retired ? "line-through" : undefined,
+          textDecorationColor: retired ? "oklch(0.75 0.12 210)" : undefined,
+          textDecorationThickness: retired ? 2 : undefined,
         }}
       >
         {title}
       </h2>
       <p
         className="mt-3 text-[17px] leading-relaxed"
-        style={{ color: "oklch(0.75 0.01 260)" }}
+        style={{ color: retired ? "oklch(0.55 0.01 260)" : "oklch(0.75 0.01 260)" }}
       >
         {description}
       </p>

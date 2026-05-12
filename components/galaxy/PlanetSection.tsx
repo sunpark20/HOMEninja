@@ -51,6 +51,9 @@ export default function PlanetSection({
           description={displayDesc}
           meta={obj.meta}
           comingSoon={obj.comingSoon}
+          retired={obj.retired}
+          retiredLabel={obj.retiredLabel}
+          retiredImage={obj.retiredImage}
           macOnly={obj.macOnly}
           hasBgraw={!!obj.bgrawUrl}
         >

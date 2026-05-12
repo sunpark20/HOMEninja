@@ -89,7 +89,7 @@ export default function DownloadButtons({
               }}
             >
               <PlatformIcon platform={dl.platform} />
-              준비 중
+              {dl.label || "준비 중"}
             </span>
           );
         }

@@ -52,11 +52,14 @@ export const galaxies: Galaxy[] = [
         name: "제주택배비지원",
         description: "카메라로 찰칵하면 택배비 신청 완료",
         meta: { lastUpdated: "2026.02" },
+        retired: true,
+        retiredLabel: "블랙홀에 들어가는중.",
+        retiredImage: "/black-hole.svg",
         downloads: [
           {
             platform: "web",
-            url: "https://jeju.ninjaturtle.win/login",
-            label: "바로 사용하기",
+            url: null,
+            label: "블랙홀에 들어가는중.",
           },
         ],
         planet: {

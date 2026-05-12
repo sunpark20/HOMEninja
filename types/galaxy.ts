@@ -23,6 +23,9 @@ export type PlanetObject = {
   downloads: DownloadLink[];
   planet: PlanetStyle;
   comingSoon?: boolean;
+  retired?: boolean;
+  retiredLabel?: string;
+  retiredImage?: string;
   macOnly?: boolean;
   bgrawUrl?: string;
   moons?: MoonLink[];

@@ -1,11 +1,24 @@
 import { galaxies } from "@/data/galaxies";
 import tmtData from "@/data/tmt.json";
-import type { PlanetObject } from "@/types/galaxy";
+import type { AppObject } from "@/types/galaxy";
 
 export const revalidate = 3600;
 
-function isPlanet(obj: unknown): obj is PlanetObject {
-  return typeof obj === "object" && obj !== null && "downloads" in obj;
+type ListedApp = AppObject & {
+  description: string;
+  downloads: NonNullable<AppObject["downloads"]>;
+};
+
+function isAppObject(obj: unknown): obj is ListedApp {
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    "downloads" in obj &&
+    Array.isArray(obj.downloads) &&
+    obj.downloads.length > 0 &&
+    "description" in obj &&
+    typeof obj.description === "string"
+  );
 }
 
 async function fetchBgraw(url: string): Promise<string | null> {
@@ -19,7 +32,7 @@ async function fetchBgraw(url: string): Promise<string | null> {
 }
 
 export async function GET() {
-  const apps = galaxies.flatMap((g) => g.objects).filter(isPlanet);
+  const apps = galaxies.flatMap((g) => g.objects).filter(isAppObject);
   const tmt = tmtData as Record<
     string,
     { name: string | null; description: string | null; entries: string[] }

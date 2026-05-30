@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import type { PlanetObject } from "@/types/galaxy";
+import type { EditableAppObject } from "@/types/galaxy";
 import type { AppContent } from "@/data/tmt";
 
 type Props = {
-  obj: PlanetObject | null;
+  obj: EditableAppObject | null;
   onClose: () => void;
   onSaved: (appId: string, data: AppContent) => void;
 };

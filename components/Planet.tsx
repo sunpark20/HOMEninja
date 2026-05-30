@@ -4,8 +4,15 @@ import { useEffect, useRef } from "react";
 import type { PlanetStyle, MoonLink } from "@/types/app";
 
 function seededRand(seed: number, n: number) {
-  const x = Math.sin(seed * 9999 + n) * 10000;
-  return x - Math.floor(x);
+  let x = Math.imul(seed ^ Math.imul(n + 1, 0x9e3779b1), 0x85ebca6b);
+  x ^= x >>> 13;
+  x = Math.imul(x, 0xc2b2ae35);
+  x ^= x >>> 16;
+  return (x >>> 0) / 0x100000000;
+}
+
+function fmt(n: number) {
+  return n.toFixed(4);
 }
 
 const MOON_SCALE = 0.25;
@@ -40,7 +47,8 @@ function MoonSatellite({ moon, parentSize }: { moon: MoonLink; parentSize: numbe
       const r = 35 + seededRand(seed, i) * 15;
       points.push([50 + Math.cos(a) * r, 50 + Math.sin(a) * r]);
     }
-    const path = "M " + points.map((p) => p.join(",")).join(" L ") + " Z";
+    const path =
+      "M " + points.map(([x, y]) => `${fmt(x)},${fmt(y)}`).join(" L ") + " Z";
     const gradId = `moon-ast-${moon.targetId}`;
 
     return (
@@ -61,7 +69,13 @@ function MoonSatellite({ moon, parentSize }: { moon: MoonLink; parentSize: numbe
           </defs>
           <path d={path} fill={`url(#${gradId})`} stroke="oklch(0.15 0.02 50)" strokeWidth="0.3" strokeOpacity="0.4" />
           {[0, 1, 2, 3].map((i) => (
-            <circle key={i} cx={30 + seededRand(seed, i + 10) * 40} cy={30 + seededRand(seed, i + 20) * 40} r={1.5 + seededRand(seed, i + 30) * 3} fill="oklch(0.15 0.02 50 / 0.5)" />
+            <circle
+              key={i}
+              cx={fmt(30 + seededRand(seed, i + 10) * 40)}
+              cy={fmt(30 + seededRand(seed, i + 20) * 40)}
+              r={fmt(1.5 + seededRand(seed, i + 30) * 3)}
+              fill="oklch(0.15 0.02 50 / 0.5)"
+            />
           ))}
         </svg>
       </div>

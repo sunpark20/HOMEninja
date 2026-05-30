@@ -1,16 +1,29 @@
 import { galaxies } from "@/data/galaxies";
-import type { PlanetObject } from "@/types/galaxy";
+import type { AppObject } from "@/types/galaxy";
 
 export const dynamic = "force-static";
 
-function isPlanet(obj: unknown): obj is PlanetObject {
-  return typeof obj === "object" && obj !== null && "downloads" in obj;
+type ListedApp = AppObject & {
+  description: string;
+  downloads: NonNullable<AppObject["downloads"]>;
+};
+
+function isAppObject(obj: unknown): obj is ListedApp {
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    "downloads" in obj &&
+    Array.isArray(obj.downloads) &&
+    obj.downloads.length > 0 &&
+    "description" in obj &&
+    typeof obj.description === "string"
+  );
 }
 
 export function GET() {
   const apps = galaxies
     .flatMap((g) => g.objects)
-    .filter(isPlanet);
+    .filter(isAppObject);
 
   const lines = [
     "# 닌자거북의홈 (ninjaturtle.win)",

@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import type {
   Galaxy as GalaxyType,
   AsteroidObject,
-  PlanetObject,
+  EditableAppObject,
 } from "@/types/galaxy";
 import type { AppContent } from "@/data/tmt";
 import StarfieldV2 from "./StarfieldV2";
@@ -31,7 +31,8 @@ export default function GalaxyExplorer({
   const [direction, setDirection] = useState(1);
   const [transitioning, setTransitioning] = useState(false);
   const [asteroid, setAsteroid] = useState<AsteroidObject | null>(null);
-  const [editPlanet, setEditPlanet] = useState<PlanetObject | null>(null);
+  const [editApp, setEditApp] = useState<EditableAppObject | null>(null);
+  const [pendingScrollId, setPendingScrollId] = useState<string | null>(null);
   const [contentOverrides, setContentOverrides] = useState<
     Record<string, AppContent>
   >({});
@@ -53,11 +54,13 @@ export default function GalaxyExplorer({
       if (galaxyIdx >= 0 && galaxyIdx !== 0) {
         setCurrent(galaxyIdx);
         setDisplayed(galaxyIdx);
+        setPendingScrollId(hash);
+      } else {
+        requestAnimationFrame(() => {
+          const el = document.getElementById(hash);
+          el?.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
       }
-      requestAnimationFrame(() => {
-        const el = document.getElementById(hash);
-        el?.scrollIntoView({ behavior: "smooth", block: "center" });
-      });
       return;
     }
 
@@ -71,6 +74,22 @@ export default function GalaxyExplorer({
       /* noop */
     }
   }, [galaxies]);
+
+  useEffect(() => {
+    if (!pendingScrollId) return;
+    const containsTarget = galaxies[displayed]?.objects.some(
+      (o) => o.id === pendingScrollId,
+    );
+    if (!containsTarget) return;
+
+    const id = pendingScrollId;
+    const raf = requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      setPendingScrollId(null);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [displayed, galaxies, pendingScrollId]);
 
   const goTo = useCallback(
     (next: number) => {
@@ -111,11 +130,8 @@ export default function GalaxyExplorer({
         const el = document.getElementById(targetId);
         el?.scrollIntoView({ behavior: "smooth", block: "center" });
       } else {
+        setPendingScrollId(targetId);
         goTo(galaxyIdx);
-        setTimeout(() => {
-          const el = document.getElementById(targetId);
-          el?.scrollIntoView({ behavior: "smooth", block: "center" });
-        }, TRANSITION_MS + 100);
       }
     };
     window.addEventListener("navigate-to-app", handler);
@@ -141,7 +157,7 @@ export default function GalaxyExplorer({
       />
       <DustLayer active={!!galaxy.bg.dust} />
       <LensFlare active={galaxy.kind === "planets"} />
-      <Comets />
+      <Comets active={galaxy.kind !== "blackholes"} />
 
       <div
         className="relative"
@@ -158,7 +174,7 @@ export default function GalaxyExplorer({
           galaxy={galaxy}
           overlap={20}
           onOpenAsteroid={setAsteroid}
-          onOpenPlanet={setEditPlanet}
+          onOpenApp={setEditApp}
           contentOverrides={contentOverrides}
         />
         <div style={{ padding: "60px 0 120px" }} />
@@ -176,8 +192,8 @@ export default function GalaxyExplorer({
         onClose={() => setAsteroid(null)}
       />
       <AdminEditModal
-        obj={editPlanet}
-        onClose={() => setEditPlanet(null)}
+        obj={editApp}
+        onClose={() => setEditApp(null)}
         onSaved={handleSaved}
       />
       <EarthZoom open={earthOpen} onClose={() => setEarthOpen(false)} />

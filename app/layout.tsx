@@ -20,12 +20,12 @@ const body = Noto_Sans_KR({
 export const metadata: Metadata = {
   title: "닌자거북의홈",
   description:
-    "기억의궁전, 제주택배비지원 등 유용한 앱을 만듭니다.",
+    "기억의궁전, Gnomon 등 유용한 앱을 만들고 퇴역 앱은 블랙홀에 보관합니다.",
   metadataBase: new URL("https://homeninja.vercel.app"),
   openGraph: {
     title: "닌자거북의홈",
     description:
-      "기억의궁전, 제주택배비지원 등 유용한 앱을 만듭니다.",
+      "기억의궁전, Gnomon 등 유용한 앱을 만들고 퇴역 앱은 블랙홀에 보관합니다.",
     type: "website",
     locale: "ko_KR",
   },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "닌자거북의홈",
     description:
-      "기억의궁전, 제주택배비지원 등 유용한 앱을 만듭니다.",
+      "기억의궁전, Gnomon 등 유용한 앱을 만들고 퇴역 앱은 블랙홀에 보관합니다.",
   },
 };
 

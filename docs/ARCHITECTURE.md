@@ -66,6 +66,7 @@ homepage/
 | planets | solar-system | 출시된 앱 (행성으로 표현) |
 | asteroids | asteroid-field | 개발 중/아이디어 단계 앱 (운석으로 표현) |
 | nebula | bright-nebula | 미래 공간 (성운으로 표현) |
+| blackholes | event-horizon | 퇴역 앱/잔해 (블랙홀로 표현) |
 
 ### 은하별 배경 차별화
 | 은하 | starTint | 특수 효과 | gradient 강도 |
@@ -73,6 +74,7 @@ homepage/
 | 태양계 | null (백색) | LensFlare (랜덤 빛줄기) | 약함 |
 | 운석지대 | 50 (amber) | dustHaze (황야 톤) | 강함 (0.12~0.25) |
 | 빛나는 성운 | 280 (보라) | gasBands (가스 밴드) | 강함 (0.10~0.14) |
+| 블랙홀 구간 | null | starDensity 0, Comets 비활성 | 최소 |
 
 ## 컴포넌트 트리
 
@@ -82,7 +84,7 @@ page.tsx (Server)
     ├── StarfieldV2 (Canvas — 별, gasBands, dustHaze)
     ├── DustLayer (부유 먼지)
     ├── LensFlare (태양계 전용 랜덤 빛줄기)
-    ├── Comets (랜덤 유성)
+    ├── Comets (랜덤 유성, 블랙홀 구간 비활성)
     ├── HeroV2 (첫 은하에서만)
     │   └── Earth (지구 버튼)
     ├── Galaxy
@@ -91,11 +93,12 @@ page.tsx (Server)
     │   └── *Section (종류별)
     │       ├── PlanetSection → Planet + ObjectContentCard + DownloadButtons
     │       ├── AsteroidSection → Asteroid + ObjectContentCard
-    │       └── NebulaSection → NebulaOrb + ObjectContentCard
+    │       ├── NebulaSection → NebulaOrb + ObjectContentCard
+    │       └── BlackHoleSection → BlackHoleVisual + ObjectContentCard
     ├── Hyperspace (전환 이펙트)
     ├── GalaxyNav (은하 네비게이션)
     ├── AsteroidModal (운석 상세)
-    ├── AdminEditModal (행성 콘텐츠/TMT 관리자 편집)
+    ├── AdminEditModal (앱 콘텐츠/TMT 관리자 편집)
     └── EarthZoom (후원 줌인 오버레이)
         └── HousePanel (토스 QR 카드)
 ```
@@ -132,7 +135,7 @@ page.tsx (Server)
 
 서비스가 종료된 앱은 삭제하지 않고 "블랙홀에 들어가는중." 상태로 남긴다. 방문자는 앱 이력을 볼 수 있지만 다운로드/실행 버튼은 누를 수 없어야 한다.
 
-`data/galaxies.ts`의 해당 `PlanetObject`에 다음 값을 설정한다.
+`data/galaxies.ts`의 블랙홀 구간으로 이동하고 다음 값을 유지한다.
 
 ```ts
 retired: true,

@@ -59,7 +59,8 @@ export default function StarfieldV2({
     function gen() {
       const area = window.innerWidth * window.innerHeight;
       const base = Math.floor(area / 5000);
-      const count = Math.min(800, Math.max(60, Math.floor(base * density)));
+      const count =
+        density <= 0 ? 0 : Math.min(800, Math.max(60, Math.floor(base * density)));
       starsRef.current = Array.from({ length: count }, () => ({
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,

@@ -107,7 +107,7 @@ function CometElement({ comet, onDone }: { comet: CometData; onDone: () => void 
   );
 }
 
-export default function Comets() {
+export default function Comets({ active = true }: { active?: boolean }) {
   const [comets, setComets] = useState<CometData[]>([]);
   const counterRef = useRef(0);
   const reducedRef = useRef(false);
@@ -117,6 +117,11 @@ export default function Comets() {
   }, []);
 
   useEffect(() => {
+    if (!active) {
+      setComets([]);
+      return;
+    }
+
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
     reducedRef.current = mql.matches;
     const motionHandler = (e: MediaQueryListEvent) => {
@@ -168,7 +173,7 @@ export default function Comets() {
       mql.removeEventListener("change", motionHandler);
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, []);
+  }, [active]);
 
   return (
     <div aria-hidden="true">

@@ -5,6 +5,8 @@ import type {
   PlanetObject,
   AsteroidObject,
   NebulaObject,
+  BlackHoleObject,
+  EditableAppObject,
 } from "@/types/galaxy";
 import type { AppContent } from "@/data/tmt";
 import GalaxyBackground from "./GalaxyBackground";
@@ -12,12 +14,13 @@ import GalaxyIntro from "./GalaxyIntro";
 import PlanetSection from "./PlanetSection";
 import AsteroidSection from "./AsteroidSection";
 import NebulaSection from "./NebulaSection";
+import BlackHoleSection from "./BlackHoleSection";
 
 type Props = {
   galaxy: GalaxyType;
   overlap: number;
   onOpenAsteroid: (obj: AsteroidObject) => void;
-  onOpenPlanet?: (obj: PlanetObject) => void;
+  onOpenApp?: (obj: EditableAppObject) => void;
   contentOverrides?: Record<string, AppContent>;
 };
 
@@ -25,7 +28,7 @@ export default function Galaxy({
   galaxy,
   overlap,
   onOpenAsteroid,
-  onOpenPlanet,
+  onOpenApp,
   contentOverrides,
 }: Props) {
   return (
@@ -40,7 +43,7 @@ export default function Galaxy({
               obj={obj as PlanetObject}
               index={i}
               overlap={overlap}
-              onPlanetClick={onOpenPlanet}
+              onPlanetClick={onOpenApp}
               contentOverrides={contentOverrides}
             />
           );
@@ -63,6 +66,18 @@ export default function Galaxy({
               obj={obj as NebulaObject}
               index={i}
               overlap={overlap}
+            />
+          );
+        }
+        if (galaxy.kind === "blackholes") {
+          return (
+            <BlackHoleSection
+              key={obj.id}
+              obj={obj as BlackHoleObject}
+              index={i}
+              overlap={overlap}
+              onOpenApp={onOpenApp}
+              contentOverrides={contentOverrides}
             />
           );
         }

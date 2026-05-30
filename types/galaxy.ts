@@ -55,7 +55,32 @@ export type NebulaObject = {
   hue: number;
 };
 
-export type GalaxyKind = "planets" | "asteroids" | "nebula";
+export type BlackHoleObject = {
+  id: string;
+  name: string;
+  description: string;
+  meta?: AppMeta;
+  downloads: DownloadLink[];
+  size: number;
+  position: { x: string; y: string };
+  rotate: number;
+  debrisType?: "satellite" | "booster" | "panel" | "ship" | "capsule";
+  retired?: boolean;
+  retiredLabel?: string;
+  retiredImage?: string;
+  bgrawUrl?: string;
+  moons?: MoonLink[];
+};
+
+export type EditableAppObject = {
+  id: string;
+  name: string;
+  description: string;
+};
+
+export type AppObject = PlanetObject | AsteroidObject | BlackHoleObject;
+
+export type GalaxyKind = "planets" | "asteroids" | "nebula" | "blackholes";
 
 export type Galaxy = {
   id: string;
@@ -65,5 +90,5 @@ export type Galaxy = {
   kind: GalaxyKind;
   accent: string;
   bg: GalaxyBackground;
-  objects: (PlanetObject | AsteroidObject | NebulaObject)[];
+  objects: (PlanetObject | AsteroidObject | NebulaObject | BlackHoleObject)[];
 };

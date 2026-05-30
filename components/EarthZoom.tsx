@@ -239,7 +239,7 @@ function HousePanel({ onClose }: { onClose: () => void }) {
           textAlign: "center",
         }}
       >
-        여기서 기억의궁전, 제주택배비지원 같은 앱을 만들고 있어요
+        여기서 기억의궁전, Gnomon 같은 앱을 만들고 있어요
       </p>
 
       {isMobile ? (

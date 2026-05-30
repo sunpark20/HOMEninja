@@ -53,3 +53,15 @@ test("TMT content keeps the normalized API shape", () => {
     }
   }
 });
+
+test("retired Jeju app lives in the black-hole galaxy", () => {
+  const galaxies = read("data/galaxies.ts");
+
+  assert.match(galaxies, /kind: "blackholes"/);
+  assert.match(galaxies, /starDensity: 0/);
+  assert.match(galaxies, /id: "jeju-delivery"/);
+  assert.doesNotMatch(
+    galaxies,
+    /id: "solar-system"[\s\S]*id: "jeju-delivery"[\s\S]*id: "asteroid-field"/,
+  );
+});

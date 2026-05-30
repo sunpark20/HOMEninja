@@ -37,9 +37,9 @@
 | 행성 | 색조 | 용도 |
 |------|------|------|
 | 기억의궁전 | 따뜻한 주황/호박 (hue ~60-80) | 행성 gradient, 다운로드 버튼 hover |
-| 제주택배비지원 | 차가운 청록 (hue ~200-220) | 행성 gradient, 다운로드 버튼 hover |
 | CallNinja | 녹색/에메랄드 (hue ~155) | 행성 gradient |
 | SpamCall070 | 붉은 톤 (hue ~25) | 행성 gradient |
+| 제주택배비지원 | 낮은 채도의 렌즈링/암부 | 퇴역 앱 블랙홀 카드 |
 
 ### 은하별 배경 톤
 | 은하 | 배경 특성 |
@@ -47,6 +47,7 @@
 | 태양계 | 기본 우주 (남색), 렌즈플레어 |
 | 운석 지대 | amber/brown dustHaze, 따뜻한 star tint (hue 50) |
 | 빛나는 성운 | 보라 gasBands, 보라 star tint (hue 280) |
+| 블랙홀 구간 | starDensity 0, 유성 비활성, 최소한의 렌즈링 |
 
 #### 행성 1 gradient 값 (따뜻한 가스 행성)
 | 역할 | OKLCH 값 |
@@ -71,6 +72,7 @@
 - PlanetSection: 행성 + ObjectContentCard + DownloadButtons (72vh)
 - AsteroidSection: 운석 + ObjectContentCard (62vh, 클릭 시 모달)
 - NebulaSection: 성운 오브 + ObjectContentCard (68vh)
+- BlackHoleSection: 블랙홀 + ObjectContentCard (66vh, 퇴역 앱은 TMT 편집 가능)
 - 모든 섹션은 SectionShell로 감싸 negative margin overlap 처리
 
 ### 후원 카드 (HousePanel)
@@ -109,6 +111,7 @@
 - 후원 카드: panel-rise 420ms cubic-bezier(.2,.8,.2,1)
 - 운석 drift: CSS keyframe 개별 궤도
 - 성운 float: CSS keyframe 부유
+- 블랙홀: 별/유성 없이 정적인 사건의 지평선과 얇은 렌즈링
 - prefers-reduced-motion: 모든 애니메이션 비활성화
 
 ## 반응형

@@ -45,13 +45,13 @@ export const galaxies: Galaxy[] = [
       },
       {
         id: "memory-palace",
-        name: "기억의궁전",
+        name: "찰칵 장값 계산기",
         description: "장소기억법 배우기",
         meta: { minOS: "iOS 16.0+ / Android 8.0+", lastUpdated: "2026.03" },
         downloads: [
           {
             platform: "ios",
-            url: "https://apps.apple.com/us/app/%EA%B8%B0%EC%96%B5%EC%9D%98%EA%B6%81%EC%A0%84-%EB%87%8C%EB%AA%A8%EB%8B%89/id6758509388",
+            url: "https://apps.apple.com/kr/app/%EC%B0%B0%EC%B9%B5-%EC%9E%A5%EA%B0%92-%EA%B3%84%EC%82%B0%EA%B8%B0/id6763238313",
             label: "App Store",
           },
           {

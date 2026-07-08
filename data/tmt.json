@@ -44,6 +44,17 @@
       "색온도 조절은 f.lux를 계속 쓰고 있어요. Apple Silicon Mac 전용입니다 (M1~M5)."
     ]
   },
+  "breaklock-timer": {
+    "name": null,
+    "description": null,
+    "entries": [
+      "BreakLock Timer는 집중 시간과 쉬는 시간을 반복하는 포모도로 타이머입니다.",
+      "쉬는 시간이 시작되면 화면을 잠가서, 쉬는 시간까지 계속 일하거나 딴짓으로 밀어버리는 흐름을 끊어줍니다.",
+      "Sentry Mode는 쉬는 시간 잠금이 풀리지 않도록 감시하는 기능이고, 이 동작은 기기 안에서만 처리됩니다.",
+      "집중 기록이나 잠금 상태를 외부 서버에 보내는 방식이 아니라, Mac에서 조용히 동작하는 작은 생산성 도구로 만들었습니다.",
+      "Mac App Store에서 배포하며 Apple Silicon Mac과 macOS 12.0 이상을 대상으로 합니다."
+    ]
+  },
   "spamcall070": {
     "name": null,
     "description": null,

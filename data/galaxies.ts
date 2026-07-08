@@ -160,33 +160,6 @@ export const galaxies: Galaxy[] = [
           shadowColor: "oklch(0.68 0.18 72 / 0.2)",
         },
       },
-      {
-        id: "breaklock-timer",
-        name: "BreakLock Timer",
-        description: "쉬는 시간에는 화면을 잠그는 포모도로 타이머",
-        meta: { minOS: "macOS 12.0+ / Apple Silicon", lastUpdated: "2026.06 업데이트" },
-        downloads: [
-          {
-            platform: "macos",
-            url: "https://apps.apple.com/kr/app/breaklock-timer/id6770569966?mt=12",
-            label: "Mac App Store",
-          },
-        ],
-        macOnly: true,
-        planet: {
-          colors: [
-            "oklch(0.78 0.18 32)",
-            "oklch(0.58 0.22 25)",
-            "oklch(0.34 0.16 20)",
-            "oklch(0.15 0.06 18)",
-          ],
-          size: 38,
-          position: { x: "52%", y: "18%" },
-          parallaxSpeed: 0.22,
-          shadowColor: "oklch(0.58 0.22 25 / 0.2)",
-          ring: { color: "oklch(0.70 0.10 35)", opacity: 0.24, tilt: 68, width: 1.1 },
-        },
-      },
     ],
   },
   {
@@ -264,9 +237,18 @@ export const galaxies: Galaxy[] = [
         tilt: 1.3,
       },
       {
-        id: "a5",
-        name: "비밀 프로젝트",
-        hint: "때가 되면 공개 예정",
+        id: "breaklock-timer",
+        name: "BreakLock Timer",
+        hint: "쉬는 시간에는 화면을 잠그는 포모도로 타이머",
+        description: "쉬는 시간에는 화면을 잠그는 포모도로 타이머",
+        meta: { minOS: "macOS 12.0+ / Apple Silicon", lastUpdated: "2026.06" },
+        downloads: [
+          {
+            platform: "macos",
+            url: "https://apps.apple.com/kr/app/breaklock-timer/id6770569966?mt=12",
+            label: "Mac App Store",
+          },
+        ],
         size: 26,
         position: { x: "58%", y: "20%" },
         rotate: 30,

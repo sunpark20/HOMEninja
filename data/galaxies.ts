@@ -210,9 +210,18 @@ export const galaxies: Galaxy[] = [
         tilt: 0.8,
       },
       {
-        id: "a2",
-        name: "메모장 속 아이디어",
-        hint: "노트 앱에만 살고 있음",
+        id: "breaklock-timer",
+        name: "BreakLock Timer",
+        hint: "쉬는 시간에는 화면을 잠그는 포모도로 타이머",
+        description: "쉬는 시간에는 화면을 잠그는 포모도로 타이머",
+        meta: { minOS: "macOS 12.0+ / Apple Silicon", lastUpdated: "2026.06" },
+        downloads: [
+          {
+            platform: "macos",
+            url: "https://apps.apple.com/kr/app/breaklock-timer/id6770569966?mt=12",
+            label: "Mac App Store",
+          },
+        ],
         size: 22,
         position: { x: "22%", y: "30%" },
         rotate: -18,
@@ -237,18 +246,9 @@ export const galaxies: Galaxy[] = [
         tilt: 1.3,
       },
       {
-        id: "breaklock-timer",
-        name: "BreakLock Timer",
-        hint: "쉬는 시간에는 화면을 잠그는 포모도로 타이머",
-        description: "쉬는 시간에는 화면을 잠그는 포모도로 타이머",
-        meta: { minOS: "macOS 12.0+ / Apple Silicon", lastUpdated: "2026.06" },
-        downloads: [
-          {
-            platform: "macos",
-            url: "https://apps.apple.com/kr/app/breaklock-timer/id6770569966?mt=12",
-            label: "Mac App Store",
-          },
-        ],
+        id: "a5",
+        name: "비밀 프로젝트",
+        hint: "때가 되면 공개 예정",
         size: 26,
         position: { x: "58%", y: "20%" },
         rotate: 30,

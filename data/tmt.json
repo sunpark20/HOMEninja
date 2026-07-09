@@ -44,6 +44,17 @@
       "색온도 조절은 f.lux를 계속 쓰고 있어요. Apple Silicon Mac 전용입니다 (M1~M5)."
     ]
   },
+  "centuryiris": {
+    "name": null,
+    "description": null,
+    "entries": [
+      "Gnomon을 만들고 나니, 외장 모니터 밝기뿐 아니라 색온도까지 주변 밝기에 맞춰 자동으로 바꾸고 싶어졌습니다.",
+      "Century Iris는 MacBook의 조도 센서를 읽어서 외장 모니터의 밝기와 색온도를 같이 조절합니다.",
+      "어두운 방에서는 화면을 더 낮고 따뜻하게, 밝은 환경에서는 더 밝고 시원하게 맞춰서 눈이 덜 피곤하도록 만들었습니다.",
+      "계정, 광고, 구독, 서버 통신 없이 Mac 안에서만 동작하는 작은 디스플레이 편의 도구입니다.",
+      "macOS 15.0 이상 Apple Silicon Mac 전용입니다."
+    ]
+  },
   "breaklock-timer": {
     "name": null,
     "description": null,

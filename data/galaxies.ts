@@ -140,6 +140,16 @@ export const galaxies: Galaxy[] = [
         description: "MacBook 조도센서로 외장 모니터 밝기를 자동으로 맞춰줍니다",
         meta: { minOS: "Apple Silicon Mac 전용 (M1~M5)", lastUpdated: "2026.04" },
         bgrawUrl: "https://raw.githubusercontent.com/sunpark20/gnomon/main/bgraw.md",
+        moons: [{
+          targetId: "centuryiris",
+          kind: "planet",
+          colors: [
+            "oklch(0.86 0.10 95)",
+            "oklch(0.64 0.14 170)",
+            "oklch(0.38 0.12 215)",
+            "oklch(0.16 0.05 235)",
+          ],
+        }],
         downloads: [
           {
             platform: "macos",
@@ -158,6 +168,44 @@ export const galaxies: Galaxy[] = [
           position: { x: "38%", y: "18%" },
           parallaxSpeed: 0.21,
           shadowColor: "oklch(0.68 0.18 72 / 0.2)",
+        },
+      },
+      {
+        id: "centuryiris",
+        name: "Century Iris",
+        description: "MacBook 조도센서로 외장 모니터 밝기와 색온도를 자동 조절합니다",
+        meta: { minOS: "macOS 15.0+ / Apple Silicon", lastUpdated: "2026.07" },
+        bgrawUrl: "https://raw.githubusercontent.com/sunpark20/centuryiris/main/bgraw.md",
+        macOnly: true,
+        moons: [{
+          targetId: "gnomon",
+          kind: "planet",
+          colors: [
+            "oklch(0.88 0.16 80)",
+            "oklch(0.68 0.18 72)",
+            "oklch(0.44 0.14 65)",
+            "oklch(0.20 0.06 60)",
+          ],
+        }],
+        downloads: [
+          {
+            platform: "macos",
+            url: "https://github.com/sunpark20/centuryiris/releases/",
+            label: "macOS 다운로드",
+          },
+        ],
+        planet: {
+          colors: [
+            "oklch(0.86 0.10 95)",
+            "oklch(0.64 0.14 170)",
+            "oklch(0.38 0.12 215)",
+            "oklch(0.16 0.05 235)",
+          ],
+          size: 38,
+          position: { x: "58%", y: "22%" },
+          parallaxSpeed: 0.22,
+          shadowColor: "oklch(0.64 0.14 170 / 0.2)",
+          ring: { color: "oklch(0.78 0.08 120)", opacity: 0.24, tilt: 68, width: 1.45 },
         },
       },
     ],

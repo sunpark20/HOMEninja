@@ -65,3 +65,11 @@ test("retired Jeju app lives in the black-hole galaxy", () => {
     /id: "solar-system"[\s\S]*id: "jeju-delivery"[\s\S]*id: "asteroid-field"/,
   );
 });
+
+test("Century Iris and Gnomon are linked as friend planets", () => {
+  const galaxies = read("data/galaxies.ts");
+
+  assert.match(galaxies, /id: "gnomon"[\s\S]*targetId: "centuryiris"/);
+  assert.match(galaxies, /id: "centuryiris"[\s\S]*targetId: "gnomon"/);
+  assert.match(galaxies, /id: "centuryiris"[\s\S]*kind: "planet"/);
+});

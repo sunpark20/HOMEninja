@@ -190,8 +190,8 @@ export const galaxies: Galaxy[] = [
         downloads: [
           {
             platform: "macos",
-            url: "https://github.com/sunpark20/centuryiris/releases/",
-            label: "macOS 다운로드",
+            url: "https://apps.apple.com/us/app/century-iris/id6763940089",
+            label: "Mac App Store",
           },
         ],
         planet: {

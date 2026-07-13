@@ -53,7 +53,7 @@ export default function RootLayout({
           style={{ color: "var(--c-dim)" }}
         >
           <a
-            href="mailto:sun.park20@gmail.com"
+            href="mailto:coastguard2681@gmail.com"
             className="transition-colors duration-200 hover:text-white/40"
           >
             문의사항

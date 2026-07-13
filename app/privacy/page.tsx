@@ -57,9 +57,9 @@ export default function Privacy() {
               2. Purpose of Use
             </h2>
             <p>
-              Collected information is used solely for service provision and
-              improvement, and is immediately deleted once that purpose is
-              fulfilled.
+              Collected information is used solely to provide, secure, and
+              improve the relevant service. Retention varies by app and data
+              type as described below.
             </p>
           </section>
 
@@ -71,8 +71,8 @@ export default function Privacy() {
               3. Retention and Deletion
             </h2>
             <p>
-              Personal information is deleted immediately upon fulfillment of
-              the collection purpose. Where retention is required by law, the
+              Information is deleted when it is no longer reasonably necessary
+              for the stated purpose. Where retention is required by law, the
               data is stored securely for that period only.
             </p>
           </section>
@@ -109,23 +109,68 @@ export default function Privacy() {
                 className="text-base font-medium mb-1"
                 style={{ color: "var(--c-subheading)" }}
               >
-                SnapCart (장보고)
+                SnapCart (찰칵 장값 계산기)
               </h3>
               <ul className="list-disc list-inside space-y-1">
-                <li>Camera access is used to photograph receipts.</li>
+                <li>Camera access is used to photograph retail price tags.</li>
                 <li>
-                  Captured images are sent to an external AI service (OpenAI
-                  API) for price analysis.
+                  Apple Vision performs OCR on-device. The original price-tag
+                  image is not sent for AI analysis.
                 </li>
                 <li>
-                  Analysis results are stored on-device only; nothing is
-                  retained on our servers.
+                  Recognized text is sent through the app&apos;s configured proxy
+                  to Google Gemini to identify the product and price.
                 </li>
                 <li>
-                  Microphone access is used when the voice input feature is
-                  enabled.
+                  When voice input is used, recorded audio is sent to Groq for
+                  transcription, and the transcript is sent to Google Gemini
+                  for item parsing.
+                </li>
+                <li>Cart items and analysis results are stored on-device.</li>
+              </ul>
+            </div>
+
+            <div className="mt-6">
+              <h3
+                className="text-base font-medium mb-1"
+                style={{ color: "var(--c-subheading)" }}
+              >
+                ytninza
+              </h3>
+              <ul className="list-disc list-inside space-y-1">
+                <li>
+                  An optional YouTube Data API key, download-folder location,
+                  and window preferences are stored on the user&apos;s device.
+                </li>
+                <li>
+                  URLs, channel handles, and public video metadata are processed
+                  through YouTube, Google APIs, or yt-dlp to provide analysis
+                  and downloads. Downloaded media remains on the user&apos;s device.
+                </li>
+                <li>
+                  Fatal errors automatically send a diagnostic report through
+                  Google Apps Script. Reports can include app and system details,
+                  error information, a traceback, and the latest 50 log lines.
+                  Recent logs may contain YouTube URLs, video titles, and local
+                  file or folder paths.
+                </li>
+                <li>
+                  Diagnostic data is used only for troubleshooting and product
+                  improvement and is retained only as long as reasonably needed
+                  for those purposes.
                 </li>
               </ul>
+              <p className="mt-2">
+                See the complete ytninza privacy, terms, and copyright notices on
+                the{" "}
+                <a
+                  href="https://sunpark20.github.io/YT-Chita/?lang=en#privacy"
+                  className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                >
+                  product page
+                </a>
+                .
+              </p>
             </div>
           </section>
         </div>
@@ -166,8 +211,9 @@ export default function Privacy() {
               2. 개인정보의 이용 목적
             </h2>
             <p>
-              수집된 개인정보는 서비스 제공 및 개선 목적으로만 사용되며, 목적
-              달성 후 즉시 파기합니다.
+              수집된 개인정보는 관련 서비스 제공, 보안 및 개선 목적으로만
+              사용합니다. 보관 기간은 아래의 앱과 데이터 유형별 설명에 따라
+              달라집니다.
             </p>
           </section>
 
@@ -179,8 +225,9 @@ export default function Privacy() {
               3. 개인정보의 보관 및 파기
             </h2>
             <p>
-              개인정보는 수집 목적 달성 시 즉시 파기합니다. 법령에 의해 보관이
-              필요한 경우 해당 기간 동안 안전하게 보관합니다.
+              개인정보는 명시한 목적에 더 이상 합리적으로 필요하지 않을 때
+              파기합니다. 법령에 의해 보관이 필요한 경우 해당 기간 동안만
+              안전하게 보관합니다.
             </p>
           </section>
 
@@ -216,22 +263,65 @@ export default function Privacy() {
                 className="text-base font-medium mb-1"
                 style={{ color: "var(--c-subheading)" }}
               >
-                장보고 (SnapCart)
+                찰칵 장값 계산기 (SnapCart)
               </h3>
               <ul className="list-disc list-inside space-y-1">
-                <li>카메라 접근 권한을 사용하여 영수증을 촬영합니다.</li>
+                <li>카메라 접근 권한을 사용하여 매장의 가격표를 촬영합니다.</li>
                 <li>
-                  촬영된 이미지는 가격 분석을 위해 외부 AI 서비스(OpenAI
-                  API)로 전송됩니다.
+                  Apple Vision이 기기에서 OCR을 처리하며, 원본 가격표 이미지는
+                  AI 분석을 위해 전송하지 않습니다.
                 </li>
                 <li>
-                  분석 결과는 기기 내에 저장되며, 서버에 별도로 보관하지
-                  않습니다.
+                  인식된 텍스트는 상품명과 가격 판별을 위해 앱에 설정된 프록시를
+                  거쳐 Google Gemini로 전송됩니다.
                 </li>
                 <li>
-                  음성 입력 기능 사용 시 마이크 접근 권한을 사용합니다.
+                  음성 입력을 사용하면 녹음한 오디오가 음성 변환을 위해 Groq로
+                  전송되고, 변환된 텍스트는 품목 분석을 위해 Google Gemini로
+                  전송됩니다.
+                </li>
+                <li>장바구니 항목과 분석 결과는 기기에 저장됩니다.</li>
+              </ul>
+            </div>
+
+            <div className="mt-6">
+              <h3
+                className="text-base font-medium mb-1"
+                style={{ color: "var(--c-subheading)" }}
+              >
+                ytninza
+              </h3>
+              <ul className="list-disc list-inside space-y-1">
+                <li>
+                  선택적으로 입력한 YouTube Data API 키, 다운로드 폴더 위치 및 창
+                  설정은 사용자 기기에 저장됩니다.
+                </li>
+                <li>
+                  URL, 채널 핸들 및 공개 영상 메타데이터는 분석과 다운로드 제공을
+                  위해 YouTube, Google API 또는 yt-dlp를 통해 처리합니다. 다운로드한
+                  미디어는 사용자 기기에 저장됩니다.
+                </li>
+                <li>
+                  치명적인 오류가 발생하면 Google Apps Script를 통해 진단 보고서를
+                  자동 전송합니다. 보고서에는 앱·시스템 정보, 오류 정보, 트레이스백
+                  및 최근 로그 50줄이 포함될 수 있습니다. 최근 로그에는 YouTube URL,
+                  영상 제목 및 로컬 파일·폴더 경로가 포함될 수 있습니다.
+                </li>
+                <li>
+                  진단 데이터는 문제 해결과 제품 개선 목적으로만 사용하며 해당
+                  목적에 합리적으로 필요한 기간 동안만 보관합니다.
                 </li>
               </ul>
+              <p className="mt-2">
+                전체 개인정보처리방침, 이용약관 및 저작권 정책은{" "}
+                <a
+                  href="https://sunpark20.github.io/YT-Chita/?lang=ko#privacy"
+                  className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                >
+                  ytninza 제품 페이지
+                </a>
+                에서 확인할 수 있습니다.
+              </p>
             </div>
           </section>
         </div>

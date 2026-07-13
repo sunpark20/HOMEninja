@@ -73,3 +73,31 @@ test("Century Iris and Gnomon are linked as friend planets", () => {
   assert.match(galaxies, /id: "centuryiris"[\s\S]*targetId: "gnomon"/);
   assert.match(galaxies, /id: "centuryiris"[\s\S]*kind: "planet"/);
 });
+
+test("ytninza card uses the current product identity and landing page", () => {
+  const galaxies = read("data/galaxies.ts");
+
+  assert.match(galaxies, /id: "yt-bulk-downloader"[\s\S]*name: "ytninza"/);
+  assert.match(galaxies, /Windows 10·11 64-bit/);
+  assert.match(galaxies, /YT-Chita\/releases\/latest/);
+  assert.match(galaxies, /https:\/\/sunpark20\.github\.io\/YT-Chita\//);
+  assert.doesNotMatch(galaxies, /name: "YtBulkDownloader"/);
+});
+
+test("integrated privacy page reflects current ytninza and SnapCart data flows", () => {
+  const privacy = read("app/privacy/page.tsx");
+
+  assert.match(privacy, /Google Apps Script/);
+  assert.match(privacy, /latest 50 log lines/);
+  assert.match(privacy, /Apple Vision performs OCR on-device/);
+  assert.match(privacy, /Google Gemini/);
+  assert.match(privacy, /sent to Groq for/);
+  assert.doesNotMatch(privacy, /external AI service \(OpenAI/);
+});
+
+test("site contact email matches the published product contact", () => {
+  const layout = read("app/layout.tsx");
+
+  assert.match(layout, /mailto:coastguard2681@gmail\.com/);
+  assert.doesNotMatch(layout, /mailto:sun\.park20@gmail\.com/);
+});

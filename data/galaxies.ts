@@ -76,19 +76,27 @@ export const galaxies: Galaxy[] = [
       },
       {
         id: "yt-bulk-downloader",
-        name: "YtBulkDownloader",
-        description: "유튜브 채널 동영상 한번에 다운로더",
-        meta: { minOS: "macOS 12+ / Windows 10+" },
+        name: "ytninza",
+        description: "YouTube 채널·재생목록·개별 영상을 저장하는 무료 데스크톱 앱",
+        meta: {
+          minOS: "macOS (Apple Silicon / Intel) / Windows 10·11 64-bit",
+          lastUpdated: "2026.07",
+        },
         downloads: [
           {
             platform: "macos",
-            url: "https://github.com/sunpark20/YT-Chita/releases",
+            url: "https://github.com/sunpark20/YT-Chita/releases/latest",
             label: "macOS 다운로드",
           },
           {
             platform: "windows",
-            url: "https://github.com/sunpark20/YT-Chita/releases",
+            url: "https://github.com/sunpark20/YT-Chita/releases/latest",
             label: "Windows 다운로드",
+          },
+          {
+            platform: "web",
+            url: "https://sunpark20.github.io/YT-Chita/",
+            label: "제품 소개 및 정책",
           },
         ],
         planet: {

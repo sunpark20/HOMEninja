@@ -11,9 +11,9 @@ export const generatedApps: AppRegistryEntry[] = [
       "macos"
     ],
     "minOS": "macOS 12.0+",
-    "version": "1.8.1",
+    "version": "1.9.0",
     "status": "released",
-    "updatedAt": "2026.07",
+    "updatedAt": "2026.08",
     "downloads": [
       {
         "platform": "macos",
@@ -75,9 +75,9 @@ export const generatedApps: AppRegistryEntry[] = [
       "macos"
     ],
     "minOS": "macOS 15.0+, Apple Silicon",
-    "version": "1",
+    "version": "1.1",
     "status": "released",
-    "updatedAt": "2026.05",
+    "updatedAt": "2026.08",
     "downloads": [
       {
         "platform": "macos",
@@ -135,7 +135,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "minOS": "iOS 26.0+",
     "version": "1.0",
     "status": "unreleased",
-    "updatedAt": null,
+    "updatedAt": "2026.08",
     "downloads": [],
     "web": {
       "privacy": "https://homeninja.vercel.app/privacy/eatwater",
@@ -159,13 +159,13 @@ export const generatedApps: AppRegistryEntry[] = [
       "macos"
     ],
     "minOS": "macOS 15.0+, Apple Silicon",
-    "version": "1.7.2",
+    "version": "1.8.0",
     "status": "released",
-    "updatedAt": "2026.05",
+    "updatedAt": "2026.08",
     "downloads": [
       {
         "platform": "macos",
-        "url": "https://github.com/sunpark20/gnomon/releases/tag/v1.7.2",
+        "url": "https://github.com/sunpark20/gnomon/releases/tag/v1.8.0",
         "label": "macOS 다운로드"
       }
     ],
@@ -193,7 +193,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "minOS": "iOS 17.0+, Android 7.0+",
     "version": "2.0.1",
     "status": "released",
-    "updatedAt": "2026.02",
+    "updatedAt": "2026.08",
     "downloads": [
       {
         "platform": "ios",
@@ -228,9 +228,9 @@ export const generatedApps: AppRegistryEntry[] = [
       "ios"
     ],
     "minOS": "iOS 18.0+",
-    "version": "2.01",
+    "version": "2.02",
     "status": "released",
-    "updatedAt": "2026.05",
+    "updatedAt": "2026.08",
     "downloads": [
       {
         "platform": "ios",
@@ -260,9 +260,9 @@ export const generatedApps: AppRegistryEntry[] = [
       "ios"
     ],
     "minOS": "iOS 16.0+",
-    "version": "1.3",
+    "version": "1.4",
     "status": "released",
-    "updatedAt": "2026.07",
+    "updatedAt": "2026.08",
     "downloads": [
       {
         "platform": "ios",
@@ -292,9 +292,9 @@ export const generatedApps: AppRegistryEntry[] = [
       "windows"
     ],
     "minOS": "macOS 10.15+, Windows 10·11 64-bit",
-    "version": "1.4.9",
+    "version": "1.5.0",
     "status": "released",
-    "updatedAt": "2026.07",
+    "updatedAt": "2026.08",
     "downloads": [
       {
         "platform": "macos",

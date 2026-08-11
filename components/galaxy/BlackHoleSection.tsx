@@ -51,6 +51,7 @@ export default function BlackHoleSection({
           retiredLabel={obj.retiredLabel}
           retiredImage={obj.retiredImage}
           hasBgraw={!!obj.bgrawUrl}
+          reportUrl={obj.reportUrl}
         >
           {isApp && <DownloadButtons downloads={obj.downloads} />}
           {isApp && tmtEntries.length > 0 && (

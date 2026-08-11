@@ -10,6 +10,7 @@ type Props = {
   retiredImage?: string;
   macOnly?: boolean;
   hasBgraw?: boolean;
+  reportUrl?: string;
   children?: React.ReactNode;
 };
 
@@ -36,6 +37,7 @@ export default function ObjectContentCard({
   retiredImage,
   macOnly,
   hasBgraw,
+  reportUrl,
   children,
 }: Props) {
   return (
@@ -118,6 +120,26 @@ export default function ObjectContentCard({
         >
           {meta.minOS && <span>{meta.minOS}</span>}
           {meta.lastUpdated && <span>{meta.lastUpdated} 업데이트</span>}
+        </div>
+      )}
+      {reportUrl && (
+        <div className="mt-5">
+          <a
+            href={reportUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center rounded-full px-3 py-2 text-sm font-semibold font-[family-name:var(--font-body)]"
+            style={{
+              background: "oklch(0.28 0.05 220 / 0.55)",
+              border: "1px solid oklch(0.58 0.08 220 / 0.45)",
+              color: "oklch(0.85 0.04 220)",
+            }}
+          >
+            GitHub으로 문제 신고
+          </a>
+          <p className="mt-2 text-xs" style={{ color: "oklch(0.57 0.01 260)" }}>
+            GitHub 계정이 필요합니다.
+          </p>
         </div>
       )}
       {children}

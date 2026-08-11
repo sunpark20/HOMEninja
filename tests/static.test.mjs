@@ -69,19 +69,19 @@ test("retired Jeju app lives in the black-hole galaxy", () => {
 test("Century Iris and Gnomon are linked as friend planets", () => {
   const galaxies = read("data/galaxies.ts");
 
-  assert.match(galaxies, /id: "gnomon"[\s\S]*targetId: "centuryiris"/);
-  assert.match(galaxies, /id: "centuryiris"[\s\S]*targetId: "gnomon"/);
-  assert.match(galaxies, /id: "centuryiris"[\s\S]*kind: "planet"/);
+  assert.match(galaxies, /planetApp\("gnomon",[\s\S]*targetId: "centuryiris"/);
+  assert.match(galaxies, /planetApp\("centuryiris",[\s\S]*targetId: "gnomon"/);
+  assert.match(galaxies, /kind: "planet"/);
 });
 
-test("ytninza card uses the current product identity and landing page", () => {
-  const galaxies = read("data/galaxies.ts");
+test("public app registry hides private source identifiers", () => {
+  const apps = read("data/apps.generated.ts");
 
-  assert.match(galaxies, /id: "yt-bulk-downloader"[\s\S]*name: "ytninza"/);
-  assert.match(galaxies, /Windows 10·11 64-bit/);
-  assert.match(galaxies, /YT-Chita\/releases\/latest/);
-  assert.match(galaxies, /https:\/\/sunpark20\.github\.io\/YT-Chita\//);
-  assert.doesNotMatch(galaxies, /name: "YtBulkDownloader"/);
+  assert.match(apps, /"id": "yt-bulk-downloader"[\s\S]*"displayName": "YT Chita"/);
+  assert.match(apps, /Windows 10·11 64-bit/);
+  assert.match(apps, /YT-Chita\/releases\/latest/);
+  assert.match(apps, /https:\/\/sunpark20\.github\.io\/YT-Chita\//);
+  assert.doesNotMatch(apps, /jangbogo|restlocktimer|ytninza|YT-Chita-source-archive/i);
 });
 
 test("integrated privacy page reflects current ytninza and SnapCart data flows", () => {

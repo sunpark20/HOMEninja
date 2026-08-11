@@ -1,4 +1,42 @@
-import type { Galaxy } from "@/types/galaxy";
+import { appByID } from "@/data/apps";
+import type { Galaxy, PlanetObject, AsteroidObject } from "@/types/galaxy";
+
+type PublicObjectFields = Pick<
+  PlanetObject,
+  "id" | "name" | "description" | "meta" | "downloads" | "comingSoon" | "reportUrl"
+>;
+
+function publicApp(id: string): PublicObjectFields {
+  const app = appByID(id);
+  return {
+    id: app.id,
+    name: app.displayNameKo,
+    description: app.taglineKo,
+    meta: {
+      minOS: app.minOS,
+      version: app.version,
+      ...(app.updatedAt ? { lastUpdated: app.updatedAt } : {}),
+    },
+    downloads: app.status === "released" ? app.downloads : [],
+    comingSoon: app.status === "unreleased",
+    reportUrl: app.reporting.url,
+  };
+}
+
+function planetApp(
+  id: string,
+  visual: Pick<PlanetObject, "planet" | "macOnly" | "moons">,
+): PlanetObject {
+  return { ...publicApp(id), ...visual };
+}
+
+function asteroidApp(
+  id: string,
+  visual: Pick<AsteroidObject, "size" | "position" | "rotate" | "tilt" | "moons">,
+): AsteroidObject {
+  const app = publicApp(id);
+  return { ...app, hint: app.description, ...visual };
+}
 
 export const galaxies: Galaxy[] = [
   {
@@ -16,19 +54,7 @@ export const galaxies: Galaxy[] = [
       starDensity: 1.0,
     },
     objects: [
-      {
-        id: "jangbogo",
-        name: "찰칵 장값 계산기",
-        description: "가격표만 찍으면 장바구니 자동 합산",
-        meta: { minOS: "iOS 18.0+", lastUpdated: "2026.05" },
-        bgrawUrl: "https://raw.githubusercontent.com/sunpark20/jangbogo/main/bgraw.md",
-        downloads: [
-          {
-            platform: "ios",
-            url: "https://apps.apple.com/kr/app/%EC%B0%B0%EC%B9%B5-%EC%9E%A5%EA%B0%92-%EA%B3%84%EC%82%B0%EA%B8%B0/id6763238313",
-            label: "App Store",
-          },
-        ],
+      planetApp("snapcart", {
         planet: {
           colors: [
             "oklch(0.82 0.13 35)",
@@ -42,24 +68,8 @@ export const galaxies: Galaxy[] = [
           shadowColor: "oklch(0.62 0.16 28 / 0.2)",
           ring: { color: "oklch(0.70 0.08 55)", opacity: 0.28, tilt: 70, width: 1.3 },
         },
-      },
-      {
-        id: "memory-palace",
-        name: "기억의궁전",
-        description: "장소기억법 배우기",
-        meta: { minOS: "iOS 16.0+ / Android 8.0+", lastUpdated: "2026.03" },
-        downloads: [
-          {
-            platform: "ios",
-            url: "https://apps.apple.com/us/app/%EA%B8%B0%EC%96%B5%EC%9D%98%EA%B6%81%EC%A0%84-%EB%87%8C%EB%AA%A8%EB%8B%89/id6758509388",
-            label: "App Store",
-          },
-          {
-            platform: "android",
-            url: "https://play.google.com/store/apps/details?id=hungry.ex_frag&hl=ko",
-            label: "Google Play",
-          },
-        ],
+      }),
+      planetApp("memory-palace", {
         planet: {
           colors: [
             "oklch(0.75 0.15 55)",
@@ -73,32 +83,8 @@ export const galaxies: Galaxy[] = [
           shadowColor: "oklch(0.55 0.18 40 / 0.2)",
           ring: { color: "oklch(0.6 0.1 45)", opacity: 0.35, tilt: 75, width: 1.6 },
         },
-      },
-      {
-        id: "yt-bulk-downloader",
-        name: "ytninza",
-        description: "YouTube 채널·재생목록·개별 영상을 저장하는 무료 데스크톱 앱",
-        meta: {
-          minOS: "macOS (Apple Silicon / Intel) / Windows 10·11 64-bit",
-          lastUpdated: "2026.07",
-        },
-        downloads: [
-          {
-            platform: "macos",
-            url: "https://github.com/sunpark20/YT-Chita/releases/latest",
-            label: "macOS 다운로드",
-          },
-          {
-            platform: "windows",
-            url: "https://github.com/sunpark20/YT-Chita/releases/latest",
-            label: "Windows 다운로드",
-          },
-          {
-            platform: "web",
-            url: "https://sunpark20.github.io/YT-Chita/",
-            label: "제품 소개 및 정책",
-          },
-        ],
+      }),
+      planetApp("yt-bulk-downloader", {
         planet: {
           colors: [
             "oklch(0.72 0.13 140)",
@@ -111,13 +97,8 @@ export const galaxies: Galaxy[] = [
           parallaxSpeed: 0.24,
           shadowColor: "oklch(0.50 0.16 130 / 0.2)",
         },
-      },
-      {
-        id: "spamcall070",
-        name: "070 스팸 전화 차단",
-        description: "최초 1회 설정, 벨소리도 안울리는",
-        meta: { minOS: "iOS 16.0+" },
-        bgrawUrl: "https://raw.githubusercontent.com/sunpark20/spamcall/main/bgraw.md",
+      }),
+      planetApp("spamcall070", {
         moons: [{
           targetId: "callninja",
           kind: "asteroid",
@@ -128,7 +109,6 @@ export const galaxies: Galaxy[] = [
             "oklch(0.18 0.03 50)",
           ],
         }],
-        downloads: [{ platform: "ios", url: "https://apps.apple.com/kr/app/070-%EC%8A%A4%ED%8C%B8-%EC%A0%84%ED%99%94-%EC%B0%A8%EB%8B%A8/id6762326707", label: "App Store" }],
         planet: {
           colors: [
             "oklch(0.70 0.14 0)",
@@ -141,13 +121,8 @@ export const galaxies: Galaxy[] = [
           parallaxSpeed: 0.2,
           shadowColor: "oklch(0.48 0.16 350 / 0.2)",
         },
-      },
-      {
-        id: "gnomon",
-        name: "Gnomon",
-        description: "MacBook 조도센서로 외장 모니터 밝기를 자동으로 맞춰줍니다",
-        meta: { minOS: "Apple Silicon Mac 전용 (M1~M5)", lastUpdated: "2026.04" },
-        bgrawUrl: "https://raw.githubusercontent.com/sunpark20/gnomon/main/bgraw.md",
+      }),
+      planetApp("gnomon", {
         moons: [{
           targetId: "centuryiris",
           kind: "planet",
@@ -158,13 +133,6 @@ export const galaxies: Galaxy[] = [
             "oklch(0.16 0.05 235)",
           ],
         }],
-        downloads: [
-          {
-            platform: "macos",
-            url: "https://github.com/sunpark20/gnomon/releases/",
-            label: "macOS 다운로드",
-          },
-        ],
         planet: {
           colors: [
             "oklch(0.88 0.16 80)",
@@ -177,13 +145,8 @@ export const galaxies: Galaxy[] = [
           parallaxSpeed: 0.21,
           shadowColor: "oklch(0.68 0.18 72 / 0.2)",
         },
-      },
-      {
-        id: "centuryiris",
-        name: "Century Iris",
-        description: "MacBook 조도센서로 외장 모니터 밝기와 색온도를 자동 조절합니다",
-        meta: { minOS: "macOS 15.0+ / Apple Silicon", lastUpdated: "2026.07" },
-        bgrawUrl: "https://raw.githubusercontent.com/sunpark20/centuryiris/main/bgraw.md",
+      }),
+      planetApp("centuryiris", {
         macOnly: true,
         moons: [{
           targetId: "gnomon",
@@ -192,16 +155,9 @@ export const galaxies: Galaxy[] = [
             "oklch(0.88 0.16 80)",
             "oklch(0.68 0.18 72)",
             "oklch(0.44 0.14 65)",
-            "oklch(0.20 0.06 60)",
+            "oklch(0.16 0.05 235)",
           ],
         }],
-        downloads: [
-          {
-            platform: "macos",
-            url: "https://apps.apple.com/us/app/century-iris/id6763940089",
-            label: "Mac App Store",
-          },
-        ],
         planet: {
           colors: [
             "oklch(0.86 0.10 95)",
@@ -215,7 +171,7 @@ export const galaxies: Galaxy[] = [
           shadowColor: "oklch(0.64 0.14 170 / 0.2)",
           ring: { color: "oklch(0.78 0.08 120)", opacity: 0.24, tilt: 68, width: 1.45 },
         },
-      },
+      }),
     ],
   },
   {
@@ -236,13 +192,7 @@ export const galaxies: Galaxy[] = [
       dust: true,
     },
     objects: [
-      {
-        id: "callninja",
-        name: "콜닌자",
-        hint: "번호 범위를 직접 지정해서 차단",
-        description: "번호 범위를 직접 지정해서 차단",
-        meta: { minOS: "iOS 16.0+" },
-        bgrawUrl: "https://raw.githubusercontent.com/sunpark20/callninja/main/bgraw.md",
+      asteroidApp("callninja", {
         moons: [{
           targetId: "spamcall070",
           kind: "planet",
@@ -253,36 +203,29 @@ export const galaxies: Galaxy[] = [
             "oklch(0.12 0.05 335)",
           ],
         }],
-        downloads: [
-          {
-            platform: "ios",
-            url: "https://apps.apple.com/kr/app/%EC%BD%9C%EB%8B%8C%EC%9E%90-%EC%8A%A4%ED%8C%B8-%EC%A0%84%ED%99%94-%ED%8C%A8%ED%84%B4-%EC%B0%A8%EB%8B%A8/id6762523084",
-            label: "App Store",
-          },
-        ],
         size: 28,
         position: { x: "55%", y: "25%" },
         rotate: 12,
         tilt: 0.8,
-      },
-      {
-        id: "breaklock-timer",
-        name: "BreakLock Timer",
-        hint: "쉬는 시간에는 화면을 잠그는 포모도로 타이머",
-        description: "쉬는 시간에는 화면을 잠그는 포모도로 타이머",
-        meta: { minOS: "macOS 12.0+ / Apple Silicon", lastUpdated: "2026.06" },
-        downloads: [
-          {
-            platform: "macos",
-            url: "https://apps.apple.com/kr/app/breaklock-timer/id6770569966?mt=12",
-            label: "Mac App Store",
-          },
-        ],
+      }),
+      asteroidApp("breaklock-timer", {
         size: 22,
         position: { x: "22%", y: "30%" },
         rotate: -18,
         tilt: 1.1,
-      },
+      }),
+      asteroidApp("earth", {
+        size: 26,
+        position: { x: "64%", y: "16%" },
+        rotate: 22,
+        tilt: 0.7,
+      }),
+      asteroidApp("eatwater", {
+        size: 24,
+        position: { x: "16%", y: "18%" },
+        rotate: -11,
+        tilt: 1.2,
+      }),
       {
         id: "a3",
         name: "북마크 정리기",
@@ -329,46 +272,11 @@ export const galaxies: Galaxy[] = [
       gasBands: true,
     },
     objects: [
-      {
-        id: "n1",
-        name: "첫 번째 별빛",
-        hint: "언젠가 행성이 될 가스 덩어리",
-        size: 36,
-        position: { x: "60%", y: "20%" },
-        hue: 280,
-      },
-      {
-        id: "n2",
-        name: "붉은 성간운",
-        hint: "아직 형태를 찾고 있어요",
-        size: 28,
-        position: { x: "20%", y: "30%" },
-        hue: 320,
-      },
-      {
-        id: "n3",
-        name: "푸른 신성",
-        hint: "가장 밝게 빛나는 아이",
-        size: 42,
-        position: { x: "62%", y: "18%" },
-        hue: 220,
-      },
-      {
-        id: "n4",
-        name: "조용한 성단",
-        hint: "아직 어둡지만 곧 깨어날",
-        size: 24,
-        position: { x: "22%", y: "32%" },
-        hue: 180,
-      },
-      {
-        id: "n5",
-        name: "먼 항성",
-        hint: "이 중 몇 개는 여러분 곁에 도착할 것",
-        size: 30,
-        position: { x: "58%", y: "24%" },
-        hue: 350,
-      },
+      { id: "n1", name: "첫 번째 별빛", hint: "언젠가 행성이 될 가스 덩어리", size: 36, position: { x: "60%", y: "20%" }, hue: 280 },
+      { id: "n2", name: "붉은 성간운", hint: "아직 형태를 찾고 있어요", size: 28, position: { x: "20%", y: "30%" }, hue: 320 },
+      { id: "n3", name: "푸른 신성", hint: "가장 밝게 빛나는 아이", size: 42, position: { x: "62%", y: "18%" }, hue: 220 },
+      { id: "n4", name: "조용한 성단", hint: "아직 어둡지만 곧 깨어날", size: 24, position: { x: "22%", y: "32%" }, hue: 180 },
+      { id: "n5", name: "먼 항성", hint: "이 중 몇 개는 여러분 곁에 도착할 것", size: 30, position: { x: "58%", y: "24%" }, hue: 350 },
     ],
   },
   {
@@ -379,9 +287,7 @@ export const galaxies: Galaxy[] = [
     kind: "blackholes",
     accent: "oklch(0.70 0.03 260)",
     bg: {
-      gradients: [
-        { color: "oklch(0.10 0.02 260 / 0.18)", x: "50%", y: "45%", size: 90 },
-      ],
+      gradients: [{ color: "oklch(0.10 0.02 260 / 0.18)", x: "50%", y: "45%", size: 90 }],
       starDensity: 0,
     },
     objects: [
@@ -393,58 +299,16 @@ export const galaxies: Galaxy[] = [
         retired: true,
         retiredLabel: "블랙홀에 들어가는중.",
         retiredImage: "/black-hole.svg",
-        downloads: [
-          {
-            platform: "web",
-            url: null,
-            label: "블랙홀에 들어가는중.",
-          },
-        ],
+        downloads: [{ platform: "web", url: null, label: "블랙홀에 들어가는중." }],
         size: 36,
         position: { x: "15%", y: "25%" },
         rotate: -12,
         debrisType: "ship",
       },
-      {
-        id: "bh-2",
-        name: "끊어진 위성",
-        description: "전송이 끝난 뒤 궤도만 남은 조각",
-        downloads: [],
-        size: 24,
-        position: { x: "58%", y: "22%" },
-        rotate: 18,
-        debrisType: "satellite",
-      },
-      {
-        id: "bh-3",
-        name: "식은 추진체",
-        description: "다시 켜지지 않는 작은 엔진",
-        downloads: [],
-        size: 20,
-        position: { x: "18%", y: "34%" },
-        rotate: 34,
-        debrisType: "booster",
-      },
-      {
-        id: "bh-4",
-        name: "부서진 패널",
-        description: "빛을 반사하지 못하는 낡은 금속판",
-        downloads: [],
-        size: 28,
-        position: { x: "64%", y: "18%" },
-        rotate: -28,
-        debrisType: "panel",
-      },
-      {
-        id: "bh-5",
-        name: "빈 캡슐",
-        description: "기록만 남기고 사라진 실험실",
-        downloads: [],
-        size: 22,
-        position: { x: "20%", y: "30%" },
-        rotate: 8,
-        debrisType: "capsule",
-      },
+      { id: "bh-2", name: "끊어진 위성", description: "전송이 끝난 뒤 궤도만 남은 조각", downloads: [], size: 24, position: { x: "58%", y: "22%" }, rotate: 18, debrisType: "satellite" },
+      { id: "bh-3", name: "식은 추진체", description: "다시 켜지지 않는 작은 엔진", downloads: [], size: 20, position: { x: "18%", y: "34%" }, rotate: 34, debrisType: "booster" },
+      { id: "bh-4", name: "부서진 패널", description: "빛을 반사하지 못하는 낡은 금속판", downloads: [], size: 28, position: { x: "64%", y: "18%" }, rotate: -28, debrisType: "panel" },
+      { id: "bh-5", name: "빈 캡슐", description: "기록만 남기고 사라진 실험실", downloads: [], size: 22, position: { x: "20%", y: "30%" }, rotate: 8, debrisType: "capsule" },
     ],
   },
 ];

@@ -43,7 +43,11 @@ homepage/
 │       ├── CardSide.tsx        # 카드 좌우 배치 유틸
 │       └── SectionShell.tsx    # 섹션 공통 쉘 (간격, z-index)
 ├── data/
-│   └── galaxies.ts             # 은하 3개 + 소속 오브젝트 정적 데이터
+│   ├── apps.ts                 # 생성 앱 레지스트리 정규화·조회
+│   ├── apps.generated.ts       # shipping.yml에서 생성한 공개 앱 사실
+│   └── galaxies.ts             # 은하·오브젝트의 시각 배치와 앱 레지스트리 join
+├── scripts/
+│   └── sync-apps.mjs           # 로컬 shipping.yml → apps.generated.ts 동기화
 ├── types/
 │   ├── app.ts                  # Platform, PlanetStyle, DownloadLink, AppMeta
 │   └── galaxy.ts               # Galaxy, GalaxyKind, GalaxyBackground, *Object 타입
@@ -119,7 +123,9 @@ page.tsx (Server)
 
 ```
 빌드 타임
-  data/galaxies.ts → page.tsx에서 import → GalaxyExplorer에 props 전달
+  ../../0.shipping/*/shipping.yml → scripts/sync-apps.mjs → data/apps.generated.ts
+  → data/apps.ts (공개 앱 레지스트리) → data/galaxies.ts (시각 배치와 join)
+  → page.tsx에서 import → GalaxyExplorer에 props 전달
   → 각 Galaxy 컴포넌트가 종류별 섹션 렌더링 → 정적 HTML 생성
 
 런타임
@@ -130,6 +136,16 @@ page.tsx (Server)
   ├── localStorage: 마지막 은하 인덱스 저장/복원
   └── AdminEditModal: /api/tmt 인증/저장 → GitHub data/tmt.json 갱신 → contentOverrides로 즉시 반영
 ```
+
+## 앱 레지스트리
+
+`shipping.yml` v2가 앱 이름, 공개 배포 링크, 최소 OS, 상태, 개인정보·지원 URL, GitHub 신고
+템플릿의 유일한 원천이다. `scripts/sync-apps.mjs`는 로컬에서만 실행하며 원격 fetch 없이
+`data/apps.generated.ts`를 만든다. 생성 산출물에는 bundle ID, 저장소명, 로컬 경로를 넣지 않는다.
+
+`data/apps.ts`는 생성 데이터를 정규화하고, `data/galaxies.ts`는 행성·운석의 색·크기·배치 같은
+시각 정보만 가진다. 두 데이터는 공개 `app.id`로 join한다. 앱 상세의 GitHub 신고 링크와
+`app/sitemap.ts`의 앱별 개인정보·지원 페이지도 이 레지스트리에서 파생한다.
 
 ## 앱 폐지 처리 패턴
 

@@ -23,7 +23,7 @@ export default function AsteroidSection({ obj, index, overlap, onOpen }: Props) 
     position: { x: isEven ? "60%" : "14%", y: obj.position.y },
   };
 
-  const isApp = !!obj.downloads?.length;
+  const isApp = Boolean(obj.reportUrl || obj.downloads?.length);
   const override = isApp ? tmt[obj.id] : undefined;
   const displayName = override?.name ?? obj.name;
   const displayDesc = override?.description ?? obj.description ?? obj.hint;
@@ -39,6 +39,7 @@ export default function AsteroidSection({ obj, index, overlap, onOpen }: Props) 
           meta={obj.meta}
           comingSoon={!isApp}
           hasBgraw={!!obj.bgrawUrl}
+          reportUrl={obj.reportUrl}
         >
           {isApp && obj.downloads && (
             <DownloadButtons downloads={obj.downloads} />

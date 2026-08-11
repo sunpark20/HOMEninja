@@ -56,6 +56,7 @@ export default function PlanetSection({
           retiredImage={obj.retiredImage}
           macOnly={obj.macOnly}
           hasBgraw={!!obj.bgrawUrl}
+          reportUrl={obj.reportUrl}
         >
           {obj.downloads.length > 0 && (
             <DownloadButtons downloads={obj.downloads} />

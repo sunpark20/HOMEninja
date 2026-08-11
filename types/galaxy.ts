@@ -28,6 +28,7 @@ export type PlanetObject = {
   retiredImage?: string;
   macOnly?: boolean;
   bgrawUrl?: string;
+  reportUrl?: string;
   moons?: MoonLink[];
 };
 
@@ -39,6 +40,7 @@ export type AsteroidObject = {
   meta?: AppMeta;
   downloads?: DownloadLink[];
   bgrawUrl?: string;
+  reportUrl?: string;
   moons?: MoonLink[];
   size: number;
   position: { x: string; y: string };
@@ -69,6 +71,7 @@ export type BlackHoleObject = {
   retiredLabel?: string;
   retiredImage?: string;
   bgrawUrl?: string;
+  reportUrl?: string;
   moons?: MoonLink[];
 };
 

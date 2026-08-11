@@ -10,7 +10,7 @@ export default function NotFound() {
         404
       </h1>
       <p className="mt-4 text-lg" style={{ color: "var(--c-secondary)" }}>
-        우주에서 길을 잃었습니다
+        앱마을에서 길을 잃었습니다
       </p>
       <Link
         href="/"

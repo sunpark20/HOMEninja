@@ -170,8 +170,8 @@ export const generatedApps: AppRegistryEntry[] = [
       }
     ],
     "web": {
-      "privacy": null,
-      "support": null
+      "privacy": "https://homeninja.vercel.app/privacy/gnomon",
+      "support": "https://homeninja.vercel.app/support/gnomon"
     },
     "reporting": {
       "template": "gnomon-bug.yml",

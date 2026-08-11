@@ -72,5 +72,10 @@ test("shipping manifests, errorreport apps.json, and homepage registry agree", (
     report_url: app.reporting.url,
   }));
 
+  for (const app of comparableHomepageApps) {
+    assert.match(app.web.privacy, /^https:\/\//, `${app.id} privacy URL`);
+    assert.match(app.web.support, /^https:\/\//, `${app.id} support URL`);
+  }
+
   assert.deepEqual(errorReportApps.apps, comparableHomepageApps);
 });

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
@@ -27,14 +27,6 @@ test("Next output tracing is pinned to this project root", () => {
   assert.match(config, /fileURLToPath\(import\.meta\.url\)/);
 });
 
-test("moon shadow alpha is emitted through an OKLCH alpha helper", () => {
-  const planet = read("components/Planet.tsx");
-
-  assert.match(planet, /function withAlpha/);
-  assert.match(planet, /withAlpha\(moon\.colors\[1\], 0\.3\)/);
-  assert.doesNotMatch(planet, /\$\{moon\.colors\[1\]\} \/ 0\.3\)/);
-});
-
 test("TMT content keeps the normalized API shape", () => {
   const tmt = readJson("data/tmt.json");
 
@@ -54,50 +46,72 @@ test("TMT content keeps the normalized API shape", () => {
   }
 });
 
-test("retired Jeju app lives in the black-hole galaxy", () => {
-  const galaxies = read("data/galaxies.ts");
-
-  assert.match(galaxies, /kind: "blackholes"/);
-  assert.match(galaxies, /starDensity: 0/);
-  assert.match(galaxies, /id: "jeju-delivery"/);
-  assert.doesNotMatch(
-    galaxies,
-    /id: "solar-system"[\s\S]*id: "jeju-delivery"[\s\S]*id: "asteroid-field"/,
-  );
-});
-
-test("Century Iris and Gnomon are linked as friend planets", () => {
-  const galaxies = read("data/galaxies.ts");
-
-  assert.match(galaxies, /planetApp\("gnomon",[\s\S]*targetId: "centuryiris"/);
-  assert.match(galaxies, /planetApp\("centuryiris",[\s\S]*targetId: "gnomon"/);
-  assert.match(galaxies, /kind: "planet"/);
-});
-
-test("public app registry hides private source identifiers", () => {
-  const apps = read("data/apps.generated.ts");
-
-  assert.match(apps, /"id": "yt-bulk-downloader"[\s\S]*"displayName": "YT Chita"/);
-  assert.match(apps, /Windows 10·11 64-bit/);
-  assert.match(apps, /YT-Chita\/releases\/latest/);
-  assert.match(apps, /https:\/\/sunpark20\.github\.io\/YT-Chita\//);
-  assert.doesNotMatch(apps, /jangbogo|restlocktimer|ytninza|YT-Chita-source-archive/i);
-});
-
-test("integrated privacy page reflects current ytninza and SnapCart data flows", () => {
-  const privacy = read("app/privacy/page.tsx");
-
-  assert.match(privacy, /Google Apps Script/);
-  assert.match(privacy, /latest 50 log lines/);
-  assert.match(privacy, /Apple Vision performs OCR on-device/);
-  assert.match(privacy, /Google Gemini/);
-  assert.match(privacy, /sent to Groq for/);
-  assert.doesNotMatch(privacy, /external AI service \(OpenAI/);
-});
-
-test("site contact email matches the published product contact", () => {
+test("homepage is the app-village entry point", () => {
+  const page = read("app/page.tsx");
+  const explorer = read("components/VillageExplorer.tsx");
   const layout = read("app/layout.tsx");
 
-  assert.match(layout, /mailto:coastguard2681@gmail\.com/);
-  assert.doesNotMatch(layout, /mailto:sun\.park20@gmail\.com/);
+  assert.match(page, /VillageExplorer/);
+  assert.match(explorer, /localStorage\.setItem\("appvillage\.resident"/);
+  assert.match(explorer, /name.*animal.*device/s);
+  assert.doesNotMatch(explorer, /email|mailto:/i);
+  assert.doesNotMatch(layout, /mailto:|coastguard2681@gmail\.com/);
+  assert.match(layout, /모여봐 앱마을/);
+});
+
+test("visual presentation is separate and covers every public app", () => {
+  const generated = read("data/apps.generated.ts");
+  const visuals = read("data/village-visuals.ts");
+
+  const appIds = [...generated.matchAll(/\n    "id": "([^"]+)"/g)].map(
+    (match) => match[1],
+  );
+  const visualIds = [...visuals.matchAll(/^\s{2,}(?:"([^"]+)"|([a-z][\w-]*)):\s*\{/gm)].map(
+    (match) => match[1] ?? match[2],
+  );
+
+  assert.equal(appIds.length, 10);
+  assert.deepEqual([...visualIds].sort(), [...appIds].sort());
+  assert.match(visuals, /tree: "mac"/);
+  assert.match(visuals, /tree: "iphone"/);
+  assert.match(visuals, /id: "jeju-delivery"/);
+  assert.match(visuals, /description: "이제는 그루터기에서 조용히 쉬고 있어요\."/);
+});
+
+test("retired source and components are removed", () => {
+  const retiredPaths = [
+    "data/galaxies.ts",
+    "types/galaxy.ts",
+    "components/GalaxyExplorer.tsx",
+    "components/StarfieldV2.tsx",
+    "components/Hyperspace.tsx",
+    "components/galaxy/Galaxy.tsx",
+    "public/black-hole.svg",
+  ];
+
+  for (const path of retiredPaths) assert.equal(existsSync(new URL(path, root)), false, path);
+});
+
+test("homepage stays self-hosted and sky-only", () => {
+  const css = read("app/globals.css");
+  const explorer = read("components/VillageExplorer.tsx");
+  const icon = read("components/VillageIcon.tsx");
+
+  assert.doesNotMatch(css, /backdrop-filter|gradient-text|fonts\.googleapis|jsdelivr|iconify|gsap/i);
+  assert.doesNotMatch(explorer, /api\.iconify|jsdelivr|fonts\.googleapis|gsap/i);
+  assert.match(css, /--v-sky/);
+  assert.match(icon, /\"wind\"/);
+  assert.match(icon, /\"download\"/);
+});
+
+test("legal contact exceptions stay on legal pages only", () => {
+  const layout = read("app/layout.tsx");
+  const village = read("components/VillageExplorer.tsx");
+  const support = read("app/support/earth/page.tsx");
+  const privacy = read("app/privacy/earth/page.tsx");
+
+  assert.doesNotMatch(layout, /coastguard2681@gmail\.com|mailto:/);
+  assert.doesNotMatch(village, /coastguard2681@gmail\.com|mailto:/);
+  assert.match(support, /coastguard2681@gmail\.com/);
+  assert.match(privacy, /coastguard2681@gmail\.com/);
 });

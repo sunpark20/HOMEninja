@@ -27,6 +27,7 @@ MVP 속도 최우선. 외부 의존성 최소화. CSS + Canvas로 해결 가능�
 ---
 
 ### ADR-002: CSS gradient 행성 (이미지 파일 대신)
+> Superseded by ADR-021. 보존된 과거 결정이며 현재 공개 UI에는 적용하지 않는다.
 **결정**: 행성 그래픽을 radial-gradient + box-shadow로 CSS만으로 생성
 **이유**:
 - 외부 이미지 의존 없음 → 로딩 속도 최고, 네트워크 요청 0
@@ -66,6 +67,7 @@ MVP 속도 최우선. 외부 의존성 최소화. CSS + Canvas로 해결 가능�
 ---
 
 ### ADR-003: Canvas 별 배경 (CSS/DOM 대신)
+> Superseded by ADR-021. 보존된 과거 결정이며 현재 공개 UI에는 적용하지 않는다.
 **결정**: HTML Canvas 2D로 별 배경을 렌더링
 **이유**:
 - 수백 개의 별을 개별 DOM 요소로 만들면 layout/paint 비용이 큼
@@ -334,6 +336,7 @@ MVP 속도 최우선. 외부 의존성 최소화. CSS + Canvas로 해결 가능�
 ---
 
 ### ADR-017: 멀티 은하 시스템 (v2)
+> Superseded by ADR-021. 보존된 과거 결정이며 현재 공개 UI에는 적용하지 않는다.
 **결정**: 단일 스크롤 페이지 → 3개 은하(태양계/운석지대/성운) 전환 구조로 변경
 **이유**:
 - 앱이 4개로 늘고 개발 중/아이디어 단계 앱도 표현해야 함
@@ -351,6 +354,7 @@ MVP 속도 최우선. 외부 의존성 최소화. CSS + Canvas로 해결 가능�
 ---
 
 ### ADR-018: 은하별 배경 차별화
+> Superseded by ADR-021. 보존된 과거 결정이며 현재 공개 UI에는 적용하지 않는다.
 **결정**: 각 은하에 고유한 시각적 분위기 부여 (tint, haze, bands)
 **이유**:
 - 은하 전환 시 "다른 공간에 왔다"는 느낌을 즉시 전달
@@ -365,6 +369,7 @@ MVP 속도 최우선. 외부 의존성 최소화. CSS + Canvas로 해결 가능�
 ---
 
 ### ADR-019: 렌즈플레어 / 유성 랜덤화
+> Superseded by ADR-021. 보존된 과거 결정이며 현재 공개 UI에는 적용하지 않는다.
 **결정**: CSS 고정 애니메이션 → JS 기반 완전 랜덤으로 전환
 **이유**:
 - CSS 고정 경로는 반복 시청 시 부자연스러움
@@ -378,6 +383,7 @@ MVP 속도 최우선. 외부 의존성 최소화. CSS + Canvas로 해결 가능�
 ---
 
 ### ADR-020: 토스 QR 후원 (EarthZoom)
+> Superseded by ADR-021. 보존된 과거 결정이며 현재 공개 UI에는 적용하지 않는다.
 **결정**: 지구 버튼 → 6단계 줌인 → 토스 QR 후원 카드
 **이유**:
 - 후원 기능을 재미있는 인터랙션으로 제공 (지구→우리집 줌인)
@@ -389,3 +395,41 @@ MVP 속도 최우선. 외부 의존성 최소화. CSS + Canvas로 해결 가능�
 - EarthZoom.tsx: ZOOM_STAGES 6단계, SVG viewBox 전환으로 줌인 시뮬레이션
 - HousePanel: 마지막 단계에 토스 QR 240px + 안내 텍스트
 - ESC, 닫기 버튼, 방향키, progress dots 지원
+
+---
+
+### ADR-021: 우주 포트폴리오를 앱마을 카탈로그로 전환
+
+**상태**: Accepted · 2026-08-12
+
+**결정**: 공개 홈페이지를 밝은 sky 팔레트의 「모여봐 앱마을」로 교체한다.
+앱은 Mac/iPhone 나무의 잎으로 표현하고, 퇴역 앱은 그루터기, TMT는 마을
+게시판에 둔다. 주민 개인화는 이름·동물·기기만 `localStorage`에 저장하며
+이메일 필드와 이메일 신고 경로를 두지 않는다.
+
+**단일 원천**: 앱의 공개 사실은 각 앱 저장소의 `shipping.yml`에서
+`scripts/sync-apps.mjs`로 `data/apps.generated.ts`를 만든다. 이 생성 레지스트리는
+홈 화면, 상세 모달, 사이트맵의 링크와 errorreport 생성기의 apps.json/Issue Form이
+공유한다. 잎 색·나무 배치·이니셜은 `data/village-visuals.ts`에 분리한다.
+
+**애니메이션**: 외부 CDN과 GSAP를 사용하지 않는다. 나무 흔들기와 잎 착지는
+Web Animations API 또는 CSS로 구현하고 `prefers-reduced-motion`에서는 정보와
+CTA를 숨기지 않는다. 착지 반동은 상호작용 의미가 있는 유일한 easing 예외다.
+
+**자산과 폰트**: Fluent Emoji SVG는 `public/village/`에 자체 호스팅하고 필요한
+아이콘은 `VillageIcon` 인라인 SVG로 유지한다. Jua/Gothic A1은 `next/font`로
+빌드 시 포함한다. 런타임 외부 요청은 0이다.
+
+**모바일**: 320px 이상 세로 스택을 기준으로 설계하고 375px, 768px, 1440px에서
+가로 스크롤이 없어야 한다. 잎은 흔들기 전부터 모두 보여 발견성과 reduced-motion
+접근성을 보장한다.
+
+**대체된 결정**: ADR-002, ADR-003, ADR-017, ADR-018, ADR-019, ADR-020은
+이 결정으로 superseded 되었다. ADR-001, ADR-004, ADR-005, ADR-007,
+ADR-008, ADR-010, ADR-014, ADR-015, ADR-016의 유효한 원칙은 유지하되,
+`data/apps.ts`를 shipping 생성 계층으로 확장하고 404/법적 페이지의 문구는
+현재 앱마을 구현에 맞춘다.
+
+**예외**: 간판·주요 버튼의 2색 면 채우기와 잎 착지 반동만 UI 금지 목록의
+문서화된 예외다. gradient-text, glassmorphism, neon glow, 외부 CDN은 계속
+금지한다.

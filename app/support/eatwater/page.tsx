@@ -48,7 +48,7 @@ export default function EatWaterSupport() {
               문제나 제안은{" "}
               <a
                 href="mailto:coastguard2681@gmail.com?subject=%EB%AC%BC%ED%95%9C%EC%9E%94%20%EB%AC%B8%EC%9D%98"
-                className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
               >
                 coastguard2681@gmail.com
               </a>
@@ -79,14 +79,14 @@ export default function EatWaterSupport() {
         <div className="pt-4 flex flex-wrap gap-4">
           <Link
             href="/"
-            className="text-sm transition-colors duration-200 hover:text-white/70"
+            className="text-sm transition-colors duration-200 hover:text-[var(--c-heading)]"
             style={{ color: "var(--c-dim)" }}
           >
             &larr; 홈으로 돌아가기
           </Link>
           <Link
             href="/privacy/eatwater"
-            className="text-sm transition-colors duration-200 hover:text-white/70"
+            className="text-sm transition-colors duration-200 hover:text-[var(--c-heading)]"
             style={{ color: "var(--c-dim)" }}
           >
             개인정보처리방침

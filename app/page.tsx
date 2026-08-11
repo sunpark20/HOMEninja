@@ -1,6 +1,5 @@
-import { galaxies } from "@/data/galaxies";
-import GalaxyExplorer from "@/components/GalaxyExplorer";
+import VillageExplorer from "@/components/VillageExplorer";
 
 export default function Home() {
-  return <GalaxyExplorer galaxies={galaxies} />;
+  return <VillageExplorer />;
 }

@@ -100,7 +100,7 @@ export default function EatWaterPrivacy() {
               개인정보 관련 문의는{" "}
               <a
                 href="mailto:coastguard2681@gmail.com"
-                className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
               >
                 coastguard2681@gmail.com
               </a>
@@ -193,7 +193,7 @@ export default function EatWaterPrivacy() {
               For privacy inquiries, contact{" "}
               <a
                 href="mailto:coastguard2681@gmail.com"
-                className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
               >
                 coastguard2681@gmail.com
               </a>
@@ -209,14 +209,14 @@ export default function EatWaterPrivacy() {
         <div className="pt-4 flex flex-wrap gap-4">
           <Link
             href="/"
-            className="text-sm transition-colors duration-200 hover:text-white/70"
+            className="text-sm transition-colors duration-200 hover:text-[var(--c-heading)]"
             style={{ color: "var(--c-dim)" }}
           >
             &larr; 홈으로 돌아가기
           </Link>
           <Link
             href="/support/eatwater"
-            className="text-sm transition-colors duration-200 hover:text-white/70"
+            className="text-sm transition-colors duration-200 hover:text-[var(--c-heading)]"
             style={{ color: "var(--c-dim)" }}
           >
             물한잔 지원

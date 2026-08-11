@@ -98,7 +98,7 @@ export default function SpamCall070Privacy() {
               For privacy-related inquiries, contact{" "}
               <a
                 href="mailto:coastguard2681@gmail.com"
-                className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
               >
                 coastguard2681@gmail.com
               </a>
@@ -190,7 +190,7 @@ export default function SpamCall070Privacy() {
               개인정보 관련 문의는{" "}
               <a
                 href="mailto:coastguard2681@gmail.com"
-                className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
               >
                 coastguard2681@gmail.com
               </a>
@@ -206,7 +206,7 @@ export default function SpamCall070Privacy() {
         <div className="pt-4">
           <Link
             href="/"
-            className="text-sm transition-colors duration-200 hover:text-white/70"
+            className="text-sm transition-colors duration-200 hover:text-[var(--c-heading)]"
             style={{ color: "var(--c-dim)" }}
           >
             &larr; 홈으로 돌아가기

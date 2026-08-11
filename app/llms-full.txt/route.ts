@@ -14,7 +14,7 @@ export function GET() {
   const sections: string[] = [
     "# 닌자거북의홈 — 전체 앱 상세 정보",
     "> 인디 개발자 sunguk park의 앱 포트폴리오",
-    "> https://ninjaturtle.win",
+    "> https://homeninja.vercel.app",
     "",
   ];
 

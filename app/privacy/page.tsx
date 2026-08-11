@@ -88,7 +88,7 @@ export default function Privacy() {
               For privacy-related inquiries, contact{" "}
               <a
                 href="mailto:coastguard2681@gmail.com"
-                className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
               >
                 coastguard2681@gmail.com
               </a>
@@ -165,7 +165,7 @@ export default function Privacy() {
                 the{" "}
                 <a
                   href="https://sunpark20.github.io/YT-Chita/?lang=en#privacy"
-                  className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                  className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
                 >
                   product page
                 </a>
@@ -242,7 +242,7 @@ export default function Privacy() {
               개인정보 관련 문의는{" "}
               <a
                 href="mailto:coastguard2681@gmail.com"
-                className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
               >
                 coastguard2681@gmail.com
               </a>
@@ -316,7 +316,7 @@ export default function Privacy() {
                 전체 개인정보처리방침, 이용약관 및 저작권 정책은{" "}
                 <a
                   href="https://sunpark20.github.io/YT-Chita/?lang=ko#privacy"
-                  className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                  className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
                 >
                   ytninza 제품 페이지
                 </a>
@@ -329,7 +329,7 @@ export default function Privacy() {
         <div className="pt-4">
           <Link
             href="/"
-            className="text-sm transition-colors duration-200 hover:text-white/70"
+            className="text-sm transition-colors duration-200 hover:text-[var(--c-heading)]"
             style={{ color: "var(--c-dim)" }}
           >
             &larr; 홈으로 돌아가기

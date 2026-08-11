@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="앱마을">
+  <rect width="58" height="58" x="3" y="3" rx="10" fill="oklch(0.64 0.16 42)" stroke="oklch(0.47 0.13 42)" stroke-width="4"/>
+  <path d="M18 29 32 17l14 12v17H18z" fill="oklch(0.96 0.04 90)" stroke="oklch(0.39 0.08 55)" stroke-width="3"/>
+  <path d="M27 46V35h10v11M13 29h38" fill="none" stroke="oklch(0.39 0.08 55)" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="32" cy="26" r="3" fill="oklch(0.64 0.16 42)"/>
+</svg>

@@ -1,49 +1,57 @@
 # 프로젝트: 닌자거북의홈 (HOMEninja)
 
-## 기술 스택
-- Next.js 15 (App Router, SSG)
-- TypeScript strict mode
-- Tailwind CSS v4
-- Vercel 배포 (무료)
+## 역할
 
-## 아키텍처 규칙
-- CRITICAL: 기본 정적 사이트 + 관리용 API Route 최소한으로 사용. 앱 데이터는 `data/`에 JSON/TS로 관리, TMT는 `/api/tmt`를 통해 GitHub API로 실시간 수정 가능.
-- CRITICAL: 외부 라이브러리 최소화. 우주 배경(별, 행성)은 CSS + Canvas로만 구현. Three.js 등 3D 라이브러리 금지.
-- CRITICAL: Impeccable 스킬(`.claude/skills/impeccable/`)의 디자인 가이드라인을 따른다. 특히 절대 금지 항목(gradient-text, border-left 스트라이프) 위반 금지.
-- Server Components 기본. Canvas/스크롤 이벤트가 필요한 곳만 Client Component ("use client").
-- 컴포넌트는 `components/`, 타입은 컴포넌트와 함께 또는 `types/`, 앱 데이터는 `data/`에 배치.
+게시판에서 유입된 방문자가 10개 앱을 빠르게 이해하고, 자신의 플랫폼에 맞는
+다운로드 링크와 GitHub 신고 링크를 찾는 공개 앱 카탈로그다. 제품 표면은 밝은
+낮의 손그림 마을인 「모여봐 앱마을」이다.
+
+## 기술 규칙
+
+- Next.js 15 App Router, TypeScript strict mode, Tailwind CSS v4.
+- 공개 라우트는 정적 우선. `/api/tmt`만 관리자 편집을 위한 Serverless API다.
+- `0.shipping/*/shipping.yml` → `scripts/sync-apps.mjs` →
+  `data/apps.generated.ts`가 유일한 앱 정보 라인이다.
+- `data/apps.ts`는 생성 레지스트리의 조회 계층이고,
+  `data/village-visuals.ts`는 앱 id로 결합하는 표현 계층이다.
+- 새 의존성, 외부 런타임 요청, Three.js, GSAP를 추가하지 않는다.
+- 폰트는 `next/font`로 빌드 타임 self-host하고 Fluent Emoji는
+  `public/village/`에 포함한다.
+
+## 제품 규칙
+
+- Mac 나무와 iPhone 나무에 앱 잎을 나눠 보여주고, 미출시 앱도 항상 목록에
+  표시한다. `나무 흔들기`는 발견을 돕는 보조 동작이지 유일한 탐색 수단이 아니다.
+- 제주택배비지원은 다운로드 카드가 아니라 그루터기에서 퇴역 상태로 보여준다.
+- 주민 신청은 선택 사항이며 이름·동물·기기만 로컬 저장한다. 이메일 필드와
+  이메일 신고 경로는 없다.
+- TMT 게시판과 관리자 편집은 마을 게시판에 유지한다.
+- 앱 상세 정보는 생성 레지스트리에서만 읽고, 다운로드·신고·privacy·support
+  링크를 임의로 복제하지 않는다.
+- 법적 페이지에 필요한 연락처를 제외하고 이메일 주소와 `mailto:`를 추가하지
+  않는다.
 
 ## 디자인 규칙
-- 다크 모드 고정 (우주 테마)
-- 색상은 OKLCH 사용. 순수 #000, #fff 금지.
-- 모바일 퍼스트. 게시판에서 유입되는 모바일 사용자가 주 대상.
-- 디자인 상세는 `docs/UI_GUIDE.md` 참조.
 
-## 디자인 금지사항 (AI 슬롭 방지)
-- CRITICAL: gradient-text (background-clip: text + gradient 배경) 금지. 텍스트는 단색만 사용.
-- CRITICAL: border-left/right > 1px 컬러 스트라이프 금지. 카드, 리스트, 콜아웃, 알림 모두 해당.
-- CRITICAL: backdrop-filter: blur() (glassmorphism) 금지.
-- CRITICAL: box-shadow 글로우 애니메이션 (네온 이펙트) 금지.
-- CRITICAL: 보라/인디고/시안 그라디언트 금지. 우주 테마여도 AI 클리셰 색상은 피한다.
-- CRITICAL: 배경 gradient orb (blur-3xl 원형 장식) 금지.
-- CRITICAL: bounce/elastic 이징 금지. ease-out-quart 이상의 자연스러운 감속 사용.
-- 전체 목록: `docs/UI_GUIDE.md`의 "AI 슬롭 안티패턴" 표 참조.
+- sky 팔레트 하나만 사용한다. 색상은 OKLCH 시맨틱 토큰으로 정의한다.
+- Jua는 제목, Gothic A1은 본문, 메타는 시스템 모노스페이스를 사용한다.
+- 두꺼운 종이 테두리, 하드 섀도, 작은 회전으로 손그림 질감을 만든다.
+- 모바일 세로 스택을 기준으로 하고 320px 이상에서 가로 스크롤이 없어야 한다.
+- gradient-text, 좌우 컬러 스트라이프, backdrop blur, 네온 글로우, 흐린 orb,
+  카드 중첩, 보라/인디고/시안 클리셰를 금지한다.
+- 의미 있는 착지 반동과 간판/버튼의 면 채우기만 문서화된 예외로 허용한다.
+- `prefers-reduced-motion: reduce`에서도 10개 앱, 다운로드, 신고 링크가
+  모두 즉시 보인다.
 
-## 개발 프로세스
-- 커밋 메시지는 conventional commits 형식을 따를 것 (feat:, fix:, docs:, refactor:)
+## 검증
 
-## 빌드 & 검증
-- Stop hook이 매 작업 종료 시 `npm run lint && npm run build && npm run test`를 자동 실행한다.
-- 이 세 명령이 모두 통과해야 작업이 완료된 것으로 간주한다.
+변경 후 다음 세 명령을 실행한다.
 
-## 명령어
-npm run dev      # 개발 서버
-npm run build    # 프로덕션 빌드 (SSG)
-npm run lint     # ESLint
-npm run start    # 프로덕션 서버 로컬 테스트
+```bash
+npm run lint
+npm run build
+npm run test
+```
 
-## 참조 문서
-- `docs/PRD.md` — 제품 요구사항
-- `docs/ARCHITECTURE.md` — 아키텍처 및 디렉토리 구조
-- `docs/ADR.md` — 아키텍처 결정 기록
-- `docs/UI_GUIDE.md` — UI 디자인 가이드 (색상, 타이포, 컴포넌트, 애니메이션)
+광범위한 UI 변경은 375px, 768px, 1440px에서 렌더와 가로 스크롤을 확인하고,
+Playwright 스크린샷을 `output/playwright/` 아래에 저장한다.

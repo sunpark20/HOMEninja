@@ -4,7 +4,7 @@ export const dynamic = "force-static";
 
 export function GET() {
   const lines = [
-    "# 닌자거북의홈 (ninjaturtle.win)",
+    "# 닌자거북의홈 · 모여봐 앱마을",
     "> 인디 개발자 sunguk park의 앱 포트폴리오",
     "",
     "## Apps",
@@ -16,7 +16,7 @@ export function GET() {
     "- [llms-full.txt](/llms-full.txt): 모든 앱의 상세 배경 정보",
     "",
     "## Links",
-    "- Homepage: https://ninjaturtle.win",
+    "- Homepage: https://homeninja.vercel.app",
     "- GitHub: https://github.com/sunpark20",
   ];
 

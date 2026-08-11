@@ -43,9 +43,9 @@ export const generatedApps: AppRegistryEntry[] = [
       "ios"
     ],
     "minOS": "iOS 16.0+",
-    "version": "1.0",
+    "version": "1.1",
     "status": "released",
-    "updatedAt": "2026.04",
+    "updatedAt": "2026.08",
     "downloads": [
       {
         "platform": "ios",
@@ -109,7 +109,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "minOS": "iOS 17.0+",
     "version": "1.0.0",
     "status": "unreleased",
-    "updatedAt": null,
+    "updatedAt": "2026.08",
     "downloads": [],
     "web": {
       "privacy": "https://homeninja.vercel.app/privacy/earth",

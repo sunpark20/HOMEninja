@@ -292,7 +292,7 @@ export const generatedApps: AppRegistryEntry[] = [
       "windows"
     ],
     "minOS": "macOS 10.15+, Windows 10·11 64-bit",
-    "version": "1.5.0",
+    "version": "1.5.2",
     "status": "released",
     "updatedAt": "2026.08",
     "downloads": [

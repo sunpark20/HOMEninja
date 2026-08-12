@@ -126,14 +126,18 @@ function V5Tree({
   appsForTree,
   falls,
   onOpen,
+  onReset,
   onShake,
+  platformRibbon,
   shaking,
   tree,
 }: {
   appsForTree: AppRegistryEntry[];
   falls: Record<string, FallState>;
   onOpen: (app: AppRegistryEntry) => void;
+  onReset?: () => void;
   onShake: () => void;
+  platformRibbon?: string;
   shaking: boolean;
   tree: VillageTree;
 }) {
@@ -143,6 +147,11 @@ function V5Tree({
       <div className="v5-tree-leaves">
         {appsForTree.map((app) => <V5Leaf app={app} fall={falls[app.id]} key={app.id} onOpen={onOpen} />)}
       </div>
+      <V5PlatformSign ribbon={platformRibbon} type={tree} />
+      <button aria-label={`${tree === "mac" ? "Mac" : "iPhone"} 나무 밑동 흔들기`} className={`v5-trunk-hit v5-trunk-hit-${tree}`} onClick={onShake} type="button">
+        {tree === "mac" && <span className="v5-shake-hint"><VillageIcon name="wind" size={15} /><span>나무 흔들기</span></span>}
+      </button>
+      {tree === "mac" && onReset && <button aria-label="잎 다시 매달기" className="v5-reset-button" onClick={onReset} type="button"><VillageIcon name="refresh" size={13} /><span>다시 매달기</span></button>}
     </div>
   );
 }
@@ -297,7 +306,7 @@ function StoryBoard({ onEdit, overrides }: { onEdit: (app: AppRegistryEntry) => 
     <section className="story-board" id="tmt-board">
       <div className="board-heading"><div><p className="eyebrow">마을 게시판</p><h2>만들며 적은 이야기</h2></div><VillageIcon name="board" size={27} /></div>
       <p className="board-intro">앱을 만들며 남긴 Too Much Talk을 마을 게시판으로 옮겼어요.</p>
-      <div className="story-list">{stories.map((app) => { const content = overrides[app.id] ?? tmt[app.id]; return <details className="story-entry" key={app.id}><summary><span className="story-dot" />{app.displayNameKo}<span className="story-count">{content.entries.length}개</span></summary><div className="story-body">{content.entries.map((entry, index) => <p key={`${app.id}-${index}`}>{entry}</p>)}<button className="admin-edit-link" onClick={() => onEdit(app)} type="button">관리자 편집</button></div></details>; })}</div>
+      <div className="story-list">{stories.map((app) => { const content = overrides[app.id] ?? tmt[app.id]; return <details className="story-entry" key={app.id}><summary><span className="story-dot" />{app.displayNameKo}</summary><div className="story-body">{content.entries.map((entry, index) => <p key={`${app.id}-${index}`}>{entry}</p>)}<button className="admin-edit-link" onClick={() => onEdit(app)} type="button">관리자 편집</button></div></details>; })}</div>
     </section>
   );
 }
@@ -307,7 +316,6 @@ export default function VillageExplorer() {
   const timersRef = useRef<number[]>([]);
   const [stageScale, setStageScale] = useState(1);
   const [falls, setFalls] = useState<Record<string, FallState>>({});
-  const [shakeCount, setShakeCount] = useState<Record<VillageTree, number>>({ mac: 0, iphone: 0 });
   const [shaking, setShaking] = useState<VillageTree | null>(null);
   const [selectedApp, setSelectedApp] = useState<AppRegistryEntry | null>(null);
   const [formOpen, setFormOpen] = useState(false);
@@ -371,7 +379,6 @@ export default function VillageExplorer() {
   function shakeTree(tree: VillageTree) {
     if (shaking) return;
     const target = appForTree(tree).find((app) => app.status !== "unreleased" && !falls[app.id]);
-    setShakeCount((current) => ({ ...current, [tree]: current[tree] + 1 }));
     setShaking(tree);
     later(() => {
       setShaking(null);
@@ -421,26 +428,23 @@ export default function VillageExplorer() {
 
           <div className="v5-title-sign"><div className="v5-title-ropes"><span /><span /></div><div className="v5-title-plaque">모여봐 앱마을</div></div>
           <button className="v5-application-button" onClick={() => { setFormDone(false); setFormOpen(true); }} type="button"><VillageIcon name="home" size={19} />{resident ? "신청서 다시 쓰기" : "입주신청서 쓰기"}</button>
-          <div className="v5-instruction"><span>밑동을 누르면 잎이 떨어져요</span><button onClick={resetLeaves} type="button"><VillageIcon name="refresh" size={13} />다시 매달기</button></div>
 
-          <V5Tree appsForTree={appForTree("mac")} falls={falls} onOpen={setSelectedApp} onShake={() => shakeTree("mac")} shaking={shaking === "mac"} tree="mac" />
-          <V5Tree appsForTree={appForTree("iphone")} falls={falls} onOpen={setSelectedApp} onShake={() => shakeTree("iphone")} shaking={shaking === "iphone"} tree="iphone" />
-          <button aria-label="Mac 나무 흔들기" className="v5-shake-button v5-shake-mac" onClick={() => shakeTree("mac")} type="button"><VillageIcon name="wind" size={15} />나무 흔들기</button>
-          <button aria-label="iPhone 나무 흔들기" className="v5-shake-button v5-shake-iphone" onClick={() => shakeTree("iphone")} type="button"><VillageIcon name="wind" size={15} />나무 흔들기</button>
-          <V5PlatformSign type="mac" ribbon={resident && (resident.device === "mac" || resident.device === "both") ? signRibbon : undefined} /><V5PlatformSign type="iphone" ribbon={resident && (resident.device === "iphone" || resident.device === "both") ? signRibbon : undefined} />
+          <V5Tree appsForTree={appForTree("mac")} falls={falls} onOpen={setSelectedApp} onReset={resetLeaves} onShake={() => shakeTree("mac")} platformRibbon={resident && (resident.device === "mac" || resident.device === "both") ? signRibbon : undefined} shaking={shaking === "mac"} tree="mac" />
+          <V5Tree appsForTree={appForTree("iphone")} falls={falls} onOpen={setSelectedApp} onShake={() => shakeTree("iphone")} platformRibbon={resident && (resident.device === "iphone" || resident.device === "both") ? signRibbon : undefined} shaking={shaking === "iphone"} tree="iphone" />
 
-          <div className="v5-house-wrap"><V5House resident={resident} /></div>
-          <V5Mailbox mailOpen={mailOpen} mailRead={mailRead} onToggle={() => { setMailOpen((open) => !open); setMailRead(true); }} resident={resident} />
-          <V5Mascot animal={animal} bubble={bubble} />
+          <div className="v5-ground-characters">
+            <div className="v5-house-wrap"><V5House resident={resident} /></div>
+            <V5Mailbox mailOpen={mailOpen} mailRead={mailRead} onToggle={() => { setMailOpen((open) => !open); setMailRead(true); }} resident={resident} />
+            <V5Mascot animal={animal} bubble={bubble} />
+          </div>
           <div className="v5-grain" />
-          <div className="v5-credit">자연물: Fluent Emoji (MIT) · UI 아이콘: Lucide (ISC) · 앱 아이콘·스크린샷은 placeholder</div>
 
           {selectedApp && <V5Detail app={selectedApp} onClose={() => setSelectedApp(null)} />}
           {formOpen && <div className="v5-overlay v5-form-overlay" onClick={() => { setFormOpen(false); setFormDone(false); }} role="presentation"><section aria-label="앱마을 입주 신청" className="v5-form-modal" onClick={(event) => event.stopPropagation()} role="dialog"><button aria-label="닫기" className="v5-close-button v5-form-close-top" onClick={() => { setFormOpen(false); setFormDone(false); }} type="button"><VillageIcon name="close" size={20} /></button><V5ResidentForm animal={animal} device={device} done={formDone} name={name} onAnimal={setAnimal} onDevice={setDevice} onName={setName} onClose={() => { setFormOpen(false); setFormDone(false); }} onSubmit={submitResident} resident={resident} /></section></div>}
         </div>
       </section>
 
-      <div className="v5-after-scene"><StoryBoard onEdit={setAdminApp} overrides={contentOverrides} /><footer className="village-footer"><span>Made slowly, with useful little things.</span><span><a href="/privacy">개인정보처리방침</a><span aria-hidden="true"> · </span><a href="/support/eatwater">지원</a><span aria-hidden="true"> · </span><a href="/llms.txt">llms.txt</a></span></footer></div>
+      <div className="v5-after-scene"><StoryBoard onEdit={setAdminApp} overrides={contentOverrides} /><footer className="village-footer"><span>Made slowly, with useful little things.</span><span className="village-footer-meta"><span className="village-footer-links"><a href="/privacy">개인정보처리방침</a><span aria-hidden="true"> · </span><a href="/support/eatwater">지원</a><span aria-hidden="true"> · </span><a href="/llms.txt">llms.txt</a></span><span className="village-credit">자연물: Fluent Emoji (MIT) · UI 아이콘: Lucide (ISC) · 앱 아이콘·스크린샷은 placeholder</span></span></footer></div>
       <VillageAdminEditModal obj={adminApp ? { id: adminApp.id, name: adminApp.displayNameKo, description: adminApp.taglineKo } : null} onClose={() => setAdminApp(null)} onSaved={(appId, data) => setContentOverrides((current) => ({ ...current, [appId]: data }))} />
     </div>
   );

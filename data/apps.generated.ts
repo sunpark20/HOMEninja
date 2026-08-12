@@ -11,7 +11,7 @@ export const generatedApps: AppRegistryEntry[] = [
       "macos"
     ],
     "minOS": "macOS 12.0+",
-    "version": "1.9.0",
+    "version": "1.8.1",
     "status": "released",
     "updatedAt": "2026.08",
     "downloads": [
@@ -43,7 +43,7 @@ export const generatedApps: AppRegistryEntry[] = [
       "ios"
     ],
     "minOS": "iOS 16.0+",
-    "version": "1.1",
+    "version": "1.0",
     "status": "released",
     "updatedAt": "2026.08",
     "downloads": [
@@ -75,7 +75,7 @@ export const generatedApps: AppRegistryEntry[] = [
       "macos"
     ],
     "minOS": "macOS 15.0+, Apple Silicon",
-    "version": "1.1",
+    "version": "1.0",
     "status": "released",
     "updatedAt": "2026.08",
     "downloads": [
@@ -191,7 +191,7 @@ export const generatedApps: AppRegistryEntry[] = [
       "android"
     ],
     "minOS": "iOS 17.0+, Android 7.0+",
-    "version": "2.0.1",
+    "version": "1.0",
     "status": "released",
     "updatedAt": "2026.08",
     "downloads": [
@@ -228,7 +228,7 @@ export const generatedApps: AppRegistryEntry[] = [
       "ios"
     ],
     "minOS": "iOS 18.0+",
-    "version": "2.02",
+    "version": "2.01",
     "status": "released",
     "updatedAt": "2026.08",
     "downloads": [
@@ -260,7 +260,7 @@ export const generatedApps: AppRegistryEntry[] = [
       "ios"
     ],
     "minOS": "iOS 16.0+",
-    "version": "1.4",
+    "version": "1.3",
     "status": "released",
     "updatedAt": "2026.08",
     "downloads": [

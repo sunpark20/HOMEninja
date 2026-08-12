@@ -126,7 +126,6 @@ function V5Tree({
   appsForTree,
   falls,
   onOpen,
-  onReset,
   onShake,
   platformRibbon,
   shaking,
@@ -135,7 +134,6 @@ function V5Tree({
   appsForTree: AppRegistryEntry[];
   falls: Record<string, FallState>;
   onOpen: (app: AppRegistryEntry) => void;
-  onReset?: () => void;
   onShake: () => void;
   platformRibbon?: string;
   shaking: boolean;
@@ -151,7 +149,6 @@ function V5Tree({
       <button aria-label={`${tree === "mac" ? "Mac" : "iPhone"} 나무 밑동 흔들기`} className={`v5-trunk-hit v5-trunk-hit-${tree}`} onClick={onShake} type="button">
         {tree === "mac" && <span className="v5-shake-hint"><VillageIcon name="wind" size={15} /><span>나무 흔들기</span></span>}
       </button>
-      {tree === "mac" && onReset && <button aria-label="잎 다시 매달기" className="v5-reset-button" onClick={onReset} type="button"><VillageIcon name="refresh" size={13} /><span>다시 매달기</span></button>}
     </div>
   );
 }
@@ -386,13 +383,6 @@ export default function VillageExplorer() {
     }, 220);
   }
 
-  function resetLeaves() {
-    timersRef.current.forEach((timer) => window.clearTimeout(timer));
-    timersRef.current = [];
-    setFalls({});
-    setShaking(null);
-  }
-
   function submitResident(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const next: Resident = { name: name.trim() || "이웃", animal, device };
@@ -429,7 +419,7 @@ export default function VillageExplorer() {
           <div className="v5-title-sign"><div className="v5-title-ropes"><span /><span /></div><div className="v5-title-plaque">모여봐 앱마을</div></div>
           <button className="v5-application-button" onClick={() => { setFormDone(false); setFormOpen(true); }} type="button"><VillageIcon name="home" size={19} />{resident ? "신청서 다시 쓰기" : "입주신청서 쓰기"}</button>
 
-          <V5Tree appsForTree={appForTree("mac")} falls={falls} onOpen={setSelectedApp} onReset={resetLeaves} onShake={() => shakeTree("mac")} platformRibbon={resident && (resident.device === "mac" || resident.device === "both") ? signRibbon : undefined} shaking={shaking === "mac"} tree="mac" />
+          <V5Tree appsForTree={appForTree("mac")} falls={falls} onOpen={setSelectedApp} onShake={() => shakeTree("mac")} platformRibbon={resident && (resident.device === "mac" || resident.device === "both") ? signRibbon : undefined} shaking={shaking === "mac"} tree="mac" />
           <V5Tree appsForTree={appForTree("iphone")} falls={falls} onOpen={setSelectedApp} onShake={() => shakeTree("iphone")} platformRibbon={resident && (resident.device === "iphone" || resident.device === "both") ? signRibbon : undefined} shaking={shaking === "iphone"} tree="iphone" />
 
           <div className="v5-ground-characters">
@@ -444,7 +434,7 @@ export default function VillageExplorer() {
         </div>
       </section>
 
-      <div className="v5-after-scene"><StoryBoard onEdit={setAdminApp} overrides={contentOverrides} /><footer className="village-footer"><span>Made slowly, with useful little things.</span><span className="village-footer-meta"><span className="village-footer-links"><a href="/privacy">개인정보처리방침</a><span aria-hidden="true"> · </span><a href="/support/eatwater">지원</a><span aria-hidden="true"> · </span><a href="/llms.txt">llms.txt</a></span><span className="village-credit">자연물: Fluent Emoji (MIT) · UI 아이콘: Lucide (ISC) · 앱 아이콘·스크린샷은 placeholder</span></span></footer></div>
+      <div className="v5-after-scene"><StoryBoard onEdit={setAdminApp} overrides={contentOverrides} /><footer className="village-footer"><span>Made slowly, with useful little things.</span><span aria-label="개인정보·지원 및 크레딧" className="village-footer-meta"><span className="village-footer-links"><a href="/privacy">개인정보처리방침</a><span aria-hidden="true"> · </span><a href="/support/eatwater">지원</a></span><span className="village-credit">자연물: Fluent Emoji (MIT) · UI 아이콘: Lucide (ISC) · 앱 아이콘·스크린샷은 placeholder</span></span></footer></div>
       <VillageAdminEditModal obj={adminApp ? { id: adminApp.id, name: adminApp.displayNameKo, description: adminApp.taglineKo } : null} onClose={() => setAdminApp(null)} onSaved={(appId, data) => setContentOverrides((current) => ({ ...current, [appId]: data }))} />
     </div>
   );

@@ -465,8 +465,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .v5-trunk-hit-mac:hover .v5-shake-hint, .v5-trunk-hit-mac:focus-visible .v5-shake-hint { opacity: 1; background: oklch(0.95 0.06 88 / .9); transform: rotate(-2deg) translateY(-3px); }
 .v5-trunk-hit-iphone::after { display: block; width: 18px; height: 18px; margin: 35px auto 0; border: 1px dashed oklch(0.62 0.1 70 / .4); border-radius: 50%; opacity: 0; content: ""; transition: opacity .18s ease; }
 .v5-trunk-hit-iphone:hover::after, .v5-trunk-hit-iphone:focus-visible::after { opacity: 1; }
-.v5-reset-button { position: absolute; top: 456px; left: 318px; z-index: 26; display: inline-flex; align-items: center; gap: 4px; padding: 3px 5px; color: oklch(0.52 0.08 58 / .72); background: transparent; cursor: pointer; font: 10px ui-monospace, Menlo, monospace; opacity: .72; }
-.v5-reset-button:hover, .v5-reset-button:focus-visible { color: oklch(0.43 0.1 48); opacity: 1; }
 .v5-platform-sign { position: absolute; z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 5px; }
 .v5-tree-mac .v5-platform-sign { top: 360px; left: 196px; }.v5-tree-iphone .v5-platform-sign { top: 438px; left: 254px; }
 .v5-ribbon { padding: 4px 10px; border-radius: 11px; color: oklch(0.99 0.01 95); background: oklch(0.61 0.16 40); box-shadow: 0 3px 0 oklch(0.47 0.13 40); font: 600 11px var(--font-body), sans-serif; animation: v5-popin .3s cubic-bezier(.34,1.4,.6,1); }
@@ -532,7 +530,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .v5-leaf { position: relative; top: auto !important; left: auto !important; width: 100%; height: 104px; }.v5-leaf-sway { width: 100%; height: 104px; }.v5-leaf-card { width: min(100%, 180px); height: 104px; margin: 0 auto; }.v5-leaf-copy { max-width: 90%; }
   .v5-tree .v5-platform-sign { position: relative; top: auto; left: auto; margin: 14px auto 0; }
   .v5-trunk-hit-mac { top: 300px; left: 50%; width: 160px; height: 86px; transform: translateX(-50%); }.v5-trunk-hit-iphone { top: 360px; left: 50%; width: 180px; height: 100px; transform: translateX(-50%); }
-  .v5-shake-hint { font-size: 11px; }.v5-reset-button { position: relative; top: auto; left: auto; display: flex; width: fit-content; margin: 34px auto 0; }
+  .v5-shake-hint { font-size: 11px; }
   .v5-ground-characters { position: relative; inset: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; gap: 8px 12px; width: min(100%, 500px); min-height: 302px; margin: 22px auto 0; }
   .v5-ground-characters .v5-house-wrap { grid-column: 1; grid-row: 1; position: relative; top: auto; left: auto; margin: 0 auto; }
   .v5-ground-characters .v5-mailbox-wrap { grid-column: 2; grid-row: 1; position: relative; top: auto; left: auto; margin: 0 auto; }

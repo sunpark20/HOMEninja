@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "물한잔 개인정보처리방침",
-  description: "물한잔(EatWater) 앱 개인정보처리방침",
+  title: "물을 마시는 새 개인정보처리방침",
+  description: "물을 마시는 새(EatWater) 앱 개인정보처리방침",
 };
 
 export default function EatWaterPrivacy() {
@@ -14,7 +14,7 @@ export default function EatWaterPrivacy() {
           className="text-3xl font-semibold tracking-tight font-[family-name:var(--font-display)]"
           style={{ color: "var(--c-title)" }}
         >
-          물한잔 개인정보처리방침
+          물을 마시는 새 개인정보처리방침
           <span
             className="block text-xl font-normal mt-1"
             style={{ color: "var(--c-dim)" }}
@@ -42,9 +42,9 @@ export default function EatWaterPrivacy() {
               1. 개인정보 수집
             </h2>
             <p>
-              물한잔은 개인정보를 수집하지 않습니다. 계정, 서버, 광고, 제3자
-              분석 도구를 사용하지 않으며 앱에서 입력한 정보를 외부로 전송하지
-              않습니다.
+              물을 마시는 새는 개인정보를 수집하지 않습니다. 계정, 개발자 서버,
+              광고, 제3자 분석 도구를 사용하지 않으며 개발자가 앱에서 입력한
+              정보에 접근하지 않습니다.
             </p>
           </section>
 
@@ -81,11 +81,14 @@ export default function EatWaterPrivacy() {
               className="text-lg font-medium mb-2"
               style={{ color: "var(--c-heading)" }}
             >
-              4. 보관과 삭제
+              4. Apple 건강
             </h2>
             <p>
-              기록은 앱에서 개별 삭제할 수 있습니다. 앱을 삭제하면 iOS가 앱과
-              관련된 로컬 데이터를 제거합니다.
+              Apple 건강 연동은 선택 사항입니다. 연결하면 앱은 수분 기록 쓰기
+              권한만 요청하고, 연결 뒤 새로 남긴 양수 물 기록을 건강 앱에
+              저장합니다. 건강 데이터를 읽거나 가져오지 않으며, 연결 전 기록과
+              권한이 꺼진 동안의 기록을 나중에 보내지 않습니다. 개발자는 건강
+              데이터에 접근하거나 광고, 분석, 데이터 마이닝에 사용하지 않습니다.
             </p>
           </section>
 
@@ -94,7 +97,22 @@ export default function EatWaterPrivacy() {
               className="text-lg font-medium mb-2"
               style={{ color: "var(--c-heading)" }}
             >
-              5. 문의
+              5. 보관과 삭제
+            </h2>
+            <p>
+              기록은 앱에서 개별 삭제할 수 있습니다. 연결된 동안 내보낸 기록을
+              앱에서 삭제하면 앱이 만든 Apple 건강 사본도 삭제를 요청합니다. 앱을
+              삭제하면 iOS가 앱의 로컬 데이터를 제거하지만 이미 건강 앱에 저장된
+              기록은 남을 수 있으며, 사용자가 건강 앱에서 삭제할 수 있습니다.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--c-heading)" }}
+            >
+              6. 문의
             </h2>
             <p>
               개인정보 관련 문의는{" "}
@@ -109,7 +127,7 @@ export default function EatWaterPrivacy() {
           </section>
 
           <p className="text-xs" style={{ color: "var(--c-meta)" }}>
-            시행일: 2026년 7월 15일
+            시행일: 2026년 8월 22일
           </p>
         </div>
 
@@ -135,8 +153,9 @@ export default function EatWaterPrivacy() {
             </h2>
             <p>
               EatWater does not collect personal information. It uses no
-              accounts, servers, advertising, or third-party analytics, and it
-              does not transmit information entered in the app.
+              accounts, developer servers, advertising, or third-party
+              analytics, and the developer cannot access information entered
+              in the app.
             </p>
           </section>
 
@@ -174,11 +193,15 @@ export default function EatWaterPrivacy() {
               className="text-lg font-medium mb-2"
               style={{ color: "var(--c-heading)" }}
             >
-              4. Retention and Deletion
+              4. Apple Health
             </h2>
             <p>
-              Records can be deleted individually in the app. When the app is
-              uninstalled, iOS removes its associated local data.
+              Apple Health integration is optional. If connected, the app
+              requests write access for water only and saves new positive water
+              entries made after connection. It never reads or imports Health
+              data, and it never backfills entries made before connection or
+              while permission was off. The developer cannot access Health data
+              and does not use it for advertising, analytics, or data mining.
             </p>
           </section>
 
@@ -187,7 +210,22 @@ export default function EatWaterPrivacy() {
               className="text-lg font-medium mb-2"
               style={{ color: "var(--c-heading)" }}
             >
-              5. Contact
+              5. Retention and Deletion
+            </h2>
+            <p>
+              Records can be deleted individually in the app. Deleting an
+              exported entry asks Apple Health to remove the copy created by
+              the app. Uninstalling removes local app data, but entries already
+              saved in Health may remain and can be deleted in the Health app.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className="text-lg font-medium mb-2"
+              style={{ color: "var(--c-heading)" }}
+            >
+              6. Contact
             </h2>
             <p>
               For privacy inquiries, contact{" "}
@@ -202,7 +240,7 @@ export default function EatWaterPrivacy() {
           </section>
 
           <p className="text-xs" style={{ color: "var(--c-meta)" }}>
-            Effective date: July 15, 2026
+            Effective date: August 22, 2026
           </p>
         </div>
 
@@ -219,7 +257,7 @@ export default function EatWaterPrivacy() {
             className="text-sm transition-colors duration-200 hover:text-[var(--c-heading)]"
             style={{ color: "var(--c-dim)" }}
           >
-            물한잔 지원
+            물을 마시는 새 지원
           </Link>
         </div>
       </article>

@@ -6,7 +6,9 @@ import path from "node:path";
 import yaml from "js-yaml";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const shippingRoot = path.resolve(repositoryRoot, "../../0.shipping");
+const shippingRoot = process.env.SHIPPING_ROOT
+  ? path.resolve(process.env.SHIPPING_ROOT)
+  : path.resolve(repositoryRoot, "../../0.shipping");
 const outputPath = path.join(repositoryRoot, "data/apps.generated.ts");
 const issueUrl = "https://github.com/sunpark20/errorreport/issues/new";
 const expectedIDs = new Set([
@@ -17,9 +19,11 @@ const expectedIDs = new Set([
   "eatwater",
   "gnomon",
   "memory-palace",
+  "quick-quit",
   "snapcart",
   "spamcall070",
   "yt-bulk-downloader",
+  "ytdi",
 ]);
 const validPlatforms = new Set(["ios", "android", "macos", "windows", "web"]);
 const privateMarkers = ["jangbogo", "restlocktimer", "ytninza", "YT-Chita-source-archive"];
@@ -160,7 +164,7 @@ const directories = readdirSync(shippingRoot, { withFileTypes: true })
 const apps = directories.map(loadManifest).sort((left, right) => left.id.localeCompare(right.id));
 const actualIDs = new Set(apps.map((app) => app.id));
 if (actualIDs.size !== expectedIDs.size || [...expectedIDs].some((id) => !actualIDs.has(id))) {
-  fail(`app IDs must exactly match the approved ten: ${[...expectedIDs].sort().join(", ")}`);
+  fail(`app IDs must exactly match the approved twelve: ${[...expectedIDs].sort().join(", ")}`);
 }
 
 const output = [

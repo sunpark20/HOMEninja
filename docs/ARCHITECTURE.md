@@ -32,7 +32,7 @@ tests/                               # registry와 정적 계약 테스트
 0.shipping/*/shipping.yml
         │
         ├── errorreport/scripts/generate.py
-        │       └── Issue Form 10개·apps.json·라벨 목록
+        │       └── Issue Form 12개·apps.json·라벨 목록
         │
         └── HOMEninja/scripts/sync-apps.mjs
                 └── data/apps.generated.ts
@@ -61,8 +61,8 @@ tests/                               # registry와 정적 계약 테스트
 
 ```text
 초기 렌더
-  ├─ Mac 나무: 4잎
-  ├─ iPhone 나무: 6잎 (미출시 포함)
+  ├─ Mac 나무: 5잎
+  ├─ iPhone 나무: 7잎 (미출시 포함)
   └─ localStorage 주민 복원
 
 나무 흔들기

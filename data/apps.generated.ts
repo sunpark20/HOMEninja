@@ -220,6 +220,32 @@ export const generatedApps: AppRegistryEntry[] = [
     }
   },
   {
+    "id": "quick-quit",
+    "displayName": "Quick Quit",
+    "displayNameKo": "Quick Quit",
+    "taglineKo": "메뉴 막대에서 앱을 클릭 한 번으로 계속 종료하는 앱",
+    "platforms": [
+      "macos"
+    ],
+    "minOS": "macOS 13.0+",
+    "version": "2.0.0",
+    "status": "unreleased",
+    "updatedAt": "2026.08",
+    "downloads": [],
+    "web": {
+      "privacy": "https://homeninja.vercel.app/privacy/quickquit",
+      "support": "https://homeninja.vercel.app/support/quickquit"
+    },
+    "reporting": {
+      "template": "quick-quit-bug.yml",
+      "locales": [
+        "ko",
+        "en"
+      ],
+      "url": "https://github.com/sunpark20/errorreport/issues/new?template=quick-quit-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    }
+  },
+  {
     "id": "snapcart",
     "displayName": "SnapCart Grocery Calculator",
     "displayNameKo": "찰칵 장값 계산기",
@@ -292,7 +318,7 @@ export const generatedApps: AppRegistryEntry[] = [
       "windows"
     ],
     "minOS": "macOS 10.15+, Windows 10·11 64-bit",
-    "version": "1.5.2",
+    "version": "1.5.3",
     "status": "released",
     "updatedAt": "2026.08",
     "downloads": [
@@ -323,6 +349,32 @@ export const generatedApps: AppRegistryEntry[] = [
         "en"
       ],
       "url": "https://github.com/sunpark20/errorreport/issues/new?template=yt-bulk-downloader-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    }
+  },
+  {
+    "id": "ytdi",
+    "displayName": "ytdi",
+    "displayNameKo": "ytdi",
+    "taglineKo": "불안정한 회선에서도 이어받는 iPhone 영상 보관 앱",
+    "platforms": [
+      "ios"
+    ],
+    "minOS": "iOS 26.0+",
+    "version": "0.1.0",
+    "status": "unreleased",
+    "updatedAt": "2026.08",
+    "downloads": [],
+    "web": {
+      "privacy": "https://homeninja.vercel.app/privacy/ytdi",
+      "support": "https://homeninja.vercel.app/support/ytdi"
+    },
+    "reporting": {
+      "template": "ytdi-bug.yml",
+      "locales": [
+        "ko",
+        "en"
+      ],
+      "url": "https://github.com/sunpark20/errorreport/issues/new?template=ytdi-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     }
   }
 ];

@@ -70,7 +70,7 @@ test("visual presentation is separate and covers every public app", () => {
     (match) => match[1] ?? match[2],
   );
 
-  assert.equal(appIds.length, 10);
+  assert.equal(appIds.length, 12);
   assert.deepEqual([...visualIds].sort(), [...appIds].sort());
   assert.match(visuals, /tree: "mac"/);
   assert.match(visuals, /tree: "iphone"/);

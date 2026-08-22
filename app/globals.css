@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  --font-display: ui-rounded, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
   --c-title: oklch(0.34 0.055 55);
   --c-heading: oklch(0.39 0.06 55);
   --c-subheading: oklch(0.47 0.055 55);

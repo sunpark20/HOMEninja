@@ -1,20 +1,5 @@
 import type { Metadata } from "next";
-import { Gothic_A1, Jua } from "next/font/google";
 import "./globals.css";
-
-const display = Jua({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-  weight: "400",
-});
-
-const body = Gothic_A1({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-  weight: ["400", "500", "700"],
-});
 
 export const metadata: Metadata = {
   title: "모여봐 앱마을 · 닌자거북의홈",
@@ -41,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" className={`${display.variable} ${body.variable}`}>
+    <html lang="ko">
       <body
         className="font-[family-name:var(--font-body)]"
         style={{ color: "var(--c-heading)" }}

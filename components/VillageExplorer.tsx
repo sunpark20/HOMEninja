@@ -34,8 +34,8 @@ const STAGE_WIDTH = 1280;
 const STAGE_HEIGHT = 900;
 
 const treeAppIds: Record<VillageTree, string[]> = {
-  mac: ["centuryiris", "gnomon", "breaklock-timer", "yt-bulk-downloader"],
-  iphone: ["spamcall070", "callninja", "snapcart", "memory-palace", "eatwater", "earth"],
+  mac: ["centuryiris", "gnomon", "quick-quit", "breaklock-timer", "yt-bulk-downloader"],
+  iphone: ["spamcall070", "callninja", "snapcart", "ytdi", "memory-palace", "eatwater", "earth"],
 };
 
 const mascotSpecs: Record<ResidentAnimal, {

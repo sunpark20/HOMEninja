@@ -39,23 +39,27 @@ export const villageAppVisuals: Record<string, VillageAppVisual> = {
   eatwater: { tree: "iphone", label: "WB", tone: "teal", tilt: -2 },
   gnomon: { tree: "mac", label: "GN", tone: "honey", tilt: 1 },
   "memory-palace": { tree: "iphone", label: "MP", tone: "lavender", tilt: -1 },
+  "quick-quit": { tree: "mac", label: "QQ", tone: "blue", tilt: 2 },
   snapcart: { tree: "iphone", label: "CK", tone: "rose", tilt: 2 },
   spamcall070: { tree: "iphone", label: "07", tone: "coral", tilt: -2 },
   "yt-bulk-downloader": { tree: "mac", label: "YT", tone: "berry", tilt: 1 },
+  ytdi: { tree: "iphone", label: "YD", tone: "berry", tilt: -2 },
 };
 
 /** Coordinates and copy translated from the supplied 앱마을 대문 v5 canvas. */
 const v5AppLayoutEntries: Array<[string, V5AppLayout]> = [
-  ["centuryiris", { tree: "mac", x: 96, y: 104, swayDuration: "5.2s", swayDelay: "-0.2s", landingX: 0, landingY: 470, shortCopy: "외장 모니터 밝기 자동 조절" }],
-  ["gnomon", { tree: "mac", x: 238, y: 88, swayDuration: "4.6s", swayDelay: "-1.4s", landingX: 180, landingY: 470, shortCopy: "Century Iris의 형제 앱" }],
-  ["breaklock-timer", { tree: "mac", x: 80, y: 232, swayDuration: "5.6s", swayDelay: "-2.6s", landingX: 60, landingY: 615, shortCopy: "쉬는 시간에 화면을 잠그는 타이머" }],
-  ["yt-bulk-downloader", { tree: "mac", x: 228, y: 220, swayDuration: "4.9s", swayDelay: "-3.3s", landingX: 225, landingY: 615, shortCopy: "유튜브 다운로드" }],
-  ["spamcall070", { tree: "iphone", x: 92, y: 100, swayDuration: "5.1s", swayDelay: "-0.6s", landingX: 80, landingY: 516, shortCopy: "스팸 전화 차단" }],
-  ["callninja", { tree: "iphone", x: 236, y: 78, swayDuration: "4.4s", swayDelay: "-1.9s", landingX: 230, landingY: 516, shortCopy: "070의 형제 앱" }],
-  ["snapcart", { tree: "iphone", x: 380, y: 104, swayDuration: "5.4s", swayDelay: "-3.1s", landingX: 380, landingY: 516, shortCopy: "장값 계산기" }],
-  ["memory-palace", { tree: "iphone", x: 84, y: 238, swayDuration: "4.7s", swayDelay: "-2.2s", landingX: 150, landingY: 636, shortCopy: "장소기억법을 배우는 뇌모닉 앱" }],
-  ["eatwater", { tree: "iphone", x: 236, y: 224, swayDuration: "6s", swayDelay: "-1.1s", landingX: 300, landingY: 636, shortCopy: "곧 출시" }],
-  ["earth", { tree: "iphone", x: 382, y: 244, swayDuration: "5.8s", swayDelay: "-4.2s", landingX: 450, landingY: 636, shortCopy: "곧 출시" }],
+  ["centuryiris", { tree: "mac", x: 35, y: 98, swayDuration: "5.2s", swayDelay: "-0.2s", landingX: 0, landingY: 470, shortCopy: "외장 모니터 밝기 자동 조절" }],
+  ["gnomon", { tree: "mac", x: 178, y: 75, swayDuration: "4.6s", swayDelay: "-1.4s", landingX: 180, landingY: 470, shortCopy: "Century Iris의 형제 앱" }],
+  ["quick-quit", { tree: "mac", x: 320, y: 105, swayDuration: "5.3s", swayDelay: "-0.9s", landingX: 350, landingY: 470, shortCopy: "앱을 빠르게 정리하는 메뉴 막대 도구" }],
+  ["breaklock-timer", { tree: "mac", x: 90, y: 225, swayDuration: "5.6s", swayDelay: "-2.6s", landingX: 60, landingY: 615, shortCopy: "쉬는 시간에 화면을 잠그는 타이머" }],
+  ["yt-bulk-downloader", { tree: "mac", x: 248, y: 215, swayDuration: "4.9s", swayDelay: "-3.3s", landingX: 225, landingY: 615, shortCopy: "유튜브 다운로드" }],
+  ["spamcall070", { tree: "iphone", x: 30, y: 95, swayDuration: "5.1s", swayDelay: "-0.6s", landingX: 80, landingY: 516, shortCopy: "스팸 전화 차단" }],
+  ["callninja", { tree: "iphone", x: 175, y: 70, swayDuration: "4.4s", swayDelay: "-1.9s", landingX: 230, landingY: 516, shortCopy: "070의 형제 앱" }],
+  ["snapcart", { tree: "iphone", x: 320, y: 95, swayDuration: "5.4s", swayDelay: "-3.1s", landingX: 380, landingY: 516, shortCopy: "장값 계산기" }],
+  ["ytdi", { tree: "iphone", x: 454, y: 118, swayDuration: "5.5s", swayDelay: "-3.7s", landingX: 520, landingY: 516, shortCopy: "끊겨도 이어받는 영상 보관" }],
+  ["memory-palace", { tree: "iphone", x: 70, y: 235, swayDuration: "4.7s", swayDelay: "-2.2s", landingX: 150, landingY: 636, shortCopy: "장소기억법을 배우는 뇌모닉 앱" }],
+  ["eatwater", { tree: "iphone", x: 234, y: 220, swayDuration: "6s", swayDelay: "-1.1s", landingX: 300, landingY: 636, shortCopy: "곧 출시" }],
+  ["earth", { tree: "iphone", x: 398, y: 238, swayDuration: "5.8s", swayDelay: "-4.2s", landingX: 450, landingY: 636, shortCopy: "곧 출시" }],
 ];
 
 export const v5AppLayouts = Object.fromEntries(v5AppLayoutEntries) as Record<string, V5AppLayout>;

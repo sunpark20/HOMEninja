@@ -11,11 +11,15 @@ const expectedIDs = [
   "eatwater",
   "gnomon",
   "memory-palace",
+  "quick-quit",
   "snapcart",
   "spamcall070",
   "yt-bulk-downloader",
+  "ytdi",
 ];
-const errorReportRoot = new URL("../../../errorreport/", import.meta.url);
+const errorReportRoot = process.env.ERRORREPORT_ROOT
+  ? new URL(`file://${process.env.ERRORREPORT_ROOT.replace(/\/$/, "")}/`)
+  : new URL("../../../errorreport/", import.meta.url);
 
 function generatedApps() {
   const generated = readFileSync(new URL("../data/apps.generated.ts", import.meta.url), "utf8");

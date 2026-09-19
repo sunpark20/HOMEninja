@@ -117,10 +117,10 @@ export default function EatWaterPrivacy() {
             <p>
               개인정보 관련 문의는{" "}
               <a
-                href="mailto:coastguard2681@gmail.com"
+                href="mailto:sun.park20@gmail.com"
                 className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
               >
-                coastguard2681@gmail.com
+                sun.park20@gmail.com
               </a>
               으로 연락해 주세요.
             </p>
@@ -230,10 +230,10 @@ export default function EatWaterPrivacy() {
             <p>
               For privacy inquiries, contact{" "}
               <a
-                href="mailto:coastguard2681@gmail.com"
+                href="mailto:sun.park20@gmail.com"
                 className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
               >
-                coastguard2681@gmail.com
+                sun.park20@gmail.com
               </a>
               .
             </p>
@@ -258,6 +258,13 @@ export default function EatWaterPrivacy() {
             style={{ color: "var(--c-dim)" }}
           >
             물을 마시는 새 지원
+          </Link>
+          <Link
+            href="/terms/eatwater"
+            className="text-sm transition-colors duration-200 hover:text-[var(--c-heading)]"
+            style={{ color: "var(--c-dim)" }}
+          >
+            이용약관 / Terms
           </Link>
         </div>
       </article>

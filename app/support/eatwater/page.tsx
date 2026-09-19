@@ -42,15 +42,16 @@ export default function EatWaterSupport() {
               className="text-lg font-medium mb-2"
               style={{ color: "var(--c-heading)" }}
             >
-              문의하기
+              개발자 및 문의
             </h2>
+            <p>개발자: sunguk park</p>
             <p>
               문제나 제안은{" "}
               <a
-                href="mailto:coastguard2681@gmail.com?subject=%EB%AC%BC%ED%95%9C%EC%9E%94%20%EB%AC%B8%EC%9D%98"
+                href="mailto:sun.park20@gmail.com?subject=%EB%AC%BC%EC%9D%84%20%EB%A7%88%EC%8B%9C%EB%8A%94%20%EC%83%88%20%EB%AC%B8%EC%9D%98"
                 className="underline underline-offset-2 hover:text-[var(--c-heading)] transition-colors"
               >
-                coastguard2681@gmail.com
+                sun.park20@gmail.com
               </a>
               으로 보내 주세요.
             </p>
@@ -90,6 +91,13 @@ export default function EatWaterSupport() {
             style={{ color: "var(--c-dim)" }}
           >
             개인정보처리방침
+          </Link>
+          <Link
+            href="/terms/eatwater"
+            className="text-sm transition-colors duration-200 hover:text-[var(--c-heading)]"
+            style={{ color: "var(--c-dim)" }}
+          >
+            이용약관 / Terms
           </Link>
         </div>
       </article>

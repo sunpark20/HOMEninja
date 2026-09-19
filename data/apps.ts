@@ -8,6 +8,7 @@ export type AppRegistryEntry = {
   displayName: string;
   displayNameKo: string;
   taglineKo: string;
+  taglineEn: string;
   platforms: Platform[];
   minOS: string;
   version: string;

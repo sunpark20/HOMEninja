@@ -47,16 +47,17 @@ test("TMT content keeps the normalized API shape", () => {
 });
 
 test("homepage is the app-village entry point", () => {
-  const page = read("app/page.tsx");
+  const page = read("app/[locale]/[[...slug]]/page.tsx");
   const explorer = read("components/VillageExplorer.tsx");
-  const layout = read("app/layout.tsx");
+  const layout = read("app/[locale]/layout.tsx");
 
   assert.match(page, /VillageExplorer/);
+  assert.match(page, /dictionaries/);
   assert.match(explorer, /localStorage\.setItem\("appvillage\.resident"/);
   assert.match(explorer, /name.*animal.*device/s);
   assert.doesNotMatch(explorer, /email|mailto:/i);
   assert.doesNotMatch(layout, /mailto:|coastguard2681@gmail\.com/);
-  assert.match(layout, /모여봐 앱마을/);
+  assert.match(layout, /lang=\{locale\}/);
 });
 
 test("visual presentation is separate and covers every public app", () => {
@@ -105,13 +106,11 @@ test("homepage stays self-hosted and sky-only", () => {
 });
 
 test("legal contact exceptions stay on legal pages only", () => {
-  const layout = read("app/layout.tsx");
+  const layout = read("app/[locale]/layout.tsx");
   const village = read("components/VillageExplorer.tsx");
-  const support = read("app/support/earth/page.tsx");
-  const privacy = read("app/privacy/earth/page.tsx");
+  const legal = read("components/LocalizedLegalPage.tsx");
 
   assert.doesNotMatch(layout, /coastguard2681@gmail\.com|mailto:/);
   assert.doesNotMatch(village, /coastguard2681@gmail\.com|mailto:/);
-  assert.match(support, /coastguard2681@gmail\.com/);
-  assert.match(privacy, /coastguard2681@gmail\.com/);
+  assert.match(legal, /coastguard2681@gmail\.com/);
 });

@@ -9,7 +9,7 @@ export function GET() {
     "",
     "## Apps",
     ...apps.map((app) => (
-      `- ${app.displayName}: ${app.taglineKo} (${app.platforms.join(", ")})`
+      `- ${app.displayName}: ${app.taglineEn} / ${app.taglineKo} (${app.platforms.join(", ")})`
     )),
     "",
     "## Detailed",

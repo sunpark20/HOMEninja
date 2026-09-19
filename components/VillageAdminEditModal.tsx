@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { AppContent } from "@/data/tmt";
+import type { VillageDictionary } from "@/i18n";
 import VillageIcon from "./VillageIcon";
 
 type EditableVillageApp = {
@@ -11,12 +12,13 @@ type EditableVillageApp = {
 };
 
 type Props = {
+  dictionary: VillageDictionary;
   obj: EditableVillageApp | null;
   onClose: () => void;
   onSaved: (appId: string, data: AppContent) => void;
 };
 
-export default function VillageAdminEditModal({ obj, onClose, onSaved }: Props) {
+export default function VillageAdminEditModal({ dictionary, obj, onClose, onSaved }: Props) {
   const [phase, setPhase] = useState<"auth" | "edit">("auth");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -64,7 +66,7 @@ export default function VillageAdminEditModal({ obj, onClose, onSaved }: Props) 
     const ok = await requestAuth(value);
     if (!ok) {
       sessionStorage.removeItem("tmt_pw");
-      setMessage("관리자 인증이 필요합니다.");
+      setMessage(dictionary.admin.authFailed);
       setBusy(false);
       return;
     }
@@ -99,10 +101,10 @@ export default function VillageAdminEditModal({ obj, onClose, onSaved }: Props) 
     });
     if (response.ok) {
       onSaved(target.id, { name: name.trim() || null, description: description.trim() || null, entries });
-      setMessage("저장했어요.");
+      setMessage(dictionary.admin.saved);
       window.setTimeout(onClose, 700);
     } else {
-      setMessage("저장하지 못했어요.");
+      setMessage(dictionary.admin.saveFailed);
     }
     setBusy(false);
   }
@@ -110,38 +112,38 @@ export default function VillageAdminEditModal({ obj, onClose, onSaved }: Props) 
   return (
     <div className="village-modal-backdrop" onClick={onClose} role="presentation">
       <section
-        aria-label={`${obj.name} 관리자 편집`}
+        aria-label={dictionary.admin.ariaLabel.replace("{appName}", obj.name)}
         className="village-admin-modal"
         onClick={(event) => event.stopPropagation()}
         role="dialog"
       >
         <div className="modal-heading-row">
           <div>
-            <p className="eyebrow">관리자 편집</p>
+            <p className="eyebrow">{dictionary.admin.eyebrow}</p>
             <h2>{obj.name}</h2>
           </div>
-          <button aria-label="닫기" className="icon-button" onClick={onClose} type="button">
+          <button aria-label={dictionary.admin.close} className="icon-button" onClick={onClose} type="button">
             <VillageIcon name="close" />
           </button>
         </div>
         {phase === "auth" ? (
           <form className="admin-form" onSubmit={(event) => { event.preventDefault(); void authenticate(password); }}>
-            <p className="modal-copy">TMT 게시판을 편집하려면 관리자 인증이 필요합니다.</p>
+            <p className="modal-copy">{dictionary.admin.authCopy}</p>
             <label>
-              비밀번호
+              {dictionary.admin.password}
               <input ref={passwordRef} onChange={(event) => setPassword(event.target.value)} type="password" value={password} />
             </label>
-            <button className="button button-primary" disabled={busy} type="submit">{busy ? "확인 중…" : "인증하고 열기"}</button>
+            <button className="button button-primary" disabled={busy} type="submit">{busy ? dictionary.admin.authenticating : dictionary.admin.authenticate}</button>
             {message && <p className="form-message">{message}</p>}
           </form>
         ) : (
           <form className="admin-form" onSubmit={(event) => { event.preventDefault(); void save(); }}>
-            <label>이름<input onChange={(event) => setName(event.target.value)} value={name} /></label>
-            <label>설명<input onChange={(event) => setDescription(event.target.value)} value={description} /></label>
-            <label>TMT 항목<textarea onChange={(event) => setTmtText(event.target.value)} rows={8} value={tmtText} /></label>
+            <label>{dictionary.admin.name}<input onChange={(event) => setName(event.target.value)} value={name} /></label>
+            <label>{dictionary.admin.description}<input onChange={(event) => setDescription(event.target.value)} value={description} /></label>
+            <label>{dictionary.admin.tmt}<textarea onChange={(event) => setTmtText(event.target.value)} rows={8} value={tmtText} /></label>
             <div className="modal-actions">
-              <button className="button button-primary" disabled={busy} type="submit">{busy ? "저장 중…" : "저장"}</button>
-              <button className="button button-quiet" onClick={onClose} type="button">취소</button>
+              <button className="button button-primary" disabled={busy} type="submit">{busy ? dictionary.admin.saving : dictionary.admin.save}</button>
+              <button className="button button-quiet" onClick={onClose} type="button">{dictionary.admin.cancel}</button>
               {message && <span className="form-message">{message}</span>}
             </div>
           </form>

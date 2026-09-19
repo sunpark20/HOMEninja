@@ -1,29 +1,51 @@
 import type { MetadataRoute } from "next";
 import { apps } from "@/data/apps";
+import { localizedRoutePaths } from "@/components/LocalizedLegalPage";
+import { locales } from "@/i18n";
 
 export const dynamic = "force-static";
 
 const baseUrl = "https://homeninja.vercel.app";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const appOwnedPages = new Set(
-    apps
-      .flatMap((app) => [app.web.privacy, app.web.support])
-      .filter((url): url is string => url?.startsWith(baseUrl) ?? false),
-  );
+function sitePath(url: string | null) {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    return parsed.origin === baseUrl ? parsed.pathname : null;
+  } catch {
+    return null;
+  }
+}
 
-  return [
+export default function sitemap(): MetadataRoute.Sitemap {
+  const appOwnedPaths = new Set(
+    apps
+      .flatMap((app) => [sitePath(app.web.privacy), sitePath(app.web.support)])
+      .filter((path): path is string => Boolean(path)),
+  );
+  const paths = new Set<string>([...localizedRoutePaths].filter((path) => path !== "/"));
+  for (const path of appOwnedPaths) paths.add(path);
+  const lastModified = new Date();
+
+  return locales.flatMap((locale) => [
     {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+      url: `${baseUrl}/${locale}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
       priority: 1,
+      alternates: { languages: { ko: `${baseUrl}/ko`, en: `${baseUrl}/en` } },
     },
-    ...[...appOwnedPages].sort().map((url) => ({
-      url,
-      lastModified: new Date(),
+    ...[...paths].sort().map((path) => ({
+      url: `${baseUrl}/${locale}${path}`,
+      lastModified,
       changeFrequency: "yearly" as const,
       priority: 0.2,
+      alternates: {
+        languages: {
+          ko: `${baseUrl}/ko${path}`,
+          en: `${baseUrl}/en${path}`,
+        },
+      },
     })),
-  ];
+  ]);
 }

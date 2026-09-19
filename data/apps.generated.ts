@@ -7,6 +7,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "Breaklock Timer",
     "displayNameKo": "Breaklock Timer",
     "taglineKo": "쉬는 시간에는 화면을 잠그는 포모도로 타이머",
+    "taglineEn": "A Pomodoro timer that locks the screen during breaks",
     "platforms": [
       "macos"
     ],
@@ -39,6 +40,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "CallNinja - Spam Call Blocker",
     "displayNameKo": "콜닌자 - 스팸 전화 패턴 차단",
     "taglineKo": "번호 범위를 직접 지정해서 차단",
+    "taglineEn": "Block number ranges directly",
     "platforms": [
       "ios"
     ],
@@ -71,6 +73,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "Century Iris",
     "displayNameKo": "Century Iris",
     "taglineKo": "MacBook 조도센서로 외장 모니터 밝기와 색온도를 자동 조절합니다",
+    "taglineEn": "Automatically adjusts external monitor brightness and color temperature using your MacBook's ambient light sensor",
     "platforms": [
       "macos"
     ],
@@ -103,6 +106,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "Earth: World Time & Sky",
     "displayNameKo": "Earth: 세계 시간과 하늘",
     "taglineKo": "지구본 위에서 세계 시간을 읽는 앱",
+    "taglineEn": "Read world time on a globe beneath the sky",
     "platforms": [
       "ios"
     ],
@@ -129,6 +133,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "The Bird That Drinks Water",
     "displayNameKo": "물을 마시는 새",
     "taglineKo": "물 마시는 시간을 알려주는 새",
+    "taglineEn": "A bird that reminds you when it is time to drink water",
     "platforms": [
       "ios"
     ],
@@ -155,6 +160,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "Gnomon",
     "displayNameKo": "Gnomon",
     "taglineKo": "MacBook 조도센서로 외장 모니터 밝기를 자동으로 맞춰줍니다",
+    "taglineEn": "Automatically matches external monitor brightness using your MacBook's ambient light sensor",
     "platforms": [
       "macos"
     ],
@@ -186,6 +192,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "기억의궁전 뇌모닉",
     "displayNameKo": "기억의궁전 뇌모닉",
     "taglineKo": "장소기억법을 배우는 뇌모닉 앱",
+    "taglineEn": "A mnemonic app that teaches the method of loci",
     "platforms": [
       "ios",
       "android"
@@ -224,6 +231,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "Quick Quit",
     "displayNameKo": "Quick Quit",
     "taglineKo": "메뉴 막대에서 앱을 클릭 한 번으로 계속 종료하는 앱",
+    "taglineEn": "A menu bar tool for quitting apps with one click",
     "platforms": [
       "macos"
     ],
@@ -250,6 +258,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "SnapCart Grocery Calculator",
     "displayNameKo": "찰칵 장값 계산기",
     "taglineKo": "가격표만 찍으면 장바구니 자동 합산",
+    "taglineEn": "Scan a price tag and automatically total your cart",
     "platforms": [
       "ios"
     ],
@@ -282,6 +291,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "SpamCall070",
     "displayNameKo": "070 스팸 전화 차단",
     "taglineKo": "최초 1회 설정으로 벨소리도 울리지 않게 차단",
+    "taglineEn": "Block spam calls after a one-time setup",
     "platforms": [
       "ios"
     ],
@@ -313,12 +323,13 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "YT Chita",
     "displayNameKo": "YT Chita",
     "taglineKo": "YouTube 채널·재생목록·개별 영상을 저장하는 데스크톱 앱",
+    "taglineEn": "A desktop app for saving YouTube channels, playlists, and individual videos",
     "platforms": [
       "macos",
       "windows"
     ],
     "minOS": "macOS 10.15+, Windows 10·11 64-bit",
-    "version": "1.5.3",
+    "version": "1.5.4",
     "status": "released",
     "updatedAt": "2026.08",
     "downloads": [
@@ -356,6 +367,7 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "ytdi",
     "displayNameKo": "ytdi",
     "taglineKo": "불안정한 회선에서도 이어받는 iPhone 영상 보관 앱",
+    "taglineEn": "An iPhone media library that resumes downloads on unstable connections",
     "platforms": [
       "ios"
     ],

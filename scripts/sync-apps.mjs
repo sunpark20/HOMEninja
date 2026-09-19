@@ -123,6 +123,7 @@ function loadManifest(directory) {
     displayName: requiredString(app.display_name, `${manifestPath}.app.display_name`),
     displayNameKo: requiredString(app.display_name_ko, `${manifestPath}.app.display_name_ko`),
     taglineKo: requiredString(app.tagline_ko, `${manifestPath}.app.tagline_ko`),
+    taglineEn: requiredString(app.tagline_en, `${manifestPath}.app.tagline_en`),
     platforms,
     minOS: requiredString(app.min_os, `${manifestPath}.app.min_os`),
     version: requiredString(app.version, `${manifestPath}.app.version`),

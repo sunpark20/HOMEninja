@@ -329,6 +329,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .legal-page { min-height: 100vh; padding: clamp(28px, 7vw, 84px) 16px; background: linear-gradient(180deg, var(--v-sky), var(--c-bg) 48%); }
 .legal-card { width: min(100%, 720px); margin: 0 auto; padding: clamp(24px, 6vw, 52px); color: var(--v-bark); background: var(--v-paper); border: 2px solid var(--c-border); box-shadow: 0 6px 0 oklch(0.78 0.07 75); }
 .legal-card h1 { margin: 0 0 22px; color: var(--c-title); font: clamp(2rem, 5vw, 3rem)/1.08 var(--font-display), cursive; }
+.legal-subtitle { display: block; margin-top: 8px; color: var(--c-secondary); font: 0.42em/1.2 var(--font-body), sans-serif; letter-spacing: 0.04em; }
 .legal-card section { padding-top: 22px; border-top: 1px solid var(--c-divider); }
 .legal-card section + section { margin-top: 22px; }
 .legal-card h2 { margin: 0 0 7px; color: var(--c-heading); font: 1.25rem/1.15 var(--font-display), cursive; }
@@ -408,6 +409,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .v5-stage { position: absolute; top: 0; left: 0; width: 1280px; height: 900px; overflow: hidden; transform-origin: top left; background: oklch(0.96 0.025 92); color: var(--v-bark); font-family: var(--font-body), system-ui, sans-serif; }
 .v5-stage button, .v5-stage input { font-family: inherit; }
 .v5-stage button { border: 0; }
+.v5-language-switcher { position: absolute; top: 25px; left: 28px; z-index: 30; display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; border: 1px solid oklch(0.62 0.1 70 / .7); border-radius: 999px; color: oklch(0.48 0.08 58); background: oklch(0.98 0.04 88 / .84); box-shadow: 0 2px 0 oklch(0.62 0.08 75 / .25); font: 12px/1 var(--font-body), sans-serif; }
+.v5-language-switcher a { color: inherit; text-decoration: none; }
+.v5-language-switcher a:hover { color: oklch(0.47 0.13 40); }
+.v5-language-switcher a.is-current { color: oklch(0.35 0.07 55); font-weight: 700; }
+.v5-language-switcher span { color: oklch(0.65 0.05 75); }
 .v5-sky { position: absolute; top: 0; left: 0; right: 0; height: 660px; background: linear-gradient(oklch(0.92 0.045 218), oklch(0.96 0.025 112) 60%, oklch(0.96 0.035 92)); }
 .v5-cloud { position: absolute; object-fit: contain; opacity: .92; animation: v5-drift 13s ease-in-out infinite alternate; }
 .v5-cloud-one { top: 96px; left: 104px; width: 90px; height: 90px; }
@@ -523,7 +529,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .v5-stage { position: relative; width: 100%; height: auto !important; min-height: 0; overflow: hidden; padding: 20px 14px 18px; transform: none !important; }
   .v5-sky { height: 720px; }.v5-hill-far { top: 475px; left: -250px; }.v5-hill-near { top: 460px; left: 50%; }.v5-grass { top: 570px; }.v5-front-ground { top: 930px; left: -50%; width: 200%; }
   .v5-cloud-one { top: 100px; left: 5%; }.v5-cloud-two { top: 165px; left: 52%; }.v5-cloud-three { top: 60px; right: 4%; left: auto; }.v5-ground-mushroom { top: 1060px; left: 3%; }.v5-ground-clover { top: 990px; left: auto; right: 4%; }.v5-ground-blossom { top: 1010px; left: 46%; }.v5-ground-seedling, .v5-ground-herb { top: 1210px; }.v5-ground-seedling { left: 25%; }.v5-ground-herb { left: auto; right: 18%; }
-  .v5-title-sign { position: relative; top: auto; left: auto; margin: 0 auto; transform: none; }.v5-title-plaque { padding-inline: 25px; font-size: clamp(32px, 10vw, 46px); }.v5-title-ropes { gap: 90px; }
+  .v5-language-switcher { top: 20px; left: 14px; }
+  .v5-title-sign { position: relative; top: auto; left: auto; margin: 30px auto 0; transform: none; }.v5-title-plaque { padding-inline: 25px; font-size: clamp(32px, 10vw, 46px); }.v5-title-ropes { gap: 90px; }
   .v5-application-button { position: relative; top: auto; right: auto; left: auto; display: flex; margin: 18px auto 0; width: fit-content; }
   .v5-tree, .v5-tree-iphone { position: relative; top: auto; left: auto; width: min(100%, 540px); height: auto; min-height: 350px; margin: 30px auto 0; padding-bottom: 10px; transform: none !important; }
   .v5-tree-iphone { min-height: 430px; margin-top: 14px; }

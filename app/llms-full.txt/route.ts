@@ -21,7 +21,7 @@ export function GET() {
   for (const app of apps) {
     sections.push("---\n");
     sections.push(`## ${app.displayName}`);
-    sections.push(`${app.taglineKo}\n`);
+    sections.push(`${app.taglineEn}\n${app.taglineKo}\n`);
     sections.push(`- 지원: ${app.minOS}`);
     sections.push(`- 상태: ${app.status}`);
     for (const download of app.downloads) sections.push(`- 다운로드: ${download.url}`);

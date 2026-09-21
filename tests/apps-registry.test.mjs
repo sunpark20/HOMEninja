@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 const expectedIDs = [
+  "book",
   "breaklock-timer",
   "callninja",
   "centuryiris",

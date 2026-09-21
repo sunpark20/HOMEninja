@@ -3,6 +3,32 @@ import type { AppRegistryEntry } from "./apps";
 
 export const generatedApps: AppRegistryEntry[] = [
   {
+    "id": "book",
+    "displayName": "Book",
+    "displayNameKo": "책기록",
+    "taglineKo": "책을 검색하고 날짜별 기록을 남기는 독서 기록 앱",
+    "taglineEn": "Search for books and keep dated reading records",
+    "platforms": [
+      "ios"
+    ],
+    "minOS": "iOS 17.0+",
+    "version": "1.0.0",
+    "status": "unreleased",
+    "updatedAt": "2026.09",
+    "downloads": [],
+    "web": {
+      "privacy": "https://homeninja.vercel.app/privacy/book",
+      "support": "https://homeninja.vercel.app/support/book"
+    },
+    "reporting": {
+      "template": "book-bug.yml",
+      "locales": [
+        "ko"
+      ],
+      "url": "https://github.com/sunpark20/errorreport/issues/new?template=book-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    }
+  },
+  {
     "id": "breaklock-timer",
     "displayName": "Breaklock Timer",
     "displayNameKo": "Breaklock Timer",

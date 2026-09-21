@@ -12,6 +12,7 @@ const shippingRoot = process.env.SHIPPING_ROOT
 const outputPath = path.join(repositoryRoot, "data/apps.generated.ts");
 const issueUrl = "https://github.com/sunpark20/errorreport/issues/new";
 const expectedIDs = new Set([
+  "book",
   "breaklock-timer",
   "callninja",
   "centuryiris",
@@ -165,7 +166,7 @@ const directories = readdirSync(shippingRoot, { withFileTypes: true })
 const apps = directories.map(loadManifest).sort((left, right) => left.id.localeCompare(right.id));
 const actualIDs = new Set(apps.map((app) => app.id));
 if (actualIDs.size !== expectedIDs.size || [...expectedIDs].some((id) => !actualIDs.has(id))) {
-  fail(`app IDs must exactly match the approved twelve: ${[...expectedIDs].sort().join(", ")}`);
+  fail(`app IDs must exactly match the approved thirteen: ${[...expectedIDs].sort().join(", ")}`);
 }
 
 const output = [

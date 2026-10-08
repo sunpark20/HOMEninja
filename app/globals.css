@@ -533,10 +533,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .about-section h2, .about-vision h2 { max-width: 640px; margin: 0; color: var(--c-heading); font: 600 clamp(27px, 4.5vw, 42px)/1.2 var(--font-display), sans-serif; letter-spacing: -.035em; }
 .about-section-intro { max-width: 610px; margin: 14px 0 30px; color: var(--c-secondary); font-size: 15px; line-height: 1.8; }
 .about-products { margin: 35px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--c-divider); }
-.about-product { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--c-divider); }
+.about-product { display: grid; grid-template-columns: 100px minmax(0, 1fr); align-items: center; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--c-divider); }
+.about-product-preview { position: relative; width: 100px; height: 128px; overflow: hidden; border: 1px solid var(--c-divider); border-radius: 8px; background: var(--v-paper); }
+.about-product-preview img { object-fit: contain; padding: 2px; }
+.about-product-copy { min-width: 0; }
 .about-product h3 { margin: 0; color: var(--c-heading); font-size: 17px; font-weight: 600; }
 .about-product p { margin: 6px 0 0; color: var(--c-secondary); font-size: 13px; line-height: 1.6; }
-.about-product-meta { display: flex; flex: 0 0 auto; align-items: flex-end; flex-direction: column; gap: 6px; color: var(--c-meta); font-size: 11px; }
+.about-product-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 7px 14px; margin-top: 10px; color: var(--c-meta); font-size: 11px; }
 .about-store-link { display: inline-flex; align-items: center; gap: 5px; color: var(--v-orange-dark); text-decoration: underline; text-underline-offset: 3px; }
 .about-store-link span { font-size: 13px; }
 .about-approach { display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, .8fr); align-items: start; gap: 48px; }
@@ -598,8 +601,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .about-content { width: calc(100% - 32px); }
   .about-hero { padding: 72px 0 72px; }
   .about-section { padding: 42px 0 46px; }
-  .about-product { align-items: flex-start; gap: 12px; }
-  .about-product-meta { align-items: flex-end; text-align: right; }
+  .about-product { grid-template-columns: 64px minmax(0, 1fr); align-items: start; gap: 12px; }
+  .about-product-preview { width: 64px; height: 112px; }
+  .about-product-meta { gap: 6px 10px; }
   .about-approach, .about-company { grid-template-columns: 1fr; gap: 22px; }
   .about-company dl > div { grid-template-columns: minmax(105px, .7fr) 1.3fr; gap: 10px; }
   .about-footer { align-items: flex-start; flex-direction: column; }

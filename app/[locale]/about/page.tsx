@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { apps } from "@/data/apps";
@@ -11,7 +12,7 @@ const copy = {
     language: "언어 선택", home: "앱마을", eyebrow: "독립 앱 스튜디오 · 제주, 대한민국",
     headline: "일상의 불편을\n쓸모 있는 앱으로.",
     intro: "앱캔버스는 사람들이 매일 마주치는 불편을 발견하고, 오래 곁에 둘 수 있는 작고 실용적인 앱으로 해결합니다.",
-    productsEyebrow: "만들고 있는 것", productsTitle: "실제 문제에서 출발한 앱",
+    productsEyebrow: "출시한 앱", productsTitle: "실제 문제에서 출발한 앱",
     productsIntro: "macOS와 iPhone에서 반복되는 일을 줄이고, 필요한 순간에 바로 쓸 수 있는 도구를 만듭니다.",
     released: "출시됨", developmentEyebrow: "일하는 방식",
     developmentTitle: "작게 만들고, 실제로 써보며 개선합니다",
@@ -28,7 +29,7 @@ const copy = {
     language: "Language", home: "App Village", eyebrow: "Independent app studio · Jeju, South Korea",
     headline: "Everyday problems,\nmade easier with apps.",
     intro: "Appcanvas finds everyday friction and turns it into small, practical apps people can keep using.",
-    productsEyebrow: "What we make", productsTitle: "Apps grounded in real needs",
+    productsEyebrow: "Released apps", productsTitle: "Apps grounded in real needs",
     productsIntro: "We build tools for macOS and iPhone that reduce repetitive work and help when they are needed.",
     released: "Available", developmentEyebrow: "How we work",
     developmentTitle: "Build small, use it, improve it",
@@ -40,6 +41,20 @@ const copy = {
     email: "Email", back: "Explore all apps in App Village",
   },
 } as const;
+
+const productPreviews: Partial<Record<string, { src: string; alt: Record<Locale, string> }>> = {
+  book: { src: "/appcanvas/book.webp", alt: { ko: "책기록 앱의 독서 기록 화면", en: "Book app reading journal screen" } },
+  "breaklock-timer": { src: "/appcanvas/breaklock-timer.webp", alt: { ko: "Breaklock Timer 화면", en: "Breaklock Timer app screen" } },
+  callninja: { src: "/appcanvas/callninja.webp", alt: { ko: "콜닌자 앱 화면", en: "CallNinja app screen" } },
+  centuryiris: { src: "/appcanvas/centuryiris.webp", alt: { ko: "Century Iris 화면", en: "Century Iris app screen" } },
+  earth: { src: "/appcanvas/earth.webp", alt: { ko: "Earth의 지구본과 세계 시간 화면", en: "Earth globe and world time screen" } },
+  eatwater: { src: "/appcanvas/eatwater.webp", alt: { ko: "물을 마시는 새의 물 섭취 기록 화면", en: "The Bird That Drinks Water daily log screen" } },
+  gnomon: { src: "/appcanvas/gnomon.jpg", alt: { ko: "Gnomon 앱 아이콘", en: "Gnomon app icon" } },
+  "memory-palace": { src: "/appcanvas/memory-palace.webp", alt: { ko: "기억의궁전 뇌모닉 앱 화면", en: "Memory Palace app screen" } },
+  snapcart: { src: "/appcanvas/snapcart.webp", alt: { ko: "찰칵 장값 계산기 앱 화면", en: "SnapCart grocery calculator screen" } },
+  spamcall070: { src: "/appcanvas/spamcall070.webp", alt: { ko: "070 스팸 전화 차단 앱 화면", en: "070 spam call blocker screen" } },
+  "yt-bulk-downloader": { src: "/appcanvas/yt-bulk-downloader.webp", alt: { ko: "YT Chita의 동영상 목록 화면", en: "YT Chita video list screen" } },
+};
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
@@ -90,16 +105,26 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <ul className="about-products">
             {releasedApps.map((app) => (
               <li className="about-product" key={app.id}>
-                <div>
+                {productPreviews[app.id] && (
+                  <div className="about-product-preview">
+                    <Image
+                      alt={productPreviews[app.id]!.alt[locale]}
+                      fill
+                      sizes="(max-width: 640px) 64px, 100px"
+                      src={productPreviews[app.id]!.src}
+                    />
+                  </div>
+                )}
+                <div className="about-product-copy">
                   <h3>{localizedAppName(app, locale)}</h3>
                   <p>{localizedAppTagline(app, locale)}</p>
-                </div>
-                <div className="about-product-meta">
-                  <span>{app.platforms.map((platform) => platformNames[platform] ?? platform).join(" · ")}</span>
-                  <span>{text.released}</span>
-                  {app.downloads.filter((download) => download.url).map((download) => (
-                    <a className="about-store-link" href={download.url!} key={`${app.id}-${download.platform}`} rel="noreferrer" target="_blank">{download.label}<span aria-hidden="true">↗</span></a>
-                  ))}
+                  <div className="about-product-meta">
+                    <span>{app.platforms.map((platform) => platformNames[platform] ?? platform).join(" · ")}</span>
+                    <span>{text.released}</span>
+                    {app.downloads.filter((download) => download.url).map((download) => (
+                      <a className="about-store-link" href={download.url!} key={`${app.id}-${download.platform}`} rel="noreferrer" target="_blank">{download.label}<span aria-hidden="true">↗</span></a>
+                    ))}
+                  </div>
                 </div>
               </li>
             ))}

@@ -7,15 +7,21 @@ export const generatedApps: AppRegistryEntry[] = [
     "displayName": "Book",
     "displayNameKo": "책기록",
     "taglineKo": "책을 검색하고 날짜별 기록을 남기는 독서 기록 앱",
-    "taglineEn": "Search for books and keep dated reading records",
+    "taglineEn": "A reading journal for searching books and keeping dated notes",
     "platforms": [
       "ios"
     ],
     "minOS": "iOS 17.0+",
-    "version": "1.0.0",
-    "status": "unreleased",
-    "updatedAt": "2026.09",
-    "downloads": [],
+    "version": "1.0.2",
+    "status": "released",
+    "updatedAt": "2026.10",
+    "downloads": [
+      {
+        "platform": "ios",
+        "url": "https://apps.apple.com/app/id6814522901",
+        "label": "App Store"
+      }
+    ],
     "web": {
       "privacy": "https://homeninja.vercel.app/privacy/book",
       "support": "https://homeninja.vercel.app/support/book"
@@ -23,7 +29,8 @@ export const generatedApps: AppRegistryEntry[] = [
     "reporting": {
       "template": "book-bug.yml",
       "locales": [
-        "ko"
+        "ko",
+        "en"
       ],
       "url": "https://github.com/sunpark20/errorreport/issues/new?template=book-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     }
@@ -138,9 +145,15 @@ export const generatedApps: AppRegistryEntry[] = [
     ],
     "minOS": "iOS 17.0+",
     "version": "1.0.0",
-    "status": "unreleased",
+    "status": "released",
     "updatedAt": "2026.08",
-    "downloads": [],
+    "downloads": [
+      {
+        "platform": "ios",
+        "url": "https://apps.apple.com/app/id6800529221",
+        "label": "App Store"
+      }
+    ],
     "web": {
       "privacy": "https://homeninja.vercel.app/privacy/earth",
       "support": "https://homeninja.vercel.app/support/earth"
@@ -164,10 +177,16 @@ export const generatedApps: AppRegistryEntry[] = [
       "ios"
     ],
     "minOS": "iOS 26.0+",
-    "version": "1.0",
-    "status": "unreleased",
+    "version": "1.2",
+    "status": "released",
     "updatedAt": "2026.08",
-    "downloads": [],
+    "downloads": [
+      {
+        "platform": "ios",
+        "url": "https://apps.apple.com/app/id6791134733",
+        "label": "App Store"
+      }
+    ],
     "web": {
       "privacy": "https://homeninja.vercel.app/privacy/eatwater",
       "support": "https://homeninja.vercel.app/support/eatwater"

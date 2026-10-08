@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://homeninja.vercel.app/sitemap.xml",
+    sitemap: "https://ninjaturtle.win/sitemap.xml",
   };
 }

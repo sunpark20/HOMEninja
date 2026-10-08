@@ -4,8 +4,8 @@ export const en: VillageDictionary = {
   locale: "en",
   alternateLocale: "ko",
   metadata: {
-    title: "App Village · HOMEninja",
-    description: "Find a useful little app in a village where small apps grow.",
+    title: "Appcanvas · App Village",
+    description: "Explore small, practical apps from Appcanvas, an independent app studio.",
     openGraphLocale: "en_US",
   },
   language: {

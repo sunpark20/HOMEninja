@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const legacyLocaleLessRoute = /^\/(privacy|support|terms)(?:\/.*)?\/?$/;
+const legacyLocaleLessRoute = /^\/(about|privacy|support|terms)(?:\/.*)?\/?$/;
 const directBookRoute = /^\/(?:privacy|support)\/book\/?$/;
 
 function localeForRequest(request: NextRequest) {
@@ -9,6 +9,11 @@ function localeForRequest(request: NextRequest) {
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  if (request.nextUrl.hostname.toLowerCase() === "www.ninjaturtle.win") {
+    const url = request.nextUrl.clone();
+    url.hostname = "ninjaturtle.win";
+    return NextResponse.redirect(url, 308);
+  }
   if ((pathname === "/" || legacyLocaleLessRoute.test(pathname)) && !directBookRoute.test(pathname)) {
     const locale = localeForRequest(request);
     const url = request.nextUrl.clone();

@@ -4,8 +4,8 @@ export const ko: VillageDictionary = {
   locale: "ko",
   alternateLocale: "en",
   metadata: {
-    title: "모여봐 앱마을 · 닌자거북의홈",
-    description: "작은 앱들이 자라는 마을에서 필요한 앱을 골라보세요.",
+    title: "앱캔버스 · 모여봐 앱마을",
+    description: "일상의 불편을 해결하는 앱캔버스의 작은 앱을 만나보세요.",
     openGraphLocale: "ko_KR",
   },
   language: {

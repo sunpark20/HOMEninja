@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { dictionaries, isLocale, locales, type Locale } from "@/i18n";
 import "../globals.css";
 
-const metadataBase = new URL("https://homeninja.vercel.app");
+const metadataBase = new URL("https://ninjaturtle.win");
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));

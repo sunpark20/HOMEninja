@@ -34,7 +34,7 @@ type V5Style = CSSProperties & Record<`--${string}`, string | number>;
 
 const STAGE_WIDTH = 1280;
 const STAGE_HEIGHT = 900;
-const SITE_ORIGIN = "https://homeninja.vercel.app";
+const SITE_ORIGINS = new Set(["https://homeninja.vercel.app", "https://ninjaturtle.win"]);
 
 const treeAppIds: Record<VillageTree, string[]> = {
   mac: ["centuryiris", "gnomon", "quick-quit", "breaklock-timer", "yt-bulk-downloader"],
@@ -91,7 +91,7 @@ function siteLink(url: string | null, locale: Locale) {
   if (!url) return null;
   try {
     const parsed = new URL(url);
-    if (parsed.origin !== SITE_ORIGIN) return url;
+    if (!SITE_ORIGINS.has(parsed.origin)) return url;
     return `${localePath(locale, parsed.pathname)}${parsed.search}${parsed.hash}`;
   } catch {
     return url;
@@ -101,7 +101,7 @@ function siteLink(url: string | null, locale: Locale) {
 function isInternalSiteLink(url: string | null) {
   if (!url) return false;
   try {
-    return new URL(url).origin === SITE_ORIGIN;
+    return SITE_ORIGINS.has(new URL(url).origin);
   } catch {
     return false;
   }
@@ -468,6 +468,7 @@ export default function VillageExplorer({ dictionary, locale }: { dictionary: Vi
         <div className="v5-stage" style={{ transform: `scale(${stageScale})` }}>
           <div className="v5-sky" />
           <LanguageSwitcher dictionary={dictionary} />
+          <Link className="v5-about-link" href={localePath(locale, "/about")}>{locale === "ko" ? "앱캔버스 소개" : "About Appcanvas"}</Link>
           <SceneAsset alt="" className="v5-cloud v5-cloud-one" src="/village/cloud.svg" />
           <SceneAsset alt="" className="v5-cloud v5-cloud-two" src="/village/cloud.svg" />
           <SceneAsset alt="" className="v5-cloud v5-cloud-three" src="/village/cloud.svg" />
@@ -492,7 +493,7 @@ export default function VillageExplorer({ dictionary, locale }: { dictionary: Vi
         </div>
       </section>
 
-      <div className="v5-after-scene"><StoryBoard dictionary={dictionary} locale={locale} onEdit={setAdminApp} overrides={contentOverrides} /><footer className="village-footer"><span>{dictionary.footer.signature}</span><span aria-label={dictionary.footer.ariaLabel} className="village-footer-meta"><span className="village-footer-links"><Link href={localePath(locale, "/privacy")}>{dictionary.footer.privacy}</Link><span aria-hidden="true"> · </span><Link href={localePath(locale, "/support/eatwater")}>{dictionary.footer.support}</Link><span aria-hidden="true"> · </span><Link href={localePath(locale, "/terms/eatwater")}>{dictionary.footer.terms}</Link></span><span className="village-credit">{dictionary.footer.credit}</span></span></footer></div>
+      <div className="v5-after-scene"><StoryBoard dictionary={dictionary} locale={locale} onEdit={setAdminApp} overrides={contentOverrides} /><footer className="village-footer"><span>{dictionary.footer.signature}</span><span aria-label={dictionary.footer.ariaLabel} className="village-footer-meta"><span className="village-footer-links"><Link href={localePath(locale, "/about")}>{locale === "ko" ? "회사 소개" : "About"}</Link><span aria-hidden="true"> · </span><Link href={localePath(locale, "/privacy")}>{dictionary.footer.privacy}</Link><span aria-hidden="true"> · </span><Link href={localePath(locale, "/support/eatwater")}>{dictionary.footer.support}</Link><span aria-hidden="true"> · </span><Link href={localePath(locale, "/terms/eatwater")}>{dictionary.footer.terms}</Link></span><span className="village-credit">{dictionary.footer.credit}</span></span></footer></div>
       <VillageAdminEditModal dictionary={dictionary} obj={adminApp ? { id: adminApp.id, name: localizedAppName(adminApp, locale), description: localizedAppTagline(adminApp, locale) } : null} onClose={() => setAdminApp(null)} onSaved={(appId, data) => setContentOverrides((current) => ({ ...current, [appId]: data }))} />
     </div>
   );

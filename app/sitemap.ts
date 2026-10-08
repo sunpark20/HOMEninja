@@ -5,13 +5,14 @@ import { locales } from "@/i18n";
 
 export const dynamic = "force-static";
 
-const baseUrl = "https://homeninja.vercel.app";
+const baseUrl = "https://ninjaturtle.win";
+const legacyBaseUrl = "https://homeninja.vercel.app";
 
 function sitePath(url: string | null) {
   if (!url) return null;
   try {
     const parsed = new URL(url);
-    return parsed.origin === baseUrl ? parsed.pathname : null;
+    return parsed.origin === baseUrl || parsed.origin === legacyBaseUrl ? parsed.pathname : null;
   } catch {
     return null;
   }
@@ -24,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter((path): path is string => Boolean(path)),
   );
   const paths = new Set<string>([...localizedRoutePaths].filter((path) => path !== "/"));
+  paths.add("/about");
   for (const path of appOwnedPaths) paths.add(path);
   const lastModified = new Date();
 

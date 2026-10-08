@@ -12,9 +12,9 @@ type AppContent = {
 export function GET() {
   const tmt = tmtData as Record<string, AppContent>;
   const sections: string[] = [
-    "# 닌자거북의홈 — 전체 앱 상세 정보",
-    "> 인디 개발자 sunguk park의 앱 포트폴리오",
-    "> https://homeninja.vercel.app",
+    "# 앱캔버스 — 전체 앱 상세 정보",
+    "> 일상의 불편을 해결하는 작은 앱을 만드는 독립 앱 스튜디오",
+    "> https://ninjaturtle.win",
     "",
   ];
 

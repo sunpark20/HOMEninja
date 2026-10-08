@@ -536,6 +536,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .about-product { display: grid; grid-template-columns: 100px minmax(0, 1fr); align-items: center; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--c-divider); }
 .about-product-preview { position: relative; width: 100px; height: 128px; overflow: hidden; border: 1px solid var(--c-divider); border-radius: 8px; background: var(--v-paper); }
 .about-product-preview img { object-fit: contain; padding: 2px; }
+.about-product-preview--landscape { height: 62px; }
+.about-product-preview--icon { height: 100px; }
+.about-product-preview--icon img { padding: 7px; }
 .about-product-copy { min-width: 0; }
 .about-product h3 { margin: 0; color: var(--c-heading); font-size: 17px; font-weight: 600; }
 .about-product p { margin: 6px 0 0; color: var(--c-secondary); font-size: 13px; line-height: 1.6; }
@@ -603,6 +606,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .about-section { padding: 42px 0 46px; }
   .about-product { grid-template-columns: 64px minmax(0, 1fr); align-items: start; gap: 12px; }
   .about-product-preview { width: 64px; height: 112px; }
+  .about-product-preview--landscape { height: 40px; }
+  .about-product-preview--icon { height: 64px; }
   .about-product-meta { gap: 6px 10px; }
   .about-approach, .about-company { grid-template-columns: 1fr; gap: 22px; }
   .about-company dl > div { grid-template-columns: minmax(105px, .7fr) 1.3fr; gap: 10px; }

@@ -42,18 +42,18 @@ const copy = {
   },
 } as const;
 
-const productPreviews: Partial<Record<string, { src: string; alt: Record<Locale, string> }>> = {
+const productPreviews: Partial<Record<string, { src: string; srcByLocale?: Partial<Record<Locale, string>>; alt: Record<Locale, string>; frame?: "landscape" | "icon" }>> = {
   book: { src: "/appcanvas/book.webp", alt: { ko: "책기록 앱의 독서 기록 화면", en: "Book app reading journal screen" } },
-  "breaklock-timer": { src: "/appcanvas/breaklock-timer.webp", alt: { ko: "Breaklock Timer 화면", en: "Breaklock Timer app screen" } },
+  "breaklock-timer": { src: "/appcanvas/breaklock-timer.webp", alt: { ko: "Breaklock Timer 화면", en: "Breaklock Timer app screen" }, frame: "landscape" },
   callninja: { src: "/appcanvas/callninja.webp", alt: { ko: "콜닌자 앱 화면", en: "CallNinja app screen" } },
-  centuryiris: { src: "/appcanvas/centuryiris.webp", alt: { ko: "Century Iris 화면", en: "Century Iris app screen" } },
-  earth: { src: "/appcanvas/earth.webp", alt: { ko: "Earth의 지구본과 세계 시간 화면", en: "Earth globe and world time screen" } },
-  eatwater: { src: "/appcanvas/eatwater.webp", alt: { ko: "물을 마시는 새의 물 섭취 기록 화면", en: "The Bird That Drinks Water daily log screen" } },
-  gnomon: { src: "/appcanvas/gnomon.jpg", alt: { ko: "Gnomon 앱 아이콘", en: "Gnomon app icon" } },
+  centuryiris: { src: "/appcanvas/centuryiris.webp", alt: { ko: "Century Iris 화면", en: "Century Iris app screen" }, frame: "landscape" },
+  earth: { src: "/appcanvas/earth-icon.webp", alt: { ko: "Earth 앱 아이콘", en: "Earth app icon" }, frame: "icon" },
+  eatwater: { src: "/appcanvas/eatwater.webp", srcByLocale: { en: "/appcanvas/eatwater-en.webp" }, alt: { ko: "물을 마시는 새의 물 섭취 기록 화면", en: "The Bird That Drinks Water daily log screen" } },
+  gnomon: { src: "/appcanvas/gnomon.jpg", alt: { ko: "Gnomon 앱 아이콘", en: "Gnomon app icon" }, frame: "icon" },
   "memory-palace": { src: "/appcanvas/memory-palace.webp", alt: { ko: "기억의궁전 뇌모닉 앱 화면", en: "Memory Palace app screen" } },
   snapcart: { src: "/appcanvas/snapcart.webp", alt: { ko: "찰칵 장값 계산기 앱 화면", en: "SnapCart grocery calculator screen" } },
   spamcall070: { src: "/appcanvas/spamcall070.webp", alt: { ko: "070 스팸 전화 차단 앱 화면", en: "070 spam call blocker screen" } },
-  "yt-bulk-downloader": { src: "/appcanvas/yt-bulk-downloader.webp", alt: { ko: "YT Chita의 동영상 목록 화면", en: "YT Chita video list screen" } },
+  "yt-bulk-downloader": { src: "/appcanvas/yt-chita.webp", alt: { ko: "YT Chita 앱 아이콘", en: "YT Chita app icon" }, frame: "icon" },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -103,31 +103,34 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <h2 id="about-products">{text.productsTitle}</h2>
           <p className="about-section-intro">{text.productsIntro}</p>
           <ul className="about-products">
-            {releasedApps.map((app) => (
-              <li className="about-product" key={app.id}>
-                {productPreviews[app.id] && (
-                  <div className="about-product-preview">
-                    <Image
-                      alt={productPreviews[app.id]!.alt[locale]}
-                      fill
-                      sizes="(max-width: 640px) 64px, 100px"
-                      src={productPreviews[app.id]!.src}
-                    />
+            {releasedApps.map((app) => {
+              const preview = productPreviews[app.id];
+              return (
+                <li className="about-product" key={app.id}>
+                  {preview && (
+                    <div className={`about-product-preview${preview.frame ? ` about-product-preview--${preview.frame}` : ""}`}>
+                      <Image
+                        alt={preview.alt[locale]}
+                        fill
+                        sizes="(max-width: 640px) 64px, 100px"
+                        src={preview.srcByLocale?.[locale] ?? preview.src}
+                      />
+                    </div>
+                  )}
+                  <div className="about-product-copy">
+                    <h3>{localizedAppName(app, locale)}</h3>
+                    <p>{localizedAppTagline(app, locale)}</p>
+                    <div className="about-product-meta">
+                      <span>{app.platforms.map((platform) => platformNames[platform] ?? platform).join(" · ")}</span>
+                      <span>{text.released}</span>
+                      {app.downloads.filter((download) => download.url).map((download) => (
+                        <a className="about-store-link" href={download.url!} key={`${app.id}-${download.platform}`} rel="noreferrer" target="_blank">{download.label}<span aria-hidden="true">↗</span></a>
+                      ))}
+                    </div>
                   </div>
-                )}
-                <div className="about-product-copy">
-                  <h3>{localizedAppName(app, locale)}</h3>
-                  <p>{localizedAppTagline(app, locale)}</p>
-                  <div className="about-product-meta">
-                    <span>{app.platforms.map((platform) => platformNames[platform] ?? platform).join(" · ")}</span>
-                    <span>{text.released}</span>
-                    {app.downloads.filter((download) => download.url).map((download) => (
-                      <a className="about-store-link" href={download.url!} key={`${app.id}-${download.platform}`} rel="noreferrer" target="_blank">{download.label}<span aria-hidden="true">↗</span></a>
-                    ))}
-                  </div>
-                </div>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
         </section>
 

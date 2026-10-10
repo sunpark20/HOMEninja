@@ -524,14 +524,23 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .about-content { width: min(920px, calc(100% - 40px)); margin: 0 auto; }
 .about-hero { padding: clamp(38px, 7vw, 76px) 0 76px; }
 .about-eyebrow { margin: 0 0 16px; color: var(--v-orange-dark); font: 11px/1.4 ui-monospace, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase; }
-.about-proof { display: grid; grid-template-columns: 1fr minmax(250px, .75fr); align-items: center; gap: 28px; margin-top: 48px; padding: 28px 0; border-block: 1px solid var(--c-divider); }
+.about-proof { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); align-items: center; gap: 24px; margin-top: 48px; padding: 28px 0; border-block: 1px solid var(--c-divider); }
 .about-proof-copy { min-width: 0; }
 .about-proof-label { margin: 0; color: var(--c-secondary); font-size: 14px; font-weight: 600; }
-.about-proof-value { margin: 2px 0 5px; color: var(--c-title); font: 700 clamp(64px, 10vw, 112px)/.95 var(--font-display), sans-serif; letter-spacing: -.07em; font-variant-numeric: tabular-nums; }
-.about-proof-source { margin: 8px 0; color: var(--c-meta); font-size: 11px; line-height: 1.6; }
-.about-proof-copy > a { display: inline-flex; gap: 7px; color: var(--v-orange-dark); font-size: 12px; text-underline-offset: 3px; }
-.about-proof-image { position: relative; display: block; width: 100%; aspect-ratio: 1.62; overflow: hidden; border: 1px solid var(--c-divider); background: var(--v-paper); }
-.about-proof-image img { object-fit: cover; object-position: top center; }
+.about-proof-metrics { display: grid; grid-template-columns: 1.2fr .8fr; align-items: end; gap: 12px; margin: 4px 0 0; }
+.about-proof-metric { display: flex; min-width: 0; flex-direction: column; }
+.about-proof-metric dt { order: 2; margin-top: 8px; color: var(--c-secondary); font-size: 14px; font-weight: 600; }
+.about-proof-metric dd { order: 1; margin: 0; color: var(--c-title); font: 700 clamp(48px, 5.6vw, 68px)/.95 var(--font-display), sans-serif; letter-spacing: -.07em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.about-proof-source { margin: 16px 0 0; color: var(--c-meta); font-size: 12px; line-height: 1.6; }
+.about-proof-motto { margin: 8px 0 0; color: var(--c-title); font-size: 14px; font-weight: 600; }
+.about-proof-collage { position: relative; isolation: isolate; width: 100%; max-width: 410px; aspect-ratio: 1.2; margin: 0 auto; }
+.about-proof-note { position: absolute; display: block; overflow: hidden; border: 8px solid var(--v-paper); outline: 1px solid var(--c-divider); outline-offset: -1px; background: var(--v-paper); box-shadow: 0 12px 24px oklch(0.25 0.035 255 / .17); transition: transform .16s ease, box-shadow .16s ease; }
+.about-proof-note img { object-fit: contain; }
+.about-proof-note--app-store-sales { z-index: 1; top: 15%; left: 1%; width: 64%; height: 59%; transform: rotate(-5deg); }
+.about-proof-note--google-play { z-index: 2; top: 5%; right: 1%; width: 65%; height: 57%; transform: rotate(4deg); }
+.about-proof-note--app-store-reviews { z-index: 3; bottom: 0; left: 29%; width: 43%; height: 90%; transform: rotate(2deg); }
+.about-proof-note:hover, .about-proof-note:focus-visible { z-index: 5; transform: scale(1.06) rotate(0); box-shadow: 0 18px 34px oklch(0.25 0.035 255 / .24); }
+.about-proof-note:focus-visible { outline: 3px solid oklch(0.63 0.12 245); outline-offset: 3px; }
 .about-business { max-width: 380px; margin-left: auto; text-align: right; }
 .about-business-label { margin: 0 0 12px; color: var(--v-orange-dark); font: 11px/1.4 ui-monospace, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase; }
 .about-business > p:not(.about-business-label) { display: flex; flex-direction: column; gap: 2px; margin: 0; color: var(--c-secondary); font-size: 12px; line-height: 1.7; }
@@ -601,9 +610,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .about-nav { gap: 10px; font-size: 12px; }
   .about-content { width: calc(100% - 32px); }
   .about-hero { padding: 38px 0 48px; }
-  .about-proof { grid-template-columns: 1fr; gap: 22px; padding: 24px 0; margin-top: 36px; }
-  .about-proof-value { font-size: clamp(58px, 16vw, 82px); }
-  .about-proof-source { font-size: 10px; }
+  .about-proof { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; margin-top: 36px; }
+  .about-proof-metrics { gap: 8px; }
+  .about-proof-metric dd { font-size: clamp(38px, 12vw, 58px); }
+  .about-proof-source { margin-top: 12px; font-size: 11px; }
+  .about-proof-motto { font-size: 13px; }
+  .about-proof-collage { width: min(100%, 410px); aspect-ratio: 1.2; }
+  .about-proof-note { border-width: 7px; }
   .about-business > p:not(.about-business-label) { font-size: 11px; overflow-wrap: anywhere; }
   .about-business-label { font-size: 9px; }
   .about-wordmark { font-size: 18px; }
@@ -611,6 +624,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .about-section { padding: 38px 0; }
   .about-approach { grid-template-columns: 1fr; gap: 18px; }
   .about-footer { align-items: flex-start; flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-proof-note { transition: none; }
 }
 
 @media (max-width: 360px) {

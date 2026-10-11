@@ -37,9 +37,11 @@ export default function CallNinjaPrivacy() {
               1. Data Collection
             </h2>
             <p>
-              CallNinja does not collect any personal information. The app
-              operates entirely on-device with no network communication, and
-              does not access your call content, contacts, or call history.
+              CallNinja does not collect call content, contacts, or call
+              history. Blocking is performed on the device. If you enable
+              iCloud Sync, your selected country and saved phone-number
+              patterns are stored in your private CloudKit database. Only you
+              can access that private database; the developer cannot view it.
             </p>
           </section>
 
@@ -51,9 +53,12 @@ export default function CallNinjaPrivacy() {
               2. Blocking Data
             </h2>
             <p>
-              Phone number patterns entered by the user are stored only in iOS
-              App Group storage on your device and are never transmitted to any
-              external server. All data is removed when the app is deleted.
+              Phone-number patterns are stored in the app&apos;s iOS App Group on
+              this device. When iCloud Sync is enabled, the selected country
+              and saved patterns for every country are also synced through your
+              private iCloud database. Turning sync off keeps the local data.
+              Deleting the app removes its local data; synced data remains in
+              iCloud unless you delete the saved patterns before uninstalling.
             </p>
           </section>
 
@@ -65,9 +70,9 @@ export default function CallNinjaPrivacy() {
               3. Contacts Access
             </h2>
             <p>
-              CallNinja does not access your contacts. iOS CallKit automatically
-              protects numbers saved in your contacts — those numbers are never
-              blocked.
+              CallNinja does not access your contacts. A contact can still be
+              blocked if its number matches a range you activate, so review
+              each pattern before turning it on.
             </p>
           </section>
 
@@ -79,9 +84,11 @@ export default function CallNinjaPrivacy() {
               4. Third Parties
             </h2>
             <p>
-              No data is collected, so no data is shared with third parties.
-              The app contains no advertising SDKs, analytics tools, or external
-              services.
+              Optional sync uses Apple&apos;s CloudKit private database. If you
+              choose to report a problem, the app opens a GitHub issue draft
+              containing app, build, device, OS, and diagnostic details for you
+              to review. The app does not post the issue; you decide whether to
+              submit it. The app contains no advertising or analytics SDKs.
             </p>
           </section>
 
@@ -105,7 +112,7 @@ export default function CallNinjaPrivacy() {
           </section>
 
           <p className="text-xs" style={{ color: "var(--c-meta)" }}>
-            Effective date: April 19, 2026
+            Effective date: October 11, 2026
           </p>
         </div>
 
@@ -132,9 +139,11 @@ export default function CallNinjaPrivacy() {
               1. 개인정보 수집 항목
             </h2>
             <p>
-              CallNinja는 개인정보를 수집하지 않습니다. 앱은 네트워크 통신 없이
-              기기 내에서만 동작하며, 사용자의 통화 내용, 연락처, 통화 기록에
-              접근하지 않습니다.
+              CallNinja는 통화 내용, 연락처, 통화 기록을 수집하지 않습니다.
+              차단 기능은 기기에서 처리됩니다. iCloud 동기화를 켜면 선택한 국가와
+              저장한 전화번호 패턴이 사용자의 비공개 CloudKit 데이터베이스에
+              저장됩니다. 이 데이터베이스는 사용자만 접근할 수 있으며 개발자는
+              내용을 볼 수 없습니다.
             </p>
           </section>
 
@@ -146,9 +155,12 @@ export default function CallNinjaPrivacy() {
               2. 차단 번호 데이터
             </h2>
             <p>
-              사용자가 입력한 전화번호 패턴은 iOS App Group 저장소에만 보관되며,
-              외부 서버로 전송되지 않습니다. 앱 삭제 시 모든 데이터가 함께
-              제거됩니다.
+              전화번호 패턴은 이 기기의 iOS App Group에 저장됩니다. iCloud 동기화를
+              켜면 선택한 국가와 모든 국가에 저장한 패턴도 사용자의 비공개 iCloud
+              데이터베이스를 통해 동기화됩니다. 동기화를 꺼도 기기 데이터는
+              유지됩니다. 앱을 삭제하면 기기 데이터는 제거되지만, iCloud에 동기화된
+              데이터는 앱 삭제만으로 지워지지 않으므로 삭제 전에 저장된 패턴을
+              지워 주세요.
             </p>
           </section>
 
@@ -160,8 +172,9 @@ export default function CallNinjaPrivacy() {
               3. 연락처 접근
             </h2>
             <p>
-              CallNinja는 연락처에 접근하지 않습니다. iOS CallKit이 연락처에
-              저장된 번호를 자동으로 보호하며, 해당 번호는 차단되지 않습니다.
+              CallNinja는 연락처에 접근하지 않습니다. 다만 연락처 번호라도 사용자가
+              활성화한 차단 범위에 포함되면 차단될 수 있으니, 패턴을 확인한 뒤
+              켜 주세요.
             </p>
           </section>
 
@@ -173,8 +186,11 @@ export default function CallNinjaPrivacy() {
               4. 제3자 제공
             </h2>
             <p>
-              수집된 정보가 없으므로 제3자에게 제공되는 정보도 없습니다. 앱은
-              광고 SDK, 분석 도구, 외부 서비스를 포함하지 않습니다.
+              선택적 동기화에는 Apple의 CloudKit 비공개 데이터베이스를 사용합니다.
+              문제를 신고하기로 선택하면 앱·빌드·기기·OS 및 진단 정보가 포함된
+              GitHub 이슈 초안을 열어 내용을 확인할 수 있습니다. 앱이 이슈를
+              자동 게시하지 않으며, 사용자가 검토한 뒤 제출 여부를 결정합니다.
+              광고나 분석 SDK는 포함하지 않습니다.
             </p>
           </section>
 
@@ -198,7 +214,7 @@ export default function CallNinjaPrivacy() {
           </section>
 
           <p className="text-xs" style={{ color: "var(--c-meta)" }}>
-            시행일: 2026년 4월 19일
+            시행일: 2026년 10월 11일
           </p>
         </div>
 

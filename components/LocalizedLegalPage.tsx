@@ -131,14 +131,16 @@ function appPrivacy(locale: Locale, id: string) {
     callninja: {
       title: pick(locale, "콜닌자 개인정보처리방침", "CallNinja Privacy Policy"),
       sections: locale === "ko" ? [
-        { title: "수집하지 않는 정보", paragraphs: ["콜닌자는 연락처, 통화 내용, 전화번호를 수집하거나 서버로 전송하지 않습니다."] },
-        { title: "기기 내 처리", paragraphs: ["차단 규칙과 앱 설정은 사용자의 기기에 저장되며 통화 차단 기능은 iOS의 권한 범위에서 동작합니다."] },
-        { title: "문제 신고", paragraphs: [<>신고는 사용자가 직접 여는 <a href={app.reporting.url} rel="noreferrer" target="_blank">{labels.ko.report}</a>을 통해서만 전송됩니다.</>] },
+        { title: "수집하지 않는 정보", paragraphs: ["콜닌자는 통화 내용, 연락처, 통화 기록을 수집하지 않습니다. 차단은 기기에서 처리됩니다."] },
+        { title: "전화번호와 iCloud 동기화", paragraphs: ["전화번호 패턴은 기기의 iOS App Group에 저장됩니다. iCloud 동기화를 켜면 선택한 국가와 모든 국가에 저장한 번호 패턴이 사용자의 비공개 CloudKit 데이터베이스에 저장되어 같은 Apple 계정의 기기 간 동기화됩니다. 이 데이터베이스는 사용자만 접근할 수 있고 개발자는 내용을 볼 수 없습니다. 동기화를 꺼도 기기 데이터는 유지됩니다. 앱을 삭제해도 iCloud 사본은 남을 수 있습니다. 동기화를 켠 상태에서 앱 안의 저장된 패턴을 삭제하면 다른 기기에도 삭제가 반영됩니다. 동기화 과정에서 삭제를 전달하기 위한 표식은 남을 수 있습니다."] },
+        { title: "연락처 접근", paragraphs: ["콜닌자는 연락처에 접근하지 않습니다. 다만 연락처 번호라도 사용자가 켠 차단 범위에 포함되면 차단될 수 있으니 패턴을 확인해 주세요."] },
+        { title: "문제 신고", paragraphs: [<>신고를 선택하면 앱·빌드·기기·OS 및 진단 정보가 포함된 <a href={app.reporting.url} rel="noreferrer" target="_blank">{labels.ko.report}</a> 초안이 열립니다. 내용을 검토하고 제출하는 것은 사용자 선택입니다. 제출한 이슈는 GitHub에서 프로젝트 관리자가 확인할 수 있습니다.</>] },
         { title: "문의", paragraphs: [<>개인정보 관련 문의는 <a href="mailto:coastguard2681@gmail.com">coastguard2681@gmail.com</a>으로 연락해 주세요.</>] },
       ] : [
-        { title: "Information not collected", paragraphs: ["CallNinja does not collect or upload contacts, call contents, or phone numbers."] },
-        { title: "On-device processing", paragraphs: ["Blocking rules and app settings stay on the device. Call blocking operates within the permissions provided by iOS."] },
-        { title: "Problem reports", paragraphs: [<>A report is submitted only when the user opens the <a href={app.reporting.url} rel="noreferrer" target="_blank">{labels.en.report}</a>.</>] },
+        { title: "Information not collected", paragraphs: ["CallNinja does not collect call contents, contacts, or call history. Blocking runs on the device."] },
+        { title: "Phone numbers and iCloud Sync", paragraphs: ["Phone-number patterns are stored in the iOS App Group on your device. If you enable iCloud Sync, your selected country and saved patterns for every country are stored in your private CloudKit database and synced across devices using the same Apple Account. Only you can access this private database; the developer cannot view it. Turning sync off keeps local data. Uninstalling the app may leave the iCloud copy. Delete saved patterns in the app while sync is enabled to remove them from the synced list; small deletion markers may remain so other devices can receive those deletions."] },
+        { title: "Contacts access", paragraphs: ["CallNinja does not access your contacts. A contact can still be blocked if its number matches a range you activate, so review each pattern first."] },
+        { title: "Problem reports", paragraphs: [<>If you choose to report a problem, the app opens a <a href={app.reporting.url} rel="noreferrer" target="_blank">{labels.en.report}</a> draft with app, build, device, OS, and diagnostic details. You review the draft and decide whether to submit it. Submitted reports are visible to the project maintainers on GitHub.</>] },
         { title: "Contact", paragraphs: [<>For privacy inquiries, contact <a href="mailto:coastguard2681@gmail.com">coastguard2681@gmail.com</a>.</>] },
       ],
     },
@@ -250,7 +252,9 @@ function appPrivacy(locale: Locale, id: string) {
   return {
     ...copy[id as keyof typeof copy],
     subtitle: pick(locale, "개인정보처리방침", "Privacy policy"),
-    effectiveDate: pick(locale, "시행일: 2026년 8월 24일", "Effective date: August 24, 2026"),
+    effectiveDate: id === "callninja"
+      ? pick(locale, "시행일: 2026년 10월 11일", "Effective date: October 11, 2026")
+      : pick(locale, "시행일: 2026년 8월 24일", "Effective date: August 24, 2026"),
   };
 }
 

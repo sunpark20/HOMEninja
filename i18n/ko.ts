@@ -56,7 +56,6 @@ export const ko: VillageDictionary = {
     spamcall070: "스팸 전화 차단",
     callninja: "070의 형제 앱",
     snapcart: "장값 계산기",
-    ytdi: "직접 고른 미디어를 로컬 보관",
     "memory-palace": "장소기억법을 배우는 뇌모닉 앱",
     eatwater: "곧 출시",
     earth: "곧 출시",
@@ -70,6 +69,7 @@ export const ko: VillageDictionary = {
     privacy: "개인정보처리방침",
     support: "지원 페이지",
     dismiss: "닫기",
+    ipaDownload: "IPA 다운로드",
     downloadLabels: {
       macos: "macOS 다운로드",
       windows: "Windows 다운로드",

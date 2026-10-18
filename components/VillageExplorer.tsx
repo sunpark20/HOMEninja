@@ -288,7 +288,7 @@ function V5Detail({ app, dictionary, locale, onClose }: { app: AppRegistryEntry 
         <div className="v5-detail-facts"><span>{app.minOS}</span><span>v{app.version}</span><span>{app.platforms.join(" · ")}</span></div>
         <div className="v5-detail-shot">{dictionary.detail.screenshotPlaceholder}</div>
         <div className="v5-detail-actions">
-          {app.downloads.filter((download) => download.url).map((download) => <a className="v5-detail-cta" href={download.url ?? undefined} key={`${app.id}-${download.platform}`} rel="noreferrer" target="_blank"><VillageIcon name="download" size={17} />{dictionary.detail.downloadLabels[download.platform] ?? download.label}</a>)}
+          {app.downloads.filter((download) => download.url).map((download) => <a className="v5-detail-cta" href={download.url ?? undefined} key={`${app.id}-${download.platform}`} rel="noreferrer" target="_blank"><VillageIcon name="download" size={17} />{download.platform === "ios" && download.distribution === "direct" ? dictionary.detail.ipaDownload : (dictionary.detail.downloadLabels[download.platform] ?? download.label)}</a>)}
           {app.status === "unreleased" && <span className="v5-detail-cta is-soon">{dictionary.detail.comingSoon}</span>}
           <a className="v5-detail-report" href={app.reporting.url} rel="noreferrer" target="_blank">{dictionary.detail.report}</a>
         </div>

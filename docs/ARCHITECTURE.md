@@ -89,3 +89,10 @@ tests/                               # registry와 정적 계약 테스트
 잎과 CTA는 실제 버튼/링크, 모달은 dialog semantics와 Escape 닫기를 사용한다.
 모션이 꺼져도 앱 잎을 숨기지 않는다. 자산은 로컬 SVG이며 런타임 CDN 요청은
 없다. 공개 라우트는 SSG, API만 동적이다.
+
+## YTDI 사이드로드 배포 (2026-10-19)
+
+YTDI manifest는 비공개 앱 소스의 shipping.yml을 0.shipping/ytdi/shipping.yml에서 참조한다.
+다운로드 distribution은 store/direct/web이며 store/release에서 생성한다. iOS direct만 IPA 다운로드/Download IPA로 표시한다.
+공개 검증 전에는 unreleased와 배포 저장소 소개 링크만 두고, 검증 후 manifest의 release.ios 및 released 상태를 함께 반영한다.
+YTDI 소개는 manifest의 ko/en 문구를 사용하며 별도 appCopies로 덮어쓰지 않는다. 정책/지원은 legacy 경로와 실제 locale 경로 양쪽을 유지한다.

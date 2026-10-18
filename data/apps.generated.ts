@@ -19,6 +19,7 @@ export const generatedApps: AppRegistryEntry[] = [
       {
         "platform": "ios",
         "url": "https://apps.apple.com/app/id6814522901",
+        "distribution": "store",
         "label": "App Store"
       }
     ],
@@ -45,13 +46,14 @@ export const generatedApps: AppRegistryEntry[] = [
       "macos"
     ],
     "minOS": "macOS 12.0+",
-    "version": "1.8.1",
+    "version": "1.9.1",
     "status": "released",
-    "updatedAt": "2026.08",
+    "updatedAt": "2026.10",
     "downloads": [
       {
         "platform": "macos",
         "url": "https://apps.apple.com/app/id6770569966",
+        "distribution": "store",
         "label": "Mac App Store"
       }
     ],
@@ -85,6 +87,7 @@ export const generatedApps: AppRegistryEntry[] = [
       {
         "platform": "ios",
         "url": "https://apps.apple.com/app/id6762523084",
+        "distribution": "store",
         "label": "App Store"
       }
     ],
@@ -118,6 +121,7 @@ export const generatedApps: AppRegistryEntry[] = [
       {
         "platform": "macos",
         "url": "https://apps.apple.com/app/id6763940089",
+        "distribution": "store",
         "label": "Mac App Store"
       }
     ],
@@ -151,6 +155,7 @@ export const generatedApps: AppRegistryEntry[] = [
       {
         "platform": "ios",
         "url": "https://apps.apple.com/app/id6800529221",
+        "distribution": "store",
         "label": "App Store"
       }
     ],
@@ -184,6 +189,7 @@ export const generatedApps: AppRegistryEntry[] = [
       {
         "platform": "ios",
         "url": "https://apps.apple.com/app/id6791134733",
+        "distribution": "store",
         "label": "App Store"
       }
     ],
@@ -217,6 +223,7 @@ export const generatedApps: AppRegistryEntry[] = [
       {
         "platform": "macos",
         "url": "https://github.com/sunpark20/gnomon/releases/tag/v1.8.0",
+        "distribution": "direct",
         "label": "macOS 다운로드"
       }
     ],
@@ -250,11 +257,13 @@ export const generatedApps: AppRegistryEntry[] = [
       {
         "platform": "ios",
         "url": "https://apps.apple.com/app/id6758509388",
+        "distribution": "store",
         "label": "App Store"
       },
       {
         "platform": "android",
         "url": "https://play.google.com/store/apps/details?id=hungry.ex_frag",
+        "distribution": "store",
         "label": "Google Play"
       }
     ],
@@ -315,6 +324,7 @@ export const generatedApps: AppRegistryEntry[] = [
       {
         "platform": "ios",
         "url": "https://apps.apple.com/app/id6763238313",
+        "distribution": "store",
         "label": "App Store"
       }
     ],
@@ -348,6 +358,7 @@ export const generatedApps: AppRegistryEntry[] = [
       {
         "platform": "ios",
         "url": "https://apps.apple.com/app/id6762326707",
+        "distribution": "store",
         "label": "App Store"
       }
     ],
@@ -381,16 +392,19 @@ export const generatedApps: AppRegistryEntry[] = [
       {
         "platform": "macos",
         "url": "https://github.com/sunpark20/YT-Chita/releases/latest",
+        "distribution": "direct",
         "label": "macOS 다운로드"
       },
       {
         "platform": "windows",
         "url": "https://github.com/sunpark20/YT-Chita/releases/latest",
+        "distribution": "direct",
         "label": "Windows 다운로드"
       },
       {
         "platform": "web",
         "url": "https://sunpark20.github.io/YT-Chita/",
+        "distribution": "web",
         "label": "제품 소개 및 정책"
       }
     ],
@@ -409,18 +423,25 @@ export const generatedApps: AppRegistryEntry[] = [
   },
   {
     "id": "ytdi",
-    "displayName": "ytdi",
-    "displayNameKo": "ytdi",
-    "taglineKo": "불안정한 회선에서도 이어받는 iPhone 영상 보관 앱",
-    "taglineEn": "An iPhone media library that resumes downloads on unstable connections",
+    "displayName": "YTDI",
+    "displayNameKo": "YTDI",
+    "taglineKo": "불안정한 회선에서도 이어받는 iPhone 영상 보관 앱 · 사이드로드 공개 준비 중",
+    "taglineEn": "An iPhone media library that resumes interrupted downloads · sideload release in preparation",
     "platforms": [
       "ios"
     ],
     "minOS": "iOS 26.0+",
     "version": "0.1.0",
     "status": "unreleased",
-    "updatedAt": "2026.08",
-    "downloads": [],
+    "updatedAt": "2026.10",
+    "downloads": [
+      {
+        "platform": "web",
+        "url": "https://github.com/sunpark20/ytdi-releases",
+        "distribution": "web",
+        "label": "제품 소개 및 정책"
+      }
+    ],
     "web": {
       "privacy": "https://homeninja.vercel.app/privacy/ytdi",
       "support": "https://homeninja.vercel.app/support/ytdi"

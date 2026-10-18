@@ -235,24 +235,26 @@ function appPrivacy(locale: Locale, id: string) {
       ],
     },
     ytdi: {
-      title: pick(locale, "ytdi 개인정보처리방침", "ytdi Privacy Policy"),
+      title: pick(locale, "YTDI 개인정보처리방침", "YTDI Privacy Policy"),
       sections: locale === "ko" ? [
-        { title: "1. 개발자가 수집하는 정보", paragraphs: ["ytdi 개발자는 개인정보를 수집하거나 보관하지 않습니다. 계정, 광고, 분석 SDK, 추적 기술 또는 개발자 서버를 사용하지 않습니다."] },
-        { title: "2. 기기에 저장되는 정보", paragraphs: ["영상 링크, 제목, 다운로드 상태, 완성 파일, 목록, 재생 위치와 설정은 iPhone 앱 컨테이너에 저장됩니다."] },
-        { title: "3. 기능 수행을 위한 네트워크", paragraphs: ["다운로드를 요청하면 링크와 영상 ID를 바탕으로 YouTube·Google 콘텐츠 서버에 연결합니다. 표준 네트워크 정보는 해당 서비스에 전달될 수 있습니다."] },
-        { title: "4. 문제 신고", paragraphs: [<>문제 신고는 {reportLink(app, labels.ko.report)}을 사용자가 직접 열었을 때만 가능합니다. 공개 이슈에 민감정보와 원본 로그를 올리지 마세요.</>] },
+        { title: "1. 개발자의 데이터 처리", paragraphs: ["개발자는 사용자 데이터를 수집하거나 보관하지 않으며 광고·분석 SDK·추적 기술·개발자 서버를 사용하지 않습니다. Google 계정 연결은 선택 사항으로, Google에 직접 인증하여 YouTube 구독을 조회·추가·해제합니다."] },
+        { title: "2. 기기에 저장되는 정보", paragraphs: ["영상 링크·제목·다운로드 상태·파일·목록·재생 위치·설정은 iPhone에 저장됩니다. Google 연결 시 이메일·구독 목록·자동 다운로드 설정도 기기에 저장됩니다. 갱신 토큰은 iOS Keychain에, 액세스 토큰은 메모리에 저장합니다. 로그아웃은 앱의 인증 정보를 삭제합니다. Google 계정의 연결된 앱 관리에서도 접근 권한을 철회할 수 있습니다. Keychain 정보는 앱 삭제 후에도 남을 수 있으므로 제거 전에 로그아웃하거나 권한을 철회하세요. 파일은 앱에서 삭제할 수 있으며 iOS 설정에 따라 기기 백업에 포함될 수 있습니다."] },
+        { title: "3. 기능 수행을 위한 네트워크", paragraphs: ["다운로드·로그인·구독 기능은 YouTube 및 Google 서버와 직접 통신합니다. 표준 네트워크 정보는 해당 서비스에 전달됩니다. 추출 규칙 갱신은 GitHub Gist를 조회하며 사용자 링크나 보관함 내용은 그 요청에 포함하지 않습니다."] },
+        { title: "4. 문제 신고", paragraphs: [<>사용자가 {reportLink(app, labels.ko.report)}을 직접 열 때만 신고할 수 있습니다. 공개 이슈에 민감정보와 원본 로그를 올리지 마세요.</>] },
       ] : [
-        { title: "1. Developer collection", paragraphs: ["The ytdi developer does not collect or retain personal information. The app uses no account, advertising, analytics SDK, tracking technology, or developer-operated server."] },
-        { title: "2. On-device information", paragraphs: ["Media links, titles, download state, completed files, lists, playback positions, and settings remain in the iPhone app container."] },
-        { title: "3. Functional network requests", paragraphs: ["When a download is requested, ytdi connects to YouTube and Google content servers based on the entered link or video ID. Those services may receive standard network information."] },
-        { title: "4. Problem reports", paragraphs: [<>A report is possible only through the {reportLink(app, labels.en.report)} opened by the user. Do not post sensitive information or raw logs in a public issue.</>] },
+        { title: "1. Developer data handling", paragraphs: ["The developer does not collect or retain user data and uses no advertising, analytics SDK, tracking, or developer server. Optional Google sign-in authenticates directly with Google to read, add, and remove YouTube subscriptions."] },
+        { title: "2. On-device information", paragraphs: ["Media links, titles, download state, files, lists, playback positions, and settings remain on the iPhone. Google connection also stores email, subscriptions, and automatic download preferences on the device. Refresh tokens use iOS Keychain; access tokens stay in memory. Signing out deletes app authentication credentials. You can also revoke access in Google Account connections. Keychain data may survive uninstalling, so sign out or revoke access first. Files can be deleted in the app and may be included in device backups depending on iOS settings."] },
+        { title: "3. Functional network requests", paragraphs: ["Downloads, sign-in, and subscriptions communicate directly with YouTube and Google servers, which receive standard network information. Rule updates fetch a GitHub Gist without sending media links or library contents."] },
+        { title: "4. Problem reports", paragraphs: [<>Reports are submitted only through the {reportLink(app, labels.en.report)} opened by the user. Do not post sensitive information or raw logs.</>] },
       ],
     },
   } as const;
   return {
     ...copy[id as keyof typeof copy],
     subtitle: pick(locale, "개인정보처리방침", "Privacy policy"),
-    effectiveDate: id === "callninja"
+    effectiveDate: id === "ytdi"
+      ? pick(locale, "시행일: 2026년 10월 19일", "Effective date: October 19, 2026")
+      : id === "callninja"
       ? pick(locale, "시행일: 2026년 10월 11일", "Effective date: October 11, 2026")
       : pick(locale, "시행일: 2026년 8월 24일", "Effective date: August 24, 2026"),
   };
@@ -315,15 +317,17 @@ function appSupport(locale: Locale, id: string) {
       ],
     },
     ytdi: {
-      title: pick(locale, "ytdi 지원", "ytdi Support"),
+      title: pick(locale, "YTDI 지원", "YTDI Support"),
       sections: locale === "ko" ? [
-        { title: "시작하기", paragraphs: ["본인이 저장할 권리나 허가를 가진 영상 링크를 붙여넣고 화질을 선택하세요. 다운로드가 끝나면 보관함에 나타납니다."] },
-        { title: "회선이 끊겼어요", paragraphs: ["연결이 돌아오면 같은 받은 위치에서 자동으로 이어받습니다. 앱 전환기에서 강제 종료한 경우에는 앱을 다시 열어야 합니다."] },
-        { title: "권리와 문제 신고", paragraphs: ["직접 만든 콘텐츠나 다운로드가 허용된 콘텐츠에만 사용하세요.", <>버전과 재현 순서를 적어 {report(labels.ko.report)}으로 알려 주세요.</>] },
+        { title: "사이드로드 공개 준비 중", paragraphs: ["iPhone·iOS 26 이상용 사용자 재서명 IPA를 준비하고 있습니다. App Store 앱이 아닙니다. Google 공개 로그인과 외부 Apple 계정 실기기 설치 검증 후 공개합니다. 현재 내려받을 수 있는 IPA는 없습니다.", <a key="distribution" href={app.downloads.find(link => link.platform === "web")?.url ?? undefined}>공개 배포 저장소와 설치 안내</a>] },
+        { title: "설치·갱신·기존 데이터", paragraphs: ["공개 후에는 자신의 Apple 계정으로 IPA를 재서명해야 합니다. 서명 유효기간은 계정·설치 도구에 따라 다릅니다. 장기간 오프라인 사용 전 갱신하고, 업데이트 시 같은 계정·앱 식별자로 덮어쓰세요. 앱 삭제는 다운로드와 진행 상태를 지우며, 다른 서명 계정이나 식별자로 설치하면 기존 데이터가 이어지지 않을 수 있습니다."] },
+        { title: "시작하기와 연결 복구", paragraphs: ["본인이 저장할 권리나 허가를 가진 영상 링크를 붙여넣고 화질을 선택하세요. 연결이 돌아오면 같은 위치에서 이어받습니다. 앱을 강제 종료했다면 다시 열어 주세요."] },
+        { title: "문제 신고", paragraphs: [<>버전과 재현 순서를 적어 {report(labels.ko.report)}으로 알려 주세요. 개인정보와 원본 로그는 게시하지 마세요.</>] },
       ] : [
-        { title: "Getting started", paragraphs: ["Paste a media link you own or are authorized to save, choose a format, and wait for it to appear in your library."] },
-        { title: "When a connection drops", paragraphs: ["The queue resumes from the received offset when the connection returns. If you force-quit the app, reopen it to continue."] },
-        { title: "Rights and reports", paragraphs: ["Use ytdi only for content you made or are authorized to download.", <>Include the version and reproduction steps in the {report(labels.en.report)}.</>] },
+        { title: "Sideload release preparation", paragraphs: ["A user-resigned IPA for iPhone on iOS 26 or later is in preparation. This is not an App Store app. Public Google sign-in and installation with another Apple account must pass verification before release. No public IPA is available yet.", <a key="distribution" href={app.downloads.find(link => link.platform === "web")?.url ?? undefined}>Public distribution repository and installation guide</a>] },
+        { title: "Installation, renewal, and existing data", paragraphs: ["After release, resign the IPA with your own Apple account. Signing validity depends on the account and installation tool. Renew before extended offline use and update with the same signing account and app identifier without uninstalling. Removing the app deletes downloads and progress; another signing identity or app identifier may not preserve existing data."] },
+        { title: "Getting started and reconnecting", paragraphs: ["Paste a media link you own or are authorized to save and choose a format. The queue resumes from the received offset when the connection returns. Reopen the app after force-quitting."] },
+        { title: "Problem reports", paragraphs: [<>Include the version and reproduction steps in the {report(labels.en.report)}. Never post personal information or raw logs.</>] },
       ],
     },
   };

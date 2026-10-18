@@ -3,7 +3,7 @@ import Link from "next/link";
 import { appByID } from "@/data/apps";
 
 export const metadata: Metadata = {
-  title: "ytdi 지원",
+  title: "YTDI 지원",
   description: "ytdi support / ytdi 사용법과 문제 해결",
 };
 
@@ -13,8 +13,11 @@ export default function YtdiSupport() {
   return (
     <div className="min-h-screen flex items-start justify-center px-6 py-24">
       <article className="max-w-2xl w-full space-y-10">
-        <h1 className="text-3xl font-semibold tracking-tight font-[family-name:var(--font-display)]" style={{ color: "var(--c-title)" }}>ytdi 지원<span className="block text-xl font-normal mt-1" style={{ color: "var(--c-dim)" }}>ytdi Support</span></h1>
+        <h1 className="text-3xl font-semibold tracking-tight font-[family-name:var(--font-display)]" style={{ color: "var(--c-title)" }}>YTDI 지원<span className="block text-xl font-normal mt-1" style={{ color: "var(--c-dim)" }}>YTDI Support</span></h1>
         <div className="space-y-7 text-sm leading-relaxed" style={{ color: "var(--c-body)" }}>
+          <section><h2 className="text-lg font-medium mb-2" style={{ color: "var(--c-heading)" }}>사이드로드 공개 준비 중</h2><p>YTDI는 iPhone·iOS 26 이상용 앱입니다. App Store 배포가 아닌 사용자 재서명용 IPA를 준비하고 있습니다. Google 공개 로그인과 외부 계정 실기기 설치 검증을 마친 뒤 공개하며, 현재 공개 다운로드는 제공하지 않습니다.</p><p className="mt-2"><a className="underline" href={app.downloads.find((link) => link.platform === "web")?.url ?? undefined}>공개 배포 저장소와 설치 안내</a>에서 진행 상태를 확인하세요.</p></section>
+          <section><h2 className="text-lg font-medium mb-2" style={{ color: "var(--c-heading)" }}>설치·갱신·기존 데이터</h2><p>공개 후에는 IPA를 내려받아 본인의 Apple 계정으로 재서명해야 합니다. 서명 유효기간은 사용하는 계정과 설치 도구에 따라 다릅니다. 장기간 오프라인으로 사용하기 전에 유효기간을 확인하세요. 업데이트할 때는 같은 계정·앱 식별자로 덮어쓰고 앱을 삭제하지 마세요. 서명 계정이나 식별자가 바뀌면 기존 데이터가 이어지지 않을 수 있습니다.</p></section>
+          <section><h2 className="text-lg font-medium mb-2" style={{ color: "var(--c-heading)" }}>Sideload release preparation</h2><p>YTDI requires an iPhone running iOS 26 or later. The user-resigned IPA will become available after public Google sign-in and installation with another Apple account are verified. There is no public IPA yet. Renew the signing profile before extended offline use. Update with the same signing account and app identifier without deleting the app to preserve local data.</p></section>
           <section><h2 className="text-lg font-medium mb-2" style={{ color: "var(--c-heading)" }}>시작하기</h2><p>큐에서 본인이 저장할 권리나 허가를 가진 영상 링크를 붙여넣고 화질을 선택하세요. 다운로드가 끝나면 다운로드받은 목록에 나타나며, 길게 눌러 새 목록으로 이동할 수 있습니다.</p></section>
           <section><h2 className="text-lg font-medium mb-2" style={{ color: "var(--c-heading)" }}>회선이 끊겼어요</h2><p>네트워크가 없으면 주소를 반복해서 다시 만들지 않고 같은 받은 위치에서 기다립니다. 연결이 돌아오면 자동으로 이어받습니다. 앱 전환기에서 사용자가 강제 종료한 경우에는 앱을 다시 열어야 합니다.</p></section>
           <section><h2 className="text-lg font-medium mb-2" style={{ color: "var(--c-heading)" }}>저장 공간이 부족해요</h2><p>공간 부족 상태에서는 이미 받은 바이트와 위치를 보존합니다. iPhone의 공간을 비운 뒤 앱을 열면 같은 위치에서 계속합니다. 고화질은 비디오, 오디오, 병합 결과가 잠시 함께 있어 표시 용량보다 더 많은 여유가 필요할 수 있습니다.</p></section>

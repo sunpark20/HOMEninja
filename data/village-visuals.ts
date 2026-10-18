@@ -43,7 +43,7 @@ export const villageAppVisuals: Record<string, VillageAppVisual> = {
   snapcart: { tree: "iphone", label: "CK", tone: "rose", tilt: 2 },
   spamcall070: { tree: "iphone", label: "07", tone: "coral", tilt: -2 },
   "yt-bulk-downloader": { tree: "mac", label: "YT", tone: "berry", tilt: 1 },
-  ytdi: { tree: "iphone", label: "TK", tone: "teal", tilt: -2 },
+  ytdi: { tree: "iphone", label: "YT", tone: "teal", tilt: -2 },
 };
 
 /** Coordinates and copy translated from the supplied 앱마을 대문 v5 canvas. */

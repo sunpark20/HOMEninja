@@ -70,7 +70,8 @@ function urlMap(value, label) {
   );
 }
 
-function downloadLabel(platform, url) {
+function downloadLabel(platform, url, distribution) {
+  if (platform === "ios" && distribution === "direct") return "IPA 다운로드";
   if (platform === "ios") return "App Store";
   if (platform === "android") return "Google Play";
   if (platform === "macos") return url.includes("apps.apple.com") ? "Mac App Store" : "macOS 다운로드";
@@ -107,10 +108,11 @@ function loadManifest(directory) {
   const release = urlMap(manifest.release, `${manifestPath}.release`);
   const downloads = platforms.flatMap((platform) => {
     const url = store[platform] ?? release[platform];
-    return url ? [{ platform, url, label: downloadLabel(platform, url) }] : [];
+    const distribution = store[platform] ? "store" : platform === "web" ? "web" : "direct";
+    return url ? [{ platform, url, distribution, label: downloadLabel(platform, url, distribution) }] : [];
   });
   if (release.web && !downloads.some((download) => download.platform === "web")) {
-    downloads.push({ platform: "web", url: release.web, label: downloadLabel("web", release.web) });
+    downloads.push({ platform: "web", url: release.web, distribution: "web", label: downloadLabel("web", release.web, "web") });
   }
 
   const status = requiredString(app.status, `${manifestPath}.app.status`);

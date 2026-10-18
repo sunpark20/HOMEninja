@@ -56,7 +56,6 @@ export const en: VillageDictionary = {
     spamcall070: "Block spam calls",
     callninja: "A sibling app to SpamCall070",
     snapcart: "Grocery calculator",
-    ytdi: "Keep selected media locally",
     "memory-palace": "A mnemonic app for learning the method of loci",
     eatwater: "Coming soon",
     earth: "Coming soon",
@@ -70,6 +69,7 @@ export const en: VillageDictionary = {
     privacy: "Privacy policy",
     support: "Support page",
     dismiss: "Close",
+    ipaDownload: "Download IPA",
     downloadLabels: {
       macos: "Download for macOS",
       windows: "Download for Windows",

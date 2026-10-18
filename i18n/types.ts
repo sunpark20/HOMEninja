@@ -51,6 +51,7 @@ export type VillageDictionary = {
     privacy: string;
     support: string;
     dismiss: string;
+    ipaDownload: string;
     downloadLabels: Partial<Record<Platform, string>>;
   };
   resident: {

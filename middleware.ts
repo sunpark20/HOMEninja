@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const legacyLocaleLessRoute = /^\/(about|privacy|support|terms)(?:\/.*)?\/?$/;
-const directBookRoute = /^\/(?:privacy|support)\/book\/?$/;
+const directAppRoute = /^\/(?:privacy|support)\/(?:book|todayopen|bip0039)\/?$/;
 
 function localeForRequest(request: NextRequest) {
   return request.headers.get("x-vercel-ip-country")?.toUpperCase() === "KR" ? "ko" : "en";
@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
     url.hostname = "ninjaturtle.win";
     return NextResponse.redirect(url, 308);
   }
-  if ((pathname === "/" || legacyLocaleLessRoute.test(pathname)) && !directBookRoute.test(pathname)) {
+  if ((pathname === "/" || legacyLocaleLessRoute.test(pathname)) && !directAppRoute.test(pathname)) {
     const locale = localeForRequest(request);
     const url = request.nextUrl.clone();
     url.pathname = pathname === "/" ? `/${locale}` : `/${locale}${pathname.replace(/\/$/, "")}`;

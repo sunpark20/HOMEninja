@@ -31,6 +31,8 @@ export type V5AppLayout = {
 
 /** Factual app fields stay in data/apps.generated.ts; this file is presentation-only. */
 export const villageAppVisuals: Record<string, VillageAppVisual> = {
+  bip0039: { tree: "iphone", label: "BIP", tone: "blue", tilt: -1 },
+  todayopen: { tree: "iphone", label: "오늘", tone: "sage", tilt: 1 },
   book: { tree: "iphone", label: "책", tone: "sage", tilt: 1 },
   "breaklock-timer": { tree: "mac", label: "BL", tone: "sage", tilt: -2 },
   callninja: { tree: "iphone", label: "CN", tone: "blue", tilt: 2 },
@@ -48,6 +50,8 @@ export const villageAppVisuals: Record<string, VillageAppVisual> = {
 
 /** Coordinates and copy translated from the supplied 앱마을 대문 v5 canvas. */
 const v5AppLayoutEntries: Array<[string, V5AppLayout]> = [
+  ["bip0039", { tree: "iphone", x: 610, y: 95, swayDuration: "5.1s", swayDelay: "-2s", landingX: 650, landingY: 516 }],
+  ["todayopen", { tree: "iphone", x: 610, y: 235, swayDuration: "5.4s", swayDelay: "-1.5s", landingX: 690, landingY: 636 }],
   ["book", { tree: "iphone", x: 520, y: 155, swayDuration: "5.2s", swayDelay: "-2.4s", landingX: 610, landingY: 636 }],
   ["centuryiris", { tree: "mac", x: 35, y: 98, swayDuration: "5.2s", swayDelay: "-0.2s", landingX: 0, landingY: 470 }],
   ["gnomon", { tree: "mac", x: 178, y: 75, swayDuration: "4.6s", swayDelay: "-1.4s", landingX: 180, landingY: 470 }],

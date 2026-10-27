@@ -3,6 +3,40 @@ import type { AppRegistryEntry } from "./apps";
 
 export const generatedApps: AppRegistryEntry[] = [
   {
+    "id": "bip0039",
+    "displayName": "BIP-0039 Mnemonic",
+    "displayNameKo": "BIP-0039 Mnemonic",
+    "taglineKo": "오프라인에서 BIP-39 영문 단어를 찾아보는 앱",
+    "taglineEn": "Browse BIP-39 English words offline",
+    "platforms": [
+      "ios"
+    ],
+    "minOS": "iOS 17.0+",
+    "version": "1.0",
+    "status": "unreleased",
+    "updatedAt": "2026.10",
+    "downloads": [
+      {
+        "platform": "ios",
+        "url": "https://apps.apple.com/app/id6827382555",
+        "distribution": "store",
+        "label": "App Store"
+      }
+    ],
+    "web": {
+      "privacy": "https://homeninja.vercel.app/privacy/bip0039",
+      "support": "https://homeninja.vercel.app/support/bip0039"
+    },
+    "reporting": {
+      "template": "bip0039-bug.yml",
+      "locales": [
+        "ko",
+        "en"
+      ],
+      "url": "https://github.com/sunpark20/errorreport/issues/new?template=bip0039-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    }
+  },
+  {
     "id": "book",
     "displayName": "Book",
     "displayNameKo": "책기록",
@@ -372,6 +406,33 @@ export const generatedApps: AppRegistryEntry[] = [
         "ko"
       ],
       "url": "https://github.com/sunpark20/errorreport/issues/new?template=spamcall070-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    }
+  },
+  {
+    "id": "todayopen",
+    "displayName": "오늘 열었을까",
+    "displayNameKo": "오늘 열었을까",
+    "taglineKo": "자주 가는 장소의 오늘 운영 상태와 휴무 확인",
+    "taglineEn": "Check today's opening hours and closures for your places",
+    "platforms": [
+      "ios"
+    ],
+    "minOS": "iOS 17.0+",
+    "version": "1.0",
+    "status": "unreleased",
+    "updatedAt": "2026.10",
+    "downloads": [],
+    "web": {
+      "privacy": "https://homeninja.vercel.app/privacy/todayopen",
+      "support": "https://homeninja.vercel.app/support/todayopen"
+    },
+    "reporting": {
+      "template": "todayopen-bug.yml",
+      "locales": [
+        "ko",
+        "en"
+      ],
+      "url": "https://github.com/sunpark20/errorreport/issues/new?template=todayopen-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     }
   },
   {

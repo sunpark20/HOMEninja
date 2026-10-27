@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 const expectedIDs = [
+  "bip0039",
   "book",
   "breaklock-timer",
   "callninja",
@@ -15,6 +16,7 @@ const expectedIDs = [
   "quick-quit",
   "snapcart",
   "spamcall070",
+  "todayopen",
   "yt-bulk-downloader",
   "ytdi",
 ];

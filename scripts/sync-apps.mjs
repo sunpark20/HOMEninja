@@ -16,7 +16,6 @@ const expectedIDs = new Set([
   "book",
   "breaklock-timer",
   "callninja",
-  "centuryiris",
   "earth",
   "eatwater",
   "gnomon",

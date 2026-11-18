@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import VillageExplorer from "@/components/VillageExplorer";
+import Home from "@/components/Home";
 import { isLocale, locales, dictionaries, type Locale } from "@/i18n";
 import { legalMetadata, localizedRoutePaths, renderLocalizedLegalPage } from "@/components/LocalizedLegalPage";
 
@@ -42,6 +42,6 @@ export default async function LocalizedRoute({ params }: { params: Promise<{ loc
   const locale: Locale = rawLocale;
   const routePath = slug?.length ? `/${slug.join("/")}` : "/";
   if (!localizedRoutePaths.includes(routePath as (typeof localizedRoutePaths)[number])) notFound();
-  if (routePath === "/") return <VillageExplorer dictionary={dictionaries[locale]} locale={locale} />;
+  if (routePath === "/") return <Home locale={locale} />;
   return renderLocalizedLegalPage(locale, routePath);
 }

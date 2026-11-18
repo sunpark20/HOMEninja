@@ -139,40 +139,6 @@ export const generatedApps: AppRegistryEntry[] = [
     }
   },
   {
-    "id": "centuryiris",
-    "displayName": "Century Iris",
-    "displayNameKo": "Century Iris",
-    "taglineKo": "MacBook 조도센서로 외장 모니터 밝기와 색온도를 자동 조절합니다",
-    "taglineEn": "Automatically adjusts external monitor brightness and color temperature using your MacBook's ambient light sensor",
-    "platforms": [
-      "macos"
-    ],
-    "minOS": "macOS 15.0+, Apple Silicon",
-    "version": "1.0",
-    "status": "released",
-    "updatedAt": "2026.08",
-    "downloads": [
-      {
-        "platform": "macos",
-        "url": "https://apps.apple.com/app/id6763940089",
-        "distribution": "store",
-        "label": "Mac App Store"
-      }
-    ],
-    "web": {
-      "privacy": "https://homeninja.vercel.app/privacy",
-      "support": "https://homeninja.vercel.app/privacy"
-    },
-    "reporting": {
-      "template": "centuryiris-bug.yml",
-      "locales": [
-        "ko",
-        "en"
-      ],
-      "url": "https://github.com/sunpark20/errorreport/issues/new?template=centuryiris-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
-    }
-  },
-  {
     "id": "earth",
     "displayName": "Earth: World Time & Sky",
     "displayNameKo": "Earth: 세계 시간과 하늘",
@@ -250,13 +216,13 @@ export const generatedApps: AppRegistryEntry[] = [
       "macos"
     ],
     "minOS": "macOS 15.0+, Apple Silicon",
-    "version": "1.8.0",
+    "version": "1.8.1",
     "status": "released",
-    "updatedAt": "2026.08",
+    "updatedAt": "2026.11",
     "downloads": [
       {
         "platform": "macos",
-        "url": "https://github.com/sunpark20/gnomon/releases/tag/v1.8.0",
+        "url": "https://github.com/sunpark20/gnomon/releases/tag/v1.8.1",
         "distribution": "direct",
         "label": "macOS 다운로드"
       }
@@ -325,7 +291,7 @@ export const generatedApps: AppRegistryEntry[] = [
     ],
     "minOS": "macOS 13.0+",
     "version": "2.0.0",
-    "status": "unreleased",
+    "status": "retired",
     "updatedAt": "2026.08",
     "downloads": [],
     "web": {
@@ -410,18 +376,25 @@ export const generatedApps: AppRegistryEntry[] = [
   },
   {
     "id": "todayopen",
-    "displayName": "오늘 열었을까",
-    "displayNameKo": "오늘 열었을까",
+    "displayName": "오늘열었나",
+    "displayNameKo": "오늘열었나",
     "taglineKo": "자주 가는 장소의 오늘 운영 상태와 휴무 확인",
     "taglineEn": "Check today's opening hours and closures for your places",
     "platforms": [
       "ios"
     ],
     "minOS": "iOS 17.0+",
-    "version": "1.0",
-    "status": "unreleased",
-    "updatedAt": "2026.10",
-    "downloads": [],
+    "version": "1.2",
+    "status": "released",
+    "updatedAt": "2026-11-12",
+    "downloads": [
+      {
+        "platform": "ios",
+        "url": "https://apps.apple.com/app/id6827599792",
+        "distribution": "store",
+        "label": "App Store"
+      }
+    ],
     "web": {
       "privacy": "https://homeninja.vercel.app/privacy/todayopen",
       "support": "https://homeninja.vercel.app/support/todayopen"

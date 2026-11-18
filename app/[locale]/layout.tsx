@@ -44,7 +44,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   return (
     <html lang={locale}>
       <body className="font-[family-name:var(--font-body)]" style={{ color: "var(--c-heading)" }}>
-        <main className="relative z-10">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );

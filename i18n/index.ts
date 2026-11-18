@@ -1,17 +1,17 @@
 import { en } from "./en";
 import { ko } from "./ko";
-import type { Locale, VillageDictionary } from "./types";
+import type { Locale, HomeDictionary } from "./types";
 
-export type { Locale, VillageDictionary } from "./types";
+export type { Locale, HomeDictionary } from "./types";
 
 export const locales: Locale[] = ["ko", "en"];
-export const dictionaries: Record<Locale, VillageDictionary> = { ko, en };
+export const dictionaries: Record<Locale, HomeDictionary> = { ko, en };
 
 export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);
 }
 
-export function dictionaryFor(locale: Locale): VillageDictionary {
+export function dictionaryFor(locale: Locale): HomeDictionary {
   return dictionaries[locale];
 }
 

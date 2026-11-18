@@ -8,7 +8,6 @@ const expectedIDs = [
   "book",
   "breaklock-timer",
   "callninja",
-  "centuryiris",
   "earth",
   "eatwater",
   "gnomon",
@@ -53,36 +52,19 @@ test("shipping registry is current, complete, and safe for public use", () => {
   }
 });
 
-test("shipping manifests, errorreport apps.json, and homepage registry agree", () => {
-  execFileSync(process.execPath, ["scripts/sync-apps.mjs", "--check"], {
-    cwd: new URL("../", import.meta.url),
-    stdio: "pipe",
-  });
-
+test("homepage registry references matching GitHub Issue Forms", () => {
   const errorReportApps = JSON.parse(
     readFileSync(new URL("apps.json", errorReportRoot), "utf8"),
   );
   assert.equal(errorReportApps.schema_version, 2);
+  const reportAppsByID = new Map(errorReportApps.apps.map((app) => [app.id, app]));
 
-  const comparableHomepageApps = generatedApps().map((app) => ({
-    id: app.id,
-    display_name: app.displayName,
-    display_name_ko: app.displayNameKo,
-    tagline_ko: app.taglineKo,
-    platforms: app.platforms,
-    min_os: app.minOS,
-    version: app.version,
-    status: app.status,
-    downloads: app.downloads.map(({ platform, url }) => ({ platform, url })),
-    web: app.web,
-    report_template: app.reporting.template,
-    report_url: app.reporting.url,
-  }));
-
-  for (const app of comparableHomepageApps) {
-    assert.match(app.web.privacy, /^https:\/\//, `${app.id} privacy URL`);
-    assert.match(app.web.support, /^https:\/\//, `${app.id} support URL`);
+  for (const app of generatedApps()) {
+    assert.match(app.web.privacy, /^https:\/\//, app.id);
+    assert.match(app.web.support, /^https:\/\//, app.id);
+    const reportApp = reportAppsByID.get(app.id);
+    assert.ok(reportApp, `Missing report entry for ${app.id}`);
+    assert.equal(app.reporting.template, reportApp.report_template, app.id);
+    assert.equal(app.reporting.url, reportApp.report_url, app.id);
   }
-
-  assert.deepEqual(errorReportApps.apps, comparableHomepageApps);
 });

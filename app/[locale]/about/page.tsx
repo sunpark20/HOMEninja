@@ -110,7 +110,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </section>
 
         <footer className="about-footer">
-          <Link href="/en">Explore App Village <span aria-hidden="true">↗</span></Link>
+          <Link href="/en">Explore HOMEninja <span aria-hidden="true">↗</span></Link>
           <span>© {new Date().getFullYear()} Appcanvas · Sunguk Park</span>
         </footer>
       </div>

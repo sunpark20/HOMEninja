@@ -51,7 +51,7 @@ const labels: Record<Locale, LegalLabels> = {
     language: "Language",
     korean: "한글",
     english: "EN",
-    home: "← Back to App Village",
+    home: "← Back to home",
     privacy: "Privacy policy",
     support: "Support",
     terms: "Terms",
@@ -142,18 +142,6 @@ function appPrivacy(locale: Locale, id: string) {
         { title: "Contacts access", paragraphs: ["CallNinja does not access your contacts. A contact can still be blocked if its number matches a range you activate, so review each pattern first."] },
         { title: "Problem reports", paragraphs: [<>If you choose to report a problem, the app opens a <a href={app.reporting.url} rel="noreferrer" target="_blank">{labels.en.report}</a> draft with app, build, device, OS, and diagnostic details. You review the draft and decide whether to submit it. Submitted reports are visible to the project maintainers on GitHub.</>] },
         { title: "Contact", paragraphs: [<>For privacy inquiries, contact <a href="mailto:coastguard2681@gmail.com">coastguard2681@gmail.com</a>.</>] },
-      ],
-    },
-    centuryiris: {
-      title: pick(locale, "Century Iris 개인정보처리방침", "Century Iris Privacy Policy"),
-      sections: locale === "ko" ? [
-        { title: "1. 수집하는 정보", paragraphs: ["Century Iris는 계정, 광고, 분석 도구를 사용하지 않으며 개인정보를 수집하지 않습니다."] },
-        { title: "2. 센서와 기기 내 처리", paragraphs: ["MacBook 조도센서와 연결된 디스플레이 정보는 밝기와 색온도 조절을 위해 기기 안에서만 처리됩니다."] },
-        { title: "3. 문의", paragraphs: [<>개인정보 관련 문의는 <a href="mailto:coastguard2681@gmail.com">coastguard2681@gmail.com</a>으로 연락해 주세요.</>] },
-      ] : [
-        { title: "1. Information collected", paragraphs: ["Century Iris uses no account, advertising, or analytics tools and does not collect personal information."] },
-        { title: "2. Sensor and on-device processing", paragraphs: ["The MacBook ambient light sensor and connected display information are processed on the device to adjust brightness and color temperature."] },
-        { title: "3. Contact", paragraphs: [<>For privacy inquiries, contact <a href="mailto:coastguard2681@gmail.com">coastguard2681@gmail.com</a>.</>] },
       ],
     },
     earth: {
@@ -359,11 +347,11 @@ function eatwaterTerms(locale: Locale) {
 
 function genericSupport(locale: Locale) {
   return {
-    title: pick(locale, "앱마을 지원", "App Village Support"),
-    subtitle: pick(locale, "공개 앱 지원 링크 모음", "Public support links for the village apps"),
+    title: pick(locale, "앱 지원", "App Support"),
+    subtitle: pick(locale, "공개 앱 지원 링크 모음", "Public support links for the apps"),
     sections: [{
       title: pick(locale, "앱별 지원", "App support"),
-      paragraphs: [pick(locale, "앱 상세에서 각 앱의 지원 페이지와 GitHub 신고 양식을 확인할 수 있습니다.", "Open an app from the village to find its support page and GitHub issue form.")],
+      paragraphs: [pick(locale, "아래에서 각 앱의 지원 페이지와 GitHub 신고 양식을 확인할 수 있습니다.", "Find each app's support page and GitHub issue form below.")],
     }],
     actions: appsWithSupport(locale),
   };
@@ -380,7 +368,6 @@ export const localizedRoutePaths = [
   "/",
   "/privacy",
   "/privacy/callninja",
-  "/privacy/centuryiris",
   "/privacy/earth",
   "/privacy/eatwater",
   "/privacy/gnomon",
@@ -399,10 +386,10 @@ export const localizedRoutePaths = [
 ] as const;
 
 export function legalMetadata(locale: Locale, routePath: string) {
-  if (routePath === "/") return { title: pick(locale, "모여봐 앱마을 · 닌자거북의홈", "App Village · HOMEninja"), description: pick(locale, "작은 앱들이 자라는 마을에서 필요한 앱을 골라보세요.", "Find a useful little app in a village where small apps grow.") };
+  if (routePath === "/") return { title: pick(locale, "닌자거북 - 내가 필요한 앱을 만들어서 씁니다. 공유하고 함께 개선합니다.", "NinjaTurtle - I build the apps I need and use them. Share and improve together."), description: pick(locale, "일상의 불편을 해결하는 작은 앱을 만나보세요.", "Explore small, practical apps.") };
   if (routePath === "/privacy") {
     const page = homePrivacy(locale);
-    return { title: page.title, description: pick(locale, "앱마을의 개인정보처리방침", "App Village privacy policy") };
+    return { title: page.title, description: pick(locale, "닌자거북의홈 개인정보처리방침", "HOMEninja privacy policy") };
   }
   if (routePath.startsWith("/privacy/")) {
     const id = routePath.split("/").at(-1) === "quickquit" ? "quick-quit" : routePath.split("/").at(-1) ?? "";

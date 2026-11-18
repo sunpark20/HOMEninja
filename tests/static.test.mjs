@@ -27,58 +27,6 @@ test("Next output tracing is pinned to this project root", () => {
   assert.match(config, /fileURLToPath\(import\.meta\.url\)/);
 });
 
-test("TMT content keeps the normalized API shape", () => {
-  const tmt = readJson("data/tmt.json");
-
-  for (const [appId, content] of Object.entries(tmt)) {
-    assert.equal(typeof appId, "string");
-    assert.equal(typeof content, "object");
-    assert.ok(content !== null);
-    assert.ok(content.name === null || typeof content.name === "string");
-    assert.ok(
-      content.description === null || typeof content.description === "string",
-    );
-    assert.ok(Array.isArray(content.entries));
-    for (const entry of content.entries) {
-      assert.equal(typeof entry, "string");
-      assert.notEqual(entry.trim(), "");
-    }
-  }
-});
-
-test("homepage is the app-village entry point", () => {
-  const page = read("app/[locale]/[[...slug]]/page.tsx");
-  const explorer = read("components/VillageExplorer.tsx");
-  const layout = read("app/[locale]/layout.tsx");
-
-  assert.match(page, /VillageExplorer/);
-  assert.match(page, /dictionaries/);
-  assert.match(explorer, /localStorage\.setItem\("appvillage\.resident"/);
-  assert.match(explorer, /name.*animal.*device/s);
-  assert.doesNotMatch(explorer, /email|mailto:/i);
-  assert.doesNotMatch(layout, /mailto:|coastguard2681@gmail\.com/);
-  assert.match(layout, /lang=\{locale\}/);
-});
-
-test("visual presentation is separate and covers every public app", () => {
-  const generated = read("data/apps.generated.ts");
-  const visuals = read("data/village-visuals.ts");
-
-  const appIds = [...generated.matchAll(/\n    "id": "([^"]+)"/g)].map(
-    (match) => match[1],
-  );
-  const visualIds = [...visuals.matchAll(/^\s{2,}(?:"([^"]+)"|([a-z][\w-]*)):\s*\{/gm)].map(
-    (match) => match[1] ?? match[2],
-  );
-
-  assert.equal(appIds.length, 15);
-  assert.deepEqual([...visualIds].sort(), [...appIds].sort());
-  assert.match(visuals, /tree: "mac"/);
-  assert.match(visuals, /tree: "iphone"/);
-  assert.match(visuals, /id: "jeju-delivery"/);
-  assert.match(visuals, /description: "이제는 그루터기에서 조용히 쉬고 있어요\."/);
-});
-
 test("retired source and components are removed", () => {
   const retiredPaths = [
     "data/galaxies.ts",
@@ -93,24 +41,54 @@ test("retired source and components are removed", () => {
   for (const path of retiredPaths) assert.equal(existsSync(new URL(path, root)), false, path);
 });
 
-test("homepage stays self-hosted and sky-only", () => {
+
+test("homepage is a simple app list backed by the registry", () => {
+  const page = read("app/[locale]/[[...slug]]/page.tsx");
+  const home = read("components/Home.tsx");
+  const list = read("components/AppList.tsx");
+  const layout = read("app/[locale]/layout.tsx");
+
+  assert.match(page, /<Home locale/);
+  assert.match(home, /@\/data\/apps/);
+  assert.match(home, /status !== "retired"/);
+  assert.match(list, /comingSoon/);
+  assert.doesNotMatch(layout, /mailto:|coastguard2681@gmail\.com/);
+  assert.match(layout, /lang=\{locale\}/);
+});
+
+test("village features and TMT are removed", () => {
+  for (const path of [
+    "components/VillageExplorer.tsx",
+    "components/VillageIcon.tsx",
+    "components/VillageAdminEditModal.tsx",
+    "data/village-visuals.ts",
+    "data/tmt.json",
+    "app/api/tmt/route.ts",
+    "public/village",
+  ]) assert.equal(existsSync(new URL(path, root)), false, path);
+});
+
+test("homepage stays self-hosted without email links", () => {
   const css = read("app/globals.css");
-  const explorer = read("components/VillageExplorer.tsx");
-  const icon = read("components/VillageIcon.tsx");
+  const homeFiles = ["Home", "AppList", "SupportSection", "SupportDrawer"]
+    .map((name) => read(`components/${name}.tsx`))
+    .join("\n");
 
   assert.doesNotMatch(css, /backdrop-filter|gradient-text|fonts\.googleapis|jsdelivr|iconify|gsap/i);
-  assert.doesNotMatch(explorer, /api\.iconify|jsdelivr|fonts\.googleapis|gsap/i);
-  assert.match(css, /--v-sky/);
-  assert.match(icon, /\"wind\"/);
-  assert.match(icon, /\"download\"/);
+  assert.doesNotMatch(homeFiles, /mailto:|api\.iconify|jsdelivr|fonts\.googleapis|gsap/i);
+});
+
+test("support data ships empty with no fabricated records", () => {
+  const support = read("data/support.ts");
+
+  assert.match(support, /export const donations: Donation\[\] = \[\];/);
+  assert.match(support, /export const ledger: LedgerEntry\[\] = \[\];/);
 });
 
 test("legal contact exceptions stay on legal pages only", () => {
-  const layout = read("app/[locale]/layout.tsx");
-  const village = read("components/VillageExplorer.tsx");
   const legal = read("components/LocalizedLegalPage.tsx");
+  const home = read("components/Home.tsx");
 
-  assert.doesNotMatch(layout, /coastguard2681@gmail\.com|mailto:/);
-  assert.doesNotMatch(village, /coastguard2681@gmail\.com|mailto:/);
+  assert.doesNotMatch(home, /coastguard2681@gmail\.com|mailto:/);
   assert.match(legal, /coastguard2681@gmail\.com/);
 });

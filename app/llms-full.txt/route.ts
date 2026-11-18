@@ -1,16 +1,8 @@
 import { apps } from "@/data/apps";
-import tmtData from "@/data/tmt.json";
 
 export const dynamic = "force-static";
 
-type AppContent = {
-  name: string | null;
-  description: string | null;
-  entries: string[];
-};
-
 export function GET() {
-  const tmt = tmtData as Record<string, AppContent>;
   const sections: string[] = [
     "# 앱캔버스 — 전체 앱 상세 정보",
     "> 일상의 불편을 해결하는 작은 앱을 만드는 독립 앱 스튜디오",
@@ -30,14 +22,6 @@ export function GET() {
     sections.push(`- 문제 신고: ${app.reporting.url}`);
     sections.push("");
 
-    const content = tmt[app.id];
-    if (content?.entries.length) {
-      sections.push("### 배경");
-      for (const entry of content.entries) {
-        sections.push(entry);
-        sections.push("");
-      }
-    }
   }
 
   return new Response(sections.join("\n"), {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const legacyLocaleLessRoute = /^\/(about|privacy|support|terms)(?:\/.*)?\/?$/;
-const directAppRoute = /^\/(?:privacy|support)\/(?:book|todayopen|bip0039)\/?$/;
+const directAppRoute = /^\/(?:privacy|support)\/(?:book|todayopen|bip0039|airmouse)\/?$/;
 
 function localeForRequest(request: NextRequest) {
   return request.headers.get("x-vercel-ip-country")?.toUpperCase() === "KR" ? "ko" : "en";
